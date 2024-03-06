@@ -22,6 +22,7 @@
                         <th>Hora</th>
                         <th>Inscripción</th>
                         <th>Active</th>
+                        <th>Edit</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,6 +36,7 @@
                         <td>{{ $race->time }}</td>
                         <td>{{ $race->inscription }}€</td>
                         <td>{{ $race->active }}</td>
+                        <td><a href="{{ route('race.edit', ['race' => $race]) }}">Edit</a></td>
                     </tr>
                     @endforeach
                 </tbody>

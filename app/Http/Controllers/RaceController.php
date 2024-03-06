@@ -33,19 +33,27 @@ class RaceController extends Controller
         $validatedData = $request->validate([
             'description' => 'required|string|max:255',
             'unevenness' => 'required|numeric',
-            'map' => 'required|string',
+            'map' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'max_competitors' => 'required|integer',
             'distance' => 'required|numeric',
             'date' => 'required|date',
             'time' => 'required|date_format:H:i',
             'start' => 'nullable|string',
-            'promotion' => 'nullable|string',
+            'promotion' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'sponsorship' => 'nullable|numeric',
             'inscription' => 'nullable|numeric',
             'active' => 'required|boolean'
         ]);
 
         try {
+            $image = $request->file('map');
+            $imageName = time().'_'.$image->getClientOriginalName();
+            $image->move(public_path('images'), $imageName);
+            $validatedData['map'] = $imageName;
+            $image = $request->file('promotion');
+            $imageName = time().'_'.$image->getClientOriginalName();
+            $image->move(public_path('images'), $imageName);
+            $validatedData['promotion'] = $imageName;
             $race = Race::create($validatedData);
         } catch (Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
@@ -65,9 +73,9 @@ class RaceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Race $race)
     {
-        //
+        return view('admin.races.edit', compact('race'));
     }
 
     /**
