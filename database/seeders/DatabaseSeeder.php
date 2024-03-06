@@ -26,5 +26,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Insurance::factory(10)->create();
 
         \App\Models\Competitor::factory(10)->create();
+
+        \App\Models\Challenge::factory(10)->create();
     }
 }
