@@ -16,7 +16,7 @@
       </ul>
     </div>
   @endif
-  <form action="{{ route('race.update', $race->id) }}" method="POST" enctype="multipart/form-data" class="mb-3">
+  <form action="{{ route('race.update', [$race]) }}" method="POST" enctype="multipart/form-data" class="mb-3">
     @csrf
     @method('PUT')
     <div class="mb-3">
@@ -31,9 +31,9 @@
     </div>
     <div class="mb-3">
       <label for="map" class="form-label">Map</label>
-      <input type="file" class="form-control" id="map" name="map" value="{{ $race->map }}" aria-describedby="map-help" required>
+      <input type="file" class="form-control" id="map" name="map" value="{{ $race->map }}" aria-describedby="map-help">
       <div id="map-help" class="form-text">Upload the race map.</div>
-      <img src="{{ asset('public/images/' . $race->map) }}" alt="Race map image" style="max-width: 200px;">
+      <img src="{{ asset('images/' . $race->map) }}" alt="Race map image" style="max-width: 200px;">
     </div>
     <div class="mb-3">
       <label for="max-competitors" class="form-label">Max competitors</label>
@@ -52,13 +52,19 @@
     </div>
     <div class="mb-3">
       <label for="time" class="form-label">Time</label>
-      <input type="time" class="form-control" id="time" name="time" value="{{ $race->time }}" aria-describedby="time-help" required>
+      <input type="time" class="form-control" id="time" name="time" value="{{ old('time', date('H:i', strtotime($race->time))) }}" aria-describedby="time-help" required>
       <div id="time-help" class="form-text">Introduce a time for the race to start.</div>
     </div>
     <div class="mb-3">
+      <label for="start" class="form-label">Start</label>
+      <input type="text" class="form-control" id="start" name="start" value="{{ old('start', $race->start) }}" aria-describedby="start-help" required>
+      <div id="start-help" class="form-text">Introduce the race starting point address.</div>
+    </div>
+    <div class="mb-3">
       <label for="promotion" class="form-label">Promotion</label>
-      <input type="file" class="form-control" id="promotion" name="promotion" value="{{ $race->promotion }}" aria-describedby="promotion-help" required>
+      <input type="file" class="form-control" id="promotion" name="promotion" value="{{ $race->promotion }}" aria-describedby="promotion-help">
       <div id="promotion-help" class="form-text">Upload the race promotion banner.</div>
+      <img src="{{ asset('images/' . $race->promotion) }}" alt="Race promotion banner image" style="max-width: 200px;">
     </div>
     <!--
     <div class="mb-3">

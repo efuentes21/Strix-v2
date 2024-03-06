@@ -25,7 +25,7 @@ Route::get('/', function () {
 Route::get('admin/races', [RaceController::class, 'index'])->name('race.index');
 Route::get('race/create', [RaceController::class, 'create'])->name('race.create');
 Route::get('race/edit/{race}', [RaceController::class, 'edit'])->name('race.edit');
-Route::put('race/update', [RaceController::class, 'update'])->name('race.update');
+Route::put('race/update/{race}', [RaceController::class, 'update'])->name('race.update');
 Route::post('race/store', [RaceController::class, 'store'])->name('race.store');
 
 Route::get('admin/sponsors', [SponsorController::class, 'index'])->name('sponsor.index');

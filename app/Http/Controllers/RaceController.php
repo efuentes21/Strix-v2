@@ -81,9 +81,53 @@ class RaceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, String $id)
     {
-        //
+        $race = Race::findOrFail($id);
+        $request->validate([
+            'description' => 'required|string|max:255',
+            'unevenness' => 'required|numeric',
+            'map' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240',
+            'max_competitors' => 'required|integer',
+            'distance' => 'required|numeric',
+            'date' => 'required|date',
+            'time' => 'required|date_format:H:i',
+            'start' => 'required|string',
+            'promotion' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240',
+            'inscription' => 'nullable|numeric',
+            'active' => 'required|boolean'
+        ]);
+
+        try {
+            $race->description = $request->description;
+            $race->unevenness = $request->unevenness;
+            $race->max_competitors = $request->max_competitors;
+            $race->distance = $request->distance;
+            $race->date = $request->date;
+            $race->time = $request->time;
+            $race->start = $request->start;
+            $race->inscription = $request->inscription;
+            $race->active = $request->active;
+
+            if($request->hasFile('map')) {
+                $image = $request->file('map');
+                $imageName = time().'_'.$image->getClientOriginalName();
+                $image->move(public_path('images'), $imageName);
+                $race->map = $imageName;
+            }
+            if($request->hasFile('promotion')) {
+                $image = $request->file('promotion');
+                $imageName = time().'_'.$image->getClientOriginalName();
+                $image->move(public_path('images'), $imageName);
+                $race->promotion = $imageName;
+            }
+            $race->update();
+            // dd($race);
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+
+        return redirect()->route('race.index');
     }
 
     /**

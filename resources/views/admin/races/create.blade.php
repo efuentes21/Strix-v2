@@ -54,6 +54,11 @@
       <div id="time-help" class="form-text">Introduce a time for the race to start.</div>
     </div>
     <div class="mb-3">
+      <label for="start" class="form-label">Start</label>
+      <input type="text" class="form-control" id="start" name="start" aria-describedby="start-help" required>
+      <div id="start-help" class="form-text">Introduce the race starting point address.</div>
+    </div>
+    <div class="mb-3">
       <label for="promotion" class="form-label">Promotion</label>
       <input type="file" class="form-control" id="promotion" name="promotion" aria-describedby="promotion-help" required>
       <div id="promotion-help" class="form-text">Upload the race promotion banner.</div>
