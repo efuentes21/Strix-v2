@@ -24,7 +24,7 @@ class SponsorFactory extends Factory
             'cif' => strtoupper(Str::random(9)),
             'name' => fake()->name(),
             'logo' => 'logo.png',
-            'address' => fake()->name(),
+            'address' => fake()->address(),
             'principal' => fake()->numberBetween(0, 1),
             'active' => fake()->numberBetween(0, 1)
         ];
