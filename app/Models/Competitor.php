@@ -22,6 +22,7 @@ class Competitor extends Model
         'pro',
         'insurance',
         'partner',
+        'active',
     ];
 
     /**

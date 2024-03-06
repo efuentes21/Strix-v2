@@ -21,6 +21,7 @@ class Insurance extends Model
         'name',     // Nombre de la aseguradora
         'address',  // Dirección de la aseguradora
         'price',    // Precio del seguro
+        'active',
     ];
 
     /**

@@ -70,6 +70,14 @@
       <input type="number" class="form-control" id="inscription" name="inscription" aria-describedby="inscription-help" required>
       <div id="inscription-help" class="form-text">Set up the race inscription price.</div>
     </div>
+    <div class="mb-3">
+      <label for="active" class="form-label">Active</label>
+      <select id="active" name="active" aria-describedby="active-help" class="form-select" aria-label="Select if the race is active or not" required>
+        <option value="1" selected>Si</option>
+        <option value="0">No</option>
+      </select>
+      <div id="active-help" class="form-text">Is the race active?</div>
+    </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>

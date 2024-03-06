@@ -27,6 +27,7 @@ class Race extends Model
         'start',
         'promotion',
         'inscription',
+        'active',
     ];
 
     /**
@@ -38,6 +39,5 @@ class Race extends Model
      */
     protected $casts = [
         'date' => 'date',
-        
     ];
 }

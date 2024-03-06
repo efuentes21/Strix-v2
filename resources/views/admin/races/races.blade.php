@@ -21,6 +21,7 @@
                         <th>Fecha</th>
                         <th>Hora</th>
                         <th>Inscripción</th>
+                        <th>Active</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,6 +34,7 @@
                         <td>{{ $race->date }}</td>
                         <td>{{ $race->time }}</td>
                         <td>{{ $race->inscription }}€</td>
+                        <td>{{ $race->active }}</td>
                     </tr>
                     @endforeach
                 </tbody>

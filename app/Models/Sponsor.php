@@ -22,6 +22,7 @@ class Sponsor extends Model
         'logo',         // Logo del patrocinador
         'address',      // Dirección del patrocinador
         'principal',    // Indica si el patrocinador es principal o no
+        'active',
     ];
 
     /**

@@ -42,6 +42,7 @@ class RaceController extends Controller
             'promotion' => 'nullable|string',
             'sponsorship' => 'nullable|numeric',
             'inscription' => 'nullable|numeric',
+            'active' => 'required|boolean'
         ]);
 
         try {
