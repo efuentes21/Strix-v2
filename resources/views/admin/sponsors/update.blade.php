@@ -7,7 +7,17 @@
             <a href="{{ route('sponsor.index') }}" class="btn btn-danger">Cancel</a>
         </div>
     </div>
-    <form action="{{ route('sponsor.update', $sponsor->id) }}" method="POST" enctype="multipart/form-data" class="mb-3">
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    {{-- ['id' => $sponsor->id] --}}
+    <form action="{{ route('sponsor.update', [$sponsor]) }}" method="POST" enctype="multipart/form-data" class="mb-3">
         @csrf
         @method('PUT')
         <div class="mb-3">
@@ -25,13 +35,18 @@
             <input type="file" class="form-control" id="logo" name="logo" aria-describedby="logo-help">
             <div id="logo-help" class="form-text">Upload the sponsor's logo.</div>
             @if($sponsor->logo)
-                <img src="{{ asset('path_to_your_logo_folder/' . $sponsor->logo) }}" alt="Sponsor Logo" style="max-width: 200px;">
+                <img src="{{ asset('images/' . $sponsor->logo) }}" alt="Sponsor Logo" style="max-width: 200px;">
             @endif
         </div>
         <div class="mb-3">
             <label for="address" class="form-label">Address</label>
             <input type="text" class="form-control" id="address" name="address" value="{{ $sponsor->address }}" aria-describedby="address-help">
             <div id="address-help" class="form-text">Introduce the sponsor's address</div>
+        </div>
+        <div class="mb-3">
+            <label for="principal" class="form-label">Principal</label>
+            <input type="number" class="form-control" id="principal" name="principal" value="{{ $sponsor->principal }}" aria-describedby="principal-help">
+            <div id="principal-help" class="form-text">Is the sponsor principal?</div>
         </div>
     
         <button type="submit" class="btn btn-primary">Submit</button>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Sponsor;
 use App\Http\Requests\StoreSponsorRequest;
 use App\Http\Requests\UpdateSponsorRequest;
+use Illuminate\Http\Request;
+use Exception;
 
 class SponsorController extends Controller
 {
@@ -52,9 +54,37 @@ class SponsorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSponsorRequest $request, Sponsor $sponsor)
+    public function update(Request $request, String $id)
     {
-        //
+        $sponsor = Sponsor::findOrFail($id);
+
+        $request->validate([
+            'cif' => 'required',
+            'name' => 'required',
+            'address' => 'required',
+            'logo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'principal' => 'required',
+        ]);
+
+        try {
+            $sponsor->cif = $request->input('cif');
+            $sponsor->name = $request->input('name');
+            $sponsor->address = $request->input('address');
+            $sponsor->principal = $request->input('principal');
+            
+            if ($request->hasFile('logo')) {
+                $image = $request->file('logo');
+                $imageName = time().'_'.$image->getClientOriginalName();
+                $image->move(public_path('images'), $imageName);
+                $sponsor->logo = $imageName;
+            }
+            
+            $sponsor->update();
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+
+        return redirect()->route('sponsor.index')->with('success', 'Sponsor updated successfully');
     }
 
     /**

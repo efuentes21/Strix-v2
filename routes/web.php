@@ -31,7 +31,7 @@ Route::post('race/store', [RaceController::class, 'store'])->name('race.store');
 Route::get('admin/sponsors', [SponsorController::class, 'index'])->name('sponsor.index');
 Route::get('sponsor/create', [SponsorController::class, 'create'])->name('sponsor.create');
 Route::get('sponsor/edit/{sponsor}', [SponsorController::class, 'edit'])->name('sponsor.edit');
-Route::put('sponsor/update', [SponsorController::class, 'update'])->name('sponsor.update');
+Route::put('sponsor/update{sponsor}', [SponsorController::class, 'update'])->name('sponsor.update');
 
 Route::get('admin/insurances', [InsuranceController::class, 'index'])->name('insurance.index');
 Route::get('insurance/create', [InsuranceController::class, 'create'])->name('insurance.create');

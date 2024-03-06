@@ -28,7 +28,7 @@
                         <td>{{ $sponsor->cif }}</td>
                         <td>{{ $sponsor->name }}</td>
                         <td>{{ $sponsor->address }}</td>
-                        <td>{{ $sponsor->logo }}</td>
+                        <td><img src="{{ asset('images/' . $sponsor->logo) }}" alt="Sponsor Logo" style="max-width: 50px;"></td>
                         <td>{{ $sponsor->principal }}</td>
                         <td><a href="{{ route('sponsor.edit', ['sponsor' => $sponsor]) }}">Edit</a></td>
                     </tr>

@@ -1,9 +1,9 @@
 @extends('layouts.admin.master')
 
-@section('titulo', 'Create new sponsor')
+@section('titulo', 'Edit sponsor')
 
 @yield('dashboard')
 @section('active-sponsors', 'active')
 @section('content')
-    @include('admin.sponsors.create')
+    @include('admin.sponsors.update')
 @stop
