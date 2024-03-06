@@ -15,24 +15,20 @@
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Desnivel</th>
-                        <th>Competidores</th>
-                        <th>Distancia</th>
-                        <th>Fecha</th>
-                        <th>Hora</th>
-                        <th>Inscripción</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Active</th>
+                        <th class="invisible">Edit</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($challenges as $challenge)
                     <tr>
                         <td>{{ $challenge->id }}</td>
-                        <td>{{ $challenge->desnivel }}</td>
-                        <td>{{ $challenge->competidores }}</td>
-                        <td>{{ $challenge->distancia }}</td>
-                        <td>{{ $challenge->fecha }}</td>
-                        <td>{{ $challenge->hora }}</td>
-                        <td>{{ $challenge->inscripcion }}</td>
+                        <td>{{ $challenge->name }}</td>
+                        <td>{{ $challenge->description }}</td>
+                        <td>{{ $challenge->active }}</td>
+                        <td><a href="{{ route('challenge.edit', ['challenge' => $challenge]) }}">Edit</a></td>
                     </tr>
                     @endforeach
                 </tbody>

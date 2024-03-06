@@ -38,6 +38,9 @@ Route::get('insurance/create', [InsuranceController::class, 'create'])->name('in
 
 Route::get('admin/challenges', [ChallengeController::class, 'index'])->name('challenge.index');
 Route::get('challenge/create', [ChallengeController::class, 'create'])->name('challenge.create');
+Route::get('challenge/edit/{challenge}', [ChallengeController::class, 'edit'])->name('challenge.edit');
+Route::put('challenge/update/{challenge}', [ChallengeController::class, 'update'])->name('challenge.update');
+Route::post('challenge/store', [ChallengeController::class, 'store'])->name('challenge.store');
 
 Route::get('admin/competitors', [CompetitorController::class, 'index'])->name('competitor.index');
 Route::get('competitor/create', [CompetitorController::class, 'create'])->name('competitor.create');

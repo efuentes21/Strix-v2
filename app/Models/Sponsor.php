@@ -35,4 +35,8 @@ class Sponsor extends Model
     protected $casts = [
         'principal' => 'boolean', // El campo 'principal' se casteará a tipo booleano
     ];
+
+    public function sponsors(){
+        return $this->hasMany('\Apps\Models\Race');
+    }
 }

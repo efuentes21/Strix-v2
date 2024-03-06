@@ -34,4 +34,8 @@ class Insurance extends Model
     protected $casts = [
         'price' => 'decimal:2', // Precio se casteará a tipo 'decimal' con 2 decimales
     ];
+
+    public function competitors(){
+        return $this->hasMany('\Apps\Models\Competitor');
+    }
 }

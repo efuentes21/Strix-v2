@@ -35,4 +35,12 @@ class Competitor extends Model
         'pro' => 'boolean',
         'partner' => 'boolean',
     ];
+
+    public function races(){
+        return $this->hasMany('\Apps\Models\Race');
+    }
+
+    public function insurance(){
+        return $this->belongsTo('\Apps\Models\Insurance');
+    }
 }

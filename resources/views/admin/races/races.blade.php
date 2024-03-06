@@ -15,14 +15,14 @@
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Desnivel</th>
-                        <th>Competidores</th>
-                        <th>Distancia</th>
-                        <th>Fecha</th>
-                        <th>Hora</th>
-                        <th>Inscripción</th>
+                        <th>Unevenness</th>
+                        <th>Competitors</th>
+                        <th>Distance</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Inscription</th>
                         <th>Active</th>
-                        <th>Edit</th>
+                        <th class="invisible">Edit</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -54,8 +54,8 @@ class RaceController extends Controller
             $imageName = time().'_'.$image->getClientOriginalName();
             $image->move(public_path('images'), $imageName);
             $validatedData['promotion'] = $imageName;
-            $race = Race::create($validatedData);
-        } catch (Exception $e) {
+            Race::create($validatedData);
+        } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
 
@@ -123,7 +123,7 @@ class RaceController extends Controller
             }
             $race->update();
             // dd($race);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
 

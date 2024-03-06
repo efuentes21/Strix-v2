@@ -30,7 +30,19 @@ class ChallengeController extends Controller
      */
     public function store(StoreChallengeRequest $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'active' => 'required|boolean'
+        ]);
+
+        try {
+            Challenge::create($validatedData);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+
+        return redirect()->route('challenge.index');
     }
 
     /**
@@ -46,15 +58,31 @@ class ChallengeController extends Controller
      */
     public function edit(Challenge $challenge)
     {
-        //
+        return view('admin.challenges.edit', compact('challenge'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateChallengeRequest $request, Challenge $challenge)
+    public function update(UpdateChallengeRequest $request, String $id)
     {
-        //
+        $challenge = Challenge::findOrFail($id);
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'active' => 'required|boolean'
+        ]);
+
+        try {
+            $challenge->name = $request->name;
+            $challenge->description = $request->description;
+            $challenge->active = $request->active;
+            $challenge->update();
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+
+        return redirect()->route('challenge.index');
     }
 
     /**

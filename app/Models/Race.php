@@ -40,4 +40,16 @@ class Race extends Model
     protected $casts = [
         'date' => 'date',
     ];
+
+    public function sponsors(){
+        return $this->hasMany('\Apps\Models\Sponsor');
+    }
+
+    public function competitors(){
+        return $this->hasMany('\Apps\Models\Competitors');
+    }
+
+    public function challenges(){
+        return $this->hasMany('\Apps\Models\Challenges');
+    }
 }

@@ -21,4 +21,8 @@ class Challenge extends Model
         'description',  // Descripción del desafío
         'active',
     ];
+
+    public function races(){
+        return $this->hasMany('\Apps\Models\Race');
+    }
 }
