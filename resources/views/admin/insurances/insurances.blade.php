@@ -14,25 +14,21 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Desnivel</th>
-                        <th>Competidores</th>
-                        <th>Distancia</th>
-                        <th>Fecha</th>
-                        <th>Hora</th>
-                        <th>Inscripción</th>
+                        <th>CIF</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Price</th>
+                        <th class="invisible">Edit</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($insurances as $insurance)
                     <tr>
-                        <td>{{ $insurance->id }}</td>
-                        <td>{{ $insurance->desnivel }}</td>
-                        <td>{{ $insurance->competidores }}</td>
-                        <td>{{ $insurance->distancia }}</td>
-                        <td>{{ $insurance->fecha }}</td>
-                        <td>{{ $insurance->hora }}</td>
-                        <td>{{ $insurance->inscripcion }}</td>
+                        <td>{{ $insurance->cif }}</td>
+                        <td>{{ $insurance->name }}</td>
+                        <td>{{ $insurance->address }}</td>
+                        <td>{{ $insurance->price }}€</td>
+                        <td><a href="{{ route('insurance.edit', ['insurance' => $insurance]) }}">Edit</a></td>
                     </tr>
                     @endforeach
                 </tbody>

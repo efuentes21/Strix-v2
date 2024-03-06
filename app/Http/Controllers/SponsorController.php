@@ -30,9 +30,28 @@ class SponsorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSponsorRequest $request)
+    public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'cif' => 'required|string|max:9',
+            'name' => 'required|string|max:255',
+            'logo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'address' => 'required|string|max:255',
+            'principal' => 'required|boolean',
+            'active' => 'required|boolean'
+        ]);
+
+        try {
+            $image = $request->file('logo');
+            $imageName = time().'_'.$image->getClientOriginalName();
+            $image->move(public_path('images'), $imageName);
+            $validatedData['logo'] = $imageName;
+            $sponsor = Sponsor::create($validatedData);
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+
+        return redirect()->route('sponsor.index');
     }
 
     /**
@@ -64,6 +83,7 @@ class SponsorController extends Controller
             'address' => 'required',
             'logo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'principal' => 'required',
+            'active' => 'required',
         ]);
 
         try {
@@ -71,6 +91,7 @@ class SponsorController extends Controller
             $sponsor->name = $request->input('name');
             $sponsor->address = $request->input('address');
             $sponsor->principal = $request->input('principal');
+            $sponsor->active = $request->input('active');
             
             if ($request->hasFile('logo')) {
                 $image = $request->file('logo');

@@ -14,25 +14,23 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Desnivel</th>
-                        <th>Competidores</th>
-                        <th>Distancia</th>
-                        <th>Fecha</th>
-                        <th>Hora</th>
-                        <th>Inscripción</th>
+                        <th>DNI</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Pro</th>
+                        <th>Partner</th>
+                        <th>Active</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($competitors as $competitor)
                     <tr>
-                        <td>{{ $competitor->id }}</td>
-                        <td>{{ $competitor->desnivel }}</td>
-                        <td>{{ $competitor->competidores }}</td>
-                        <td>{{ $competitor->distancia }}</td>
-                        <td>{{ $competitor->fecha }}</td>
-                        <td>{{ $competitor->hora }}</td>
-                        <td>{{ $competitor->inscripcion }}</td>
+                        <td>{{ $competitor->dni }}</td>
+                        <td>{{ $competitor->name }}</td>
+                        <td>{{ $competitor->address }}</td>
+                        <td>{{ $competitor->pro }}</td>
+                        <td>{{ $competitor->partner }}</td>
+                        <td>{{ $competitor->active }}</td>
                     </tr>
                     @endforeach
                 </tbody>

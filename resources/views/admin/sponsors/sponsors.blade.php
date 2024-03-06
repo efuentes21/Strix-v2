@@ -19,7 +19,7 @@
                         <th>Address</th>
                         <th>Logo</th>
                         <th>Principal</th>
-                        <th>&nbsp;</th>
+                        <th class="invisible">Edit</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -45,8 +45,29 @@
         </div>
         <div class="mb-3">
             <label for="principal" class="form-label">Principal</label>
-            <input type="number" class="form-control" id="principal" name="principal" value="{{ $sponsor->principal }}" aria-describedby="principal-help">
-            <div id="principal-help" class="form-text">Is the sponsor principal?</div>
+            <select id="principal" name="principal" aria-describedby="principal-help" class="form-select" aria-label="Select if the sponsor is principal or not" required>
+                @if($sponsor->principal)
+                <option value="1" selected>Yes</option>
+                <option value="0">No</option>              
+                @else
+                <option value="1">Yes</option>
+                <option value="0" selected>No</option>   
+                @endif
+            </select>
+            <div id="active-help" class="form-text">Is the sponsor principal?</div>
+          </div>
+        <div class="mb-3">
+            <label for="active" class="form-label">Active</label>
+            <select id="active" name="active" aria-describedby="active-help" class="form-select" aria-label="Select if the sponsor is active or not" required>
+                @if($sponsor->active)
+                <option value="1" selected>Yes</option>
+                <option value="0">No</option>              
+                @else
+                <option value="1">Yes</option>
+                <option value="0" selected>No</option>   
+                @endif
+            </select>
+            <div id="active-help" class="form-text">Is the sponsor active?</div>
         </div>
     
         <button type="submit" class="btn btn-primary">Submit</button>
