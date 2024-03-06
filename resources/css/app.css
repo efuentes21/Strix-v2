@@ -1,0 +1,21 @@
+body {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+}
+  
+html {
+    height: -webkit-fill-available;
+}
+
+aside, main {
+    display: flex;
+    flex-wrap: nowrap;
+    height: 100vh;
+    max-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+  
+.sidebar {
+    
+}
