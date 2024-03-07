@@ -5,7 +5,7 @@
             <h1>SPONSORS</h1>
         </div>
         <div class="col-md-2 d-flex align-items-center justify-content-end">
-            <a href="{{ route('sponsor.create') }}" class="btn btn-primary">ADD SPONSORS</a>
+            <a href="{{ route('sponsor.create') }}" class="btn btn-primary text-white">ADD SPONSORS</a>
         </div>
     </div>
 

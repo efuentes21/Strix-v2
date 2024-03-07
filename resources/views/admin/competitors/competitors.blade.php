@@ -5,7 +5,7 @@
             <h1>COMPETITORS</h1>
         </div>
         <div class="col-md-2 d-flex align-items-center justify-content-end">
-            <a href="{{ route('competitor.create') }}" class="btn btn-primary">ADD COMPETITORS</a>
+            <a href="{{ route('competitor.create') }}" class="btn btn-primary text-white">ADD COMPETITORS</a>
         </div>
     </div>
 

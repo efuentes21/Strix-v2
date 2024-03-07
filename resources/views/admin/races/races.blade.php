@@ -5,7 +5,7 @@
             <h1>RACES</h1>
         </div>
         <div class="col-md-2 d-flex align-items-center justify-content-end">
-            <a href="{{ route('race.create') }}" class="btn btn-primary">ADD RACE</a>
+            <a href="{{ route('race.create') }}" class="btn btn-primary text-white">ADD RACE</a>
         </div>
     </div>
 

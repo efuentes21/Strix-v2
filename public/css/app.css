@@ -7,6 +7,9 @@ html * {
     font-weight: 400;
     font-style: normal;
 }
+.btn {
+    font-weight: 600 !important;
+}
 
 body {
     min-height: 100vh;
@@ -27,5 +30,5 @@ aside, main {
 }
 
 .sidebar li a:hover {
-    background-color: rgba(174, 22, 22, 1) !important;
+    background-color: #0A8383 !important;
 }
