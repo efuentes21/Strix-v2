@@ -84,6 +84,6 @@
       <div id="active-help" class="form-text">Is the race active?</div>
     </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary text-white">Submit</button>
   </form>
 </div>
