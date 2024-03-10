@@ -59,7 +59,7 @@ class RaceController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
 
-        return redirect()->route('race.index');
+        return redirect()->route('race.index')->with('success', 'Race successfully created!');
     }
 
     /**

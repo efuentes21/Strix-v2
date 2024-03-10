@@ -1,8 +1,8 @@
-@section('races')
+@section('racechallenges')
 <div class="container">
     <div class="row mt-4 mb-2">
         <div class="col-md-10">
-            <h1>RACES</h1>
+            <h1>ADD CHALLENGES TO RACES</h1>
         </div>
         <div class="col-md-2 d-flex align-items-center justify-content-end">
             <a href="{{ route('race.create') }}" class="btn btn-primary text-white">ADD RACE</a>
