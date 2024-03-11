@@ -3,6 +3,7 @@
 use App\Http\Controllers\RaceController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\InsuranceController;
+use App\Http\Controllers\RaceChallengeController;
 use App\Http\Controllers\ChallengeController;
 use App\Http\Controllers\CompetitorController;
 use Illuminate\Support\Facades\Route;
@@ -45,6 +46,11 @@ Route::get('challenge/create', [ChallengeController::class, 'create'])->name('ch
 Route::get('challenge/edit/{challenge}', [ChallengeController::class, 'edit'])->name('challenge.edit');
 Route::put('challenge/update/{challenge}', [ChallengeController::class, 'update'])->name('challenge.update');
 Route::post('challenge/store', [ChallengeController::class, 'store'])->name('challenge.store');
+
+Route::get('admin/racechallenges/remove/{race}', [RaceChallengeController::class, 'index'])->name('racechallenge.index');
+Route::get('admin/racechallenges/add/{race}', [RaceChallengeController::class, 'indexadd'])->name('racechallenge.indexadd');
+Route::post('racechallenge/add/{challenge}/{race}', [RaceChallengeController::class, 'add'])->name('racechallenge.add');
+Route::post('racechallenge/remove/{challenge}/{race}', [RaceChallengeController::class, 'remove'])->name('racechallenge.remove');
 
 Route::get('admin/competitors', [CompetitorController::class, 'index'])->name('competitor.index');
 Route::get('competitor/create', [CompetitorController::class, 'create'])->name('competitor.create');

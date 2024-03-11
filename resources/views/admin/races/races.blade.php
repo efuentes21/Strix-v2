@@ -8,7 +8,8 @@
             <a href="{{ route('race.create') }}" class="btn btn-primary text-white">ADD RACE</a>
         </div>
     </div>
-    @if($success)
+    <!--
+    @if(false)
         <div class="modal" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -16,12 +17,13 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p>{{ $success }}</p>
+                        <p> </p>
                     </div>
                 </div>
             </div>
         </div>
     @endif
+    -->
     <div class="row">
         <div class="col-md-12">
             <table class="table table-striped">
@@ -35,6 +37,7 @@
                         <th>Time</th>
                         <th>Inscription</th>
                         <th>Active</th>
+                        <th class="invisible">Add challenges</th>
                         <th class="invisible">Edit</th>
                     </tr>
                 </thead>
@@ -49,6 +52,7 @@
                         <td>{{ $race->time }}</td>
                         <td>{{ $race->inscription }}€</td>
                         <td>{{ $race->active }}</td>
+                        <td><a href="{{ route('racechallenge.index', ['race' => $race]) }}">Challenges</a></td>
                         <td><a href="{{ route('race.edit', ['race' => $race]) }}">Edit</a></td>
                     </tr>
                     @endforeach

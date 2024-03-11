@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Race;
+use App\Models\Challenge;
 use App\Models\RaceChallenge;
 use App\Http\Requests\StoreRaceChallengeRequest;
 use App\Http\Requests\UpdateRaceChallengeRequest;
@@ -13,10 +15,17 @@ class RaceChallengeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Race $race)
     {
-        $racechallenge = RaceChallenge::all();
-        return view('admin.racechallenge.index', compact('racechallenge'));
+        $racechallenges = $race->with(['challenges' => function($query){
+            $query->where('active', true);
+        }]);
+        return view('admin.racechallenges.index', compact('racechallenges'));
+    }
+    public function indexadd(Race $race)
+    {
+        $racechallenges = $race->challenges()->where('activo', true)->whereDoesntHave('race');
+        return view('admin.racechallenges.index', compact('racechallenges'));
     }
 
     /**
