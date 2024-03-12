@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\RaceController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\InsuranceController;
@@ -22,6 +23,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('admin/index', [AdminController::class, 'index']) ->name('admin.index');
+Route::post('admin/login', [AdminController::class, 'login'])->name('admin.login');
 
 Route::get('admin/races', [RaceController::class, 'index'])->name('race.index');
 Route::get('race/create', [RaceController::class, 'create'])->name('race.create');

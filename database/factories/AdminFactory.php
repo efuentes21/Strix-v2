@@ -21,7 +21,7 @@ class AdminFactory extends Factory
         return [
             'email' => fake()->unique()->email(),
             'signature' => 'signature.png',
-            'password' => bcrypt(fake()->password())
+            'password' => bcrypt('admin')
         ];
     }
 }
