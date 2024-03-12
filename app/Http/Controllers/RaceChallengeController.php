@@ -17,15 +17,23 @@ class RaceChallengeController extends Controller
      */
     public function index(Race $race)
     {
-        $racechallenges = $race->with(['challenges' => function($query){
-            $query->where('active', true);
-        }]);
-        return view('admin.racechallenges.index', compact('racechallenges'));
+        $racechallenges = $race->challenges()->get();
+        if($racechallenges->count() > 0){
+            $noRecord = false;
+        } else {
+            $noRecord = true;
+        }
+        return view('admin.racechallenges.index', compact('racechallenges', 'race', 'noRecord'));
+        // $racechallenges = $race->challenges();
+        //$racechallenges = RaceChallenge::where('race', $race->id);
+        //$racechallenges = Challenge::with('races')->where('active', true)->where('race', $race->id)->get();
     }
     public function indexadd(Race $race)
     {
-        $racechallenges = $race->challenges()->where('activo', true)->whereDoesntHave('race');
-        return view('admin.racechallenges.index', compact('racechallenges'));
+        $racechallenges = Challenge::whereNotIn('id', function ($query) use ($race) {
+            $query->select('challenge')->from('race_challenges')->where('race', $race->id);
+        })->get();
+        return view('admin.racechallenges.add', compact('racechallenges', 'race'));
     }
 
     /**
@@ -34,6 +42,32 @@ class RaceChallengeController extends Controller
     public function create()
     {
         return view('admin.racechallenge.new');
+    }
+
+    /**
+     * Adds a challenge to the desired race
+     */
+    public function add(Race $race, Challenge $challenge)
+    {
+        if(!($race->challenges()->where('challenge', $challenge->id)->exists())) {
+            $racechallenge = new RaceChallenge();
+            $racechallenge->race = $race->id;
+            $racechallenge->challenge = $challenge->id;
+            $racechallenge->save();
+            return redirect()->back()->with('success', 'Challenge added successfully');
+        } else {
+            return redirect()->back();
+        }
+    }
+    
+    /**
+     * Adds a challenge to the desired race
+     */
+    public function remove(Race $race, Challenge $challenge)
+    {
+        $race->challenges()->detach($challenge->id);
+        return redirect()->back()->with('success', 'Challenge added successfully');
+        
     }
 
     /**

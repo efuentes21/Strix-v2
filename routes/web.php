@@ -53,8 +53,8 @@ Route::post('challenge/store', [ChallengeController::class, 'store'])->name('cha
 
 Route::get('admin/racechallenges/remove/{race}', [RaceChallengeController::class, 'index'])->name('racechallenge.index');
 Route::get('admin/racechallenges/add/{race}', [RaceChallengeController::class, 'indexadd'])->name('racechallenge.indexadd');
-Route::post('racechallenge/add/{challenge}/{race}', [RaceChallengeController::class, 'add'])->name('racechallenge.add');
-Route::post('racechallenge/remove/{challenge}/{race}', [RaceChallengeController::class, 'remove'])->name('racechallenge.remove');
+Route::get('racechallenge/{race}/add/{challenge}', [RaceChallengeController::class, 'add'])->name('racechallenge.add');
+Route::get('racechallenge/{race}/remove/{challenge}', [RaceChallengeController::class, 'remove'])->name('racechallenge.remove');
 
 Route::get('admin/competitors', [CompetitorController::class, 'index'])->name('competitor.index');
 Route::get('competitor/create', [CompetitorController::class, 'create'])->name('competitor.create');

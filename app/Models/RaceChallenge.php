@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class RaceChallenge extends Model
 {
     use HasFactory;
-
+    protected $table = 'race_challenges';
     /**
      * The attributes that are mass assignable.
      *
@@ -22,9 +22,9 @@ class RaceChallenge extends Model
     ];
 
     public function races() {
-        return $this->belongsTo('\App\Models\Race');
+        return $this->belongsTo('\App\Models\Race', 'race', 'id');
     }
     public function challenges() {
-        return $this->belongsTo('\App\Models\Challenge');
+        return $this->belongsTo('\App\Models\Challenge', 'challenge', 'id');
     }
 }

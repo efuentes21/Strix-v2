@@ -23,6 +23,6 @@ class Challenge extends Model
     ];
 
     public function races(){
-        return $this->hasMany('\Apps\Models\Race');
+        return $this->belongsToMany(Race::class, 'race_challenges', 'challenge', 'race');
     }
 }

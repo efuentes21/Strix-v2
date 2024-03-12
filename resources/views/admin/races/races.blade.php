@@ -37,7 +37,7 @@
                         <th>Time</th>
                         <th>Inscription</th>
                         <th>Active</th>
-                        <th class="invisible">Add challenges</th>
+                        <th class="invisible">Challenges</th>
                         <th class="invisible">Edit</th>
                     </tr>
                 </thead>

@@ -2,10 +2,10 @@
 <div class="container">
     <div class="row mt-4 mb-2">
         <div class="col-md-10">
-            <h1>RACE CHALLENGES</h1>
+            <h1>ADD CHALLENGES TO RACE</h1>
         </div>
         <div class="col-md-2 d-flex align-items-center justify-content-end">
-            <a href="{{ route('race.index') }}" class="btn btn-primary text-white">ADD CHALLENGES</a>
+            <a href="{{ route('racechallenge.index', ['race' => $race]) }}" class="btn btn-primary text-white">REMOVE CHALLENGES</a>
         </div>
     </div>
     <!-- 
@@ -48,5 +48,10 @@
             </table>
         </div>
     </div>
+    @if($noRecord)
+    <div class="row">
+        <p>No challenges found!</p>
+    </div>
+    @endif
 </div>
 @show
