@@ -83,7 +83,7 @@
                         <li><a class="dropdown-item" href="#">Settings</a></li>
                         <li><a class="dropdown-item" href="#">Profile</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="{{ route('admin.index') }}">Sign out</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.logout') }}">Sign out</a></li>
                     </ul>
                 </div>
             </aside>

@@ -2,6 +2,6 @@
 
 @section('titulo', 'Log in')
 
-@section('route-user', '{{ route("admin.login") }}')
+@section('route-user', route("admin.login"))
 
 @section('user', false)

@@ -17,49 +17,47 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <main class="container-fuild h-100">
+    <main class="container-fuild">
         <div class="row h-100 full">
             @section('login')
-            <div class="container">
-                <div class="col-md-6">
-                    <h1>image</h1>
-                </div>
-                <div class="col-md-6">
-                    <div class="row mt-3 mb-3">
-                        <h1>LOG IN</h1>
+                <div id="backgound-login" class="col-6"></div>
+                <div class="col-6 d-flex align-items-center justify-content-center">
+                    <div>
+                        <div class="row mt-3 mb-3 container">
+                            <h1>LOG IN</h1>
+                        </div>
+                        <div class="row mt-3 mb-3 container">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            <form action="@yield('route-user')" method="POST" enctype="multipart/form-data" class="mb-3">
+                                @csrf
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="text" class="form-control" id="email" name="email" aria-describedby="email-help" required>
+                                    <div id="email-help" class="form-text">Introduce an email of an admin's account.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="password" name="password" aria-describedby="password-help" required>
+                                    <div id="password-help" class="form-text">Introduce the password</div>
+                                </div>
+                                <button type="submit" class="btn btn-primary text-white">LOGIN</button>
+                            </form>
+                            {{-- @if($client) --}}
+                                <div class="mb-3">
+                                    <div id="route-signup"><a href="#">Not registered yet?</a></div>
+                                </div>
+                            {{-- @endif --}}
+                        </div>
                     </div>
-                    <div class="row mt-3 mb-3">
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-                        <form action="@yield('route-user')" method="POST" enctype="multipart/form-data" class="mb-3">
-                            @csrf
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="text" class="form-control" id="email" name="email" aria-describedby="email-help" required>
-                                <div id="email-help" class="form-text">Introduce an email of an admin's account.</div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="password" name="password" aria-describedby="password-help" required>
-                                <div id="password-help" class="form-text">Introduce the password</div>
-                            </div>
-                            <button type="submit" class="btn btn-primary text-white">LOGIN</button>
-                        </form>
-                        {{-- @if($client) --}}
-                            <div class="mb-3">
-                                <div id="route-signup"><a href="#">Not registered yet?</a></div>
-                            </div>
-                        {{-- @endif --}}
-                    </div>
                 </div>
-            </div>
             @show
         </div>
     </main>

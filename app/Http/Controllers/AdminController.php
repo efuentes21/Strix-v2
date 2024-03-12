@@ -28,13 +28,22 @@ class AdminController extends Controller
 	    $credentials = $request->only('email', 'password');
 	
 	    // Si el usuario existe lo logamos y lo llevamos a la vista de "logados" con un mensaje
-	    if (Auth::attempt($credentials)) {
-	        return redirect()->intended('logados')
-	            ->withSuccess('Logado Correctamente');
+	    if (Auth::guard('admin')->attempt($credentials)) {
+	        return redirect()->route('race.index')->withSuccess('Loged correctly');
 	    }
 	
 	    // Si el usuario no existe devolvemos al usuario al formulario de login con un mensaje de error
-	    return redirect()->route('race.index')->withSuccess('Los datos introducidos no son correctos');
+	    return redirect()->route('admin.index')->withSuccess('Los datos introducidos no son correctos');
     }
+
+	public function logout(Request $request) {
+		Auth::guard('admin')->logout();
+
+		$request->session()->invalidate();
+
+		// $request->session()->regenerateToken();
+
+		return redirect()->route('admin.index')->withSuccess('Logged out successfully');
+	}
 
 }

@@ -32,3 +32,9 @@ aside, main {
 .sidebar li a:hover {
     background-color: #0A8383 !important;
 }
+
+#backgound-login {
+    background-image: url("../images/login.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
