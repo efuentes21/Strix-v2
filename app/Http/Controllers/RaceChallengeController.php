@@ -24,9 +24,6 @@ class RaceChallengeController extends Controller
             $noRecord = true;
         }
         return view('admin.racechallenges.index', compact('racechallenges', 'race', 'noRecord'));
-        // $racechallenges = $race->challenges();
-        //$racechallenges = RaceChallenge::where('race', $race->id);
-        //$racechallenges = Challenge::with('races')->where('active', true)->where('race', $race->id)->get();
     }
     public function indexadd(Race $race)
     {

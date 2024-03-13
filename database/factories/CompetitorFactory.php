@@ -23,8 +23,8 @@ class CompetitorFactory extends Factory
             'address' => fake()->address(),
             'birthdate' => fake()->date(),
             'pro' => fake()->numberBetween(0, 1),
-            'insurance' => fake()->numberBetween(0, 50),
-            'points' => fake()->numberBetwen(0,5000),
+            'insurance' => strtoupper(Str::random(9)),
+            'points' => fake()->numberBetween(0,5000),
             'partner' => fake()->numberBetween(0, 1),
             'active' => fake()->numberBetween(0, 1)
         ];

@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('sponsorships', function (Blueprint $table) {
             $table->unsignedBigInteger('race');
-            $table->string('sponsor');
+            $table->unsignedBigInteger('sponsor');
             $table->timestamps();
             
             $table->primary(['race', 'sponsor']);
 
             $table->foreign('race')->references('id')->on('races')->onDelete('cascade');
-            $table->foreign('sponsor')->references('cif')->on('sponsors')->onDelete('cascade');
+            $table->foreign('sponsor')->references('id')->on('sponsors')->onDelete('cascade');
         });
     }
 

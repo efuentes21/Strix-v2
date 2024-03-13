@@ -42,11 +42,11 @@ class Race extends Model
     ];
 
     public function sponsors(){
-        return $this->hasMany('\App\Models\Sponsor');
+        return $this->hasMany(Sponsor::class);
     }
 
     public function competitors(){
-        return $this->hasMany('\App\Models\Competitor');
+        return $this->hasMany(Competitor::class);
     }
 
     public function challenges(){

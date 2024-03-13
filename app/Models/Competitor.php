@@ -38,10 +38,10 @@ class Competitor extends Model
     ];
 
     public function races(){
-        return $this->hasMany('\Apps\Models\Race');
+        return $this->hasMany(Race::class);
     }
 
     public function insurance(){
-        return $this->belongsTo('\Apps\Models\Insurance');
+        return $this->belongsTo(Insurance::class);
     }
 }

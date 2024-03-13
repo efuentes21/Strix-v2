@@ -37,6 +37,6 @@ class Sponsor extends Model
     ];
 
     public function sponsors(){
-        return $this->hasMany('\Apps\Models\Race');
+        return $this->hasMany(Race::class);
     }
 }

@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RaceChallenge extends Model
+class Sponsorship extends Model
 {
     use HasFactory;
-    protected $table = 'race_challenges';
+    protected $table = 'sponsorships';
     /**
      * The attributes that are mass assignable.
      *
@@ -18,13 +18,13 @@ class RaceChallenge extends Model
      */
     protected $fillable = [
         'race',
-        'challenge',
+        'sponsor',
     ];
 
     public function races() {
         return $this->belongsTo(Race::class, 'race', 'id');
     }
-    public function challenges() {
-        return $this->belongsTo(Challenge::class, 'challenge', 'id');
+    public function sponsors() {
+        return $this->belongsTo(Sponsor::class, 'sponsor', 'id');
     }
 }
