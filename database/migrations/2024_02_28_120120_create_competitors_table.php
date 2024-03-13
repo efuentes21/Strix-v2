@@ -16,11 +16,14 @@ return new class extends Migration
             $table->string('name');
             $table->string('address');
             $table->date('birthdate');
+            $table->integer('points');
             $table->boolean('pro');
-            $table->string('insurance');
+            $table->unsignedBigInteger('insurance');
             $table->boolean('partner');
             $table->boolean('active');
             $table->timestamps();
+
+            $table->foreign('insurance')->references('id')->on('insurances')->onDelete('cascade');
         });
     }
 

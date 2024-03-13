@@ -33,7 +33,12 @@ class RaceChallengeController extends Controller
         $racechallenges = Challenge::whereNotIn('id', function ($query) use ($race) {
             $query->select('challenge')->from('race_challenges')->where('race', $race->id);
         })->get();
-        return view('admin.racechallenges.add', compact('racechallenges', 'race'));
+        if($racechallenges->count() > 0){
+            $noRecord = false;
+        } else {
+            $noRecord = true;
+        }
+        return view('admin.racechallenges.add', compact('racechallenges', 'race', 'noRecord'));
     }
 
     /**

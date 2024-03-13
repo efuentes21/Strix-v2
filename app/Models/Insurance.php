@@ -35,7 +35,7 @@ class Insurance extends Model
         'price' => 'decimal:2', // Precio se casteará a tipo 'decimal' con 2 decimales
     ];
 
-    public function competitors(){
-        return $this->hasMany('\Apps\Models\Competitor');
+    public function races(){
+        return $this->belongsToMany(Race::class, 'race_insurances');
     }
 }

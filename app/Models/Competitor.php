@@ -19,6 +19,7 @@ class Competitor extends Model
         'name',
         'address',
         'birthdate',
+        'points',
         'pro',
         'insurance',
         'partner',
