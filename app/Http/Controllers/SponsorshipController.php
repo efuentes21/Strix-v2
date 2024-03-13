@@ -41,10 +41,10 @@ class SponsorshipController extends Controller
     public function add(Race $race, Sponsor $sponsor)
     {
         if(!($race->sponsors()->where('sponsor', $sponsor->id)->exists())) {
-            $sponsor = new Sponsorship();
-            $sponsor->race = $race->id;
-            $sponsor->sponsor = $sponsor->id;
-            $sponsor->save();
+            $sponsorship = new Sponsorship();
+            $sponsorship->race = $race->id;
+            $sponsorship->sponsor = $sponsor->id;
+            $sponsorship->save();
             return redirect()->back()->with('success', 'Sponsor added successfully');
         } else {
             return redirect()->back();
