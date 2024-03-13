@@ -42,7 +42,7 @@ class Race extends Model
     ];
 
     public function sponsors(){
-        return $this->hasMany(Sponsor::class);
+        return $this->belongsToMany(Sponsor::class, 'sponsorships', 'race', 'sponsor');
     }
 
     public function competitors(){

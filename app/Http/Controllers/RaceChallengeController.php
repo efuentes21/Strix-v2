@@ -69,7 +69,6 @@ class RaceChallengeController extends Controller
     {
         $race->challenges()->detach($challenge->id);
         return redirect()->back()->with('success', 'Challenge added successfully');
-        
     }
 
     /**
@@ -77,26 +76,7 @@ class RaceChallengeController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'cif' => 'required|string|max:9',
-            'name' => 'required|string|max:255',
-            'logo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'address' => 'required|string|max:255',
-            'principal' => 'required|boolean',
-            'active' => 'required|boolean'
-        ]);
-
-        try {
-            $image = $request->file('logo');
-            $imageName = time().'_'.$image->getClientOriginalName();
-            $image->move(public_path('images'), $imageName);
-            $validatedData['logo'] = $imageName;
-            $RaceChallenge = RaceChallenge::create($validatedData);
-        } catch (Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
-        }
-
-        return redirect()->route('RaceChallenge.index');
+        //
     }
 
     /**
@@ -112,7 +92,7 @@ class RaceChallengeController extends Controller
      */
     public function edit(RaceChallenge $RaceChallenge)
     {
-        return view('admin.racechallenge.edit', compact('RaceChallenge'));
+        //
     }
 
     /**
@@ -120,37 +100,7 @@ class RaceChallengeController extends Controller
      */
     public function update(Request $request, String $id)
     {
-        $RaceChallenge = RaceChallenge::findOrFail($id);
-
-        $request->validate([
-            'cif' => 'required',
-            'name' => 'required',
-            'address' => 'required',
-            'logo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-            'principal' => 'required',
-            'active' => 'required',
-        ]);
-
-        try {
-            $RaceChallenge->cif = $request->input('cif');
-            $RaceChallenge->name = $request->input('name');
-            $RaceChallenge->address = $request->input('address');
-            $RaceChallenge->principal = $request->input('principal');
-            $RaceChallenge->active = $request->input('active');
-            
-            if ($request->hasFile('logo')) {
-                $image = $request->file('logo');
-                $imageName = time().'_'.$image->getClientOriginalName();
-                $image->move(public_path('images'), $imageName);
-                $RaceChallenge->logo = $imageName;
-            }
-            
-            $RaceChallenge->update();
-        } catch (Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
-        }
-
-        return redirect()->route('RaceChallenge.index')->with('success', 'RaceChallenge updated successfully');
+        //
     }
 
     /**

@@ -43,14 +43,14 @@
                 <tbody>
                     @foreach ($races as $race)
                     <tr>
-                        <td>{{ $race->id }}</td>
-                        <td>{{ $race->unevenness }}</td>
-                        <td>{{ $race->max_competitors }}</td>
-                        <td>{{ $race->distance }}</td>
-                        <td>{{ $race->date }}</td>
-                        <td>{{ $race->time }}</td>
-                        <td>{{ $race->inscription }}€</td>
-                        <td>{{ $race->active }}</td>
+                        <td class="align-middle">{{ $race->id }}</td>
+                        <td class="align-middle">{{ $race->unevenness }}</td>
+                        <td class="align-middle">{{ $race->max_competitors }}</td>
+                        <td class="align-middle">{{ $race->distance }}</td>
+                        <td class="align-middle">{{ $race->date }}</td>
+                        <td class="align-middle">{{ $race->time }}</td>
+                        <td class="align-middle">{{ $race->inscription }}€</td>
+                        <td class="align-middle">{{ $race->active }}</td>
                         <td>
                             <div class="dropdown">
                                 <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" id="dropdownUser1-{{ $race->id }}" data-bs-toggle="dropdown" aria-expanded="false">
@@ -59,6 +59,7 @@
                                 <ul class="dropdown-menu dropdown-menu-white text-small shadow" aria-labelledby="dropdownUser1-{{ $race->id }}">
                                     <li><a class="dropdown-item" href="{{ route('race.edit', ['race' => $race]) }}">Edit</a></li>
                                     <li><a class="dropdown-item" href="{{ route('racechallenge.index', ['race' => $race]) }}">Challenges</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('sponsorship.index', ['race' => $race]) }}">Sponsors</a></li>
                                     <li><a class="dropdown-item" href="{{ route('raceinsurance.index', ['race' => $race]) }}">Insurances</a></li>
                                 </ul>
                             </div>

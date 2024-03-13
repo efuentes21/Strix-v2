@@ -24,11 +24,11 @@
                 <tbody>
                     @foreach ($insurances as $insurance)
                     <tr>
-                        <td>{{ $insurance->cif }}</td>
-                        <td>{{ $insurance->name }}</td>
-                        <td>{{ $insurance->address }}</td>
-                        <td>{{ $insurance->price }}€</td>
-                        <td><a href="{{ route('insurance.edit', ['insurance' => $insurance]) }}">Edit</a></td>
+                        <td class="align-middle">{{ $insurance->cif }}</td>
+                        <td class="align-middle">{{ $insurance->name }}</td>
+                        <td class="align-middle">{{ $insurance->address }}</td>
+                        <td class="align-middle">{{ $insurance->price }}€</td>
+                        <td class="align-middle"><a href="{{ route('insurance.edit', ['insurance' => $insurance]) }}">Edit</a></td>
                     </tr>
                     @endforeach
                 </tbody>

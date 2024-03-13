@@ -25,12 +25,12 @@
                 <tbody>
                     @foreach ($competitors as $competitor)
                     <tr>
-                        <td>{{ $competitor->dni }}</td>
-                        <td>{{ $competitor->name }}</td>
-                        <td>{{ $competitor->address }}</td>
-                        <td>{{ $competitor->pro }}</td>
-                        <td>{{ $competitor->partner }}</td>
-                        <td>{{ $competitor->active }}</td>
+                        <td class="align-middle">{{ $competitor->dni }}</td>
+                        <td class="align-middle">{{ $competitor->name }}</td>
+                        <td class="align-middle">{{ $competitor->address }}</td>
+                        <td class="align-middle">{{ $competitor->pro }}</td>
+                        <td class="align-middle">{{ $competitor->partner }}</td>
+                        <td class="align-middle">{{ $competitor->active }}</td>
                     </tr>
                     @endforeach
                 </tbody>

@@ -38,10 +38,10 @@
                 <tbody>
                     @foreach ($racechallenges as $challenge)
                     <tr>
-                        <td>{{ $challenge->id }}</td>
-                        <td>{{ $challenge->name }}</td>
-                        <td>{{ $challenge->description }}</td>
-                        <td><a href="{{ route('racechallenge.remove', ['challenge' => $challenge, 'race' => $race]) }}">Remove</a></td>
+                        <td class="align-middle">{{ $challenge->id }}</td>
+                        <td class="align-middle">{{ $challenge->name }}</td>
+                        <td class="align-middle">{{ $challenge->description }}</td>
+                        <td class="align-middle"><a href="{{ route('racechallenge.remove', ['challenge' => $challenge, 'race' => $race]) }}">Remove</a></td>
                     </tr>
                     @endforeach
                 </tbody>

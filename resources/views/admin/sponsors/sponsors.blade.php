@@ -25,16 +25,16 @@
                 <tbody>
                     @foreach ($sponsors as $sponsor)
                     <tr>
-                        <td>{{ $sponsor->cif }}</td>
-                        <td>{{ $sponsor->name }}</td>
-                        <td>{{ $sponsor->address }}</td>
-                        <td class="text-center"><img src="{{ asset('images/' . $sponsor->logo) }}" alt="Sponsor Logo" style="max-width: 50px;"></td>
+                        <td class="align-middle">{{ $sponsor->cif }}</td>
+                        <td class="align-middle">{{ $sponsor->name }}</td>
+                        <td class="align-middle">{{ $sponsor->address }}</td>
+                        <td class="text-center align-middle"><img src="{{ asset('images/' . $sponsor->logo) }}" alt="Sponsor Logo" style="max-width: 50px;"></td>
                         @if($sponsor->principal)
-                            <td class="text-center"><img src="{{ asset('images/verde.png') }}" alt="true" style="max-width: 50px;"></td>
+                            <td class="text-center align-middle"><img src="{{ asset('images/verde.png') }}" alt="true" style="max-width: 50px;"></td>
                         @else
-                            <td class="text-center"><img src="{{ asset('images/rojo.png') }}" alt="false" style="max-width: 50px;"></td>
+                            <td class="text-center align-middle"><img src="{{ asset('images/rojo.png') }}" alt="false" style="max-width: 50px;"></td>
                         @endif
-                        <td><a href="{{ route('sponsor.edit', ['sponsor' => $sponsor]) }}">Edit</a></td>
+                        <td class="align-middle"><a href="{{ route('sponsor.edit', ['sponsor' => $sponsor]) }}">Edit</a></td>
                     </tr>
                     @endforeach
                 </tbody>

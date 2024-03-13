@@ -24,11 +24,11 @@
                 <tbody>
                     @foreach ($challenges as $challenge)
                     <tr>
-                        <td>{{ $challenge->id }}</td>
-                        <td>{{ $challenge->name }}</td>
-                        <td>{{ $challenge->description }}</td>
-                        <td>{{ $challenge->active }}</td>
-                        <td><a href="{{ route('challenge.edit', ['challenge' => $challenge]) }}">Edit</a></td>
+                        <td class="align-middle">{{ $challenge->id }}</td>
+                        <td class="align-middle">{{ $challenge->name }}</td>
+                        <td class="align-middle">{{ $challenge->description }}</td>
+                        <td class="align-middle">{{ $challenge->active }}</td>
+                        <td class="align-middle"><a href="{{ route('challenge.edit', ['challenge' => $challenge]) }}">Edit</a></td>
                     </tr>
                     @endforeach
                 </tbody>

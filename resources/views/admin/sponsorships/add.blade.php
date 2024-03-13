@@ -1,9 +1,9 @@
 @extends('layouts.admin.master')
 
-@section('titulo', 'Race challenges')
+@section('titulo', 'Race sponsors')
 
 @yield('dashboard')
 @section('active-races', 'active')
 @section('content')
-    @include('admin.racechallenges.create')
+    @include('admin.sponsorships.create')
 @stop
