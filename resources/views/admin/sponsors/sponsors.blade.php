@@ -28,8 +28,12 @@
                         <td>{{ $sponsor->cif }}</td>
                         <td>{{ $sponsor->name }}</td>
                         <td>{{ $sponsor->address }}</td>
-                        <td><img src="{{ asset('images/' . $sponsor->logo) }}" alt="Sponsor Logo" style="max-width: 50px;"></td>
-                        <td>{{ $sponsor->principal }}</td>
+                        <td class="text-center"><img src="{{ asset('images/' . $sponsor->logo) }}" alt="Sponsor Logo" style="max-width: 50px;"></td>
+                        @if($sponsor->principal)
+                            <td class="text-center"><img src="{{ asset('images/verde.png') }}" alt="true" style="max-width: 50px;"></td>
+                        @else
+                            <td class="text-center"><img src="{{ asset('images/rojo.png') }}" alt="false" style="max-width: 50px;"></td>
+                        @endif
                         <td><a href="{{ route('sponsor.edit', ['sponsor' => $sponsor]) }}">Edit</a></td>
                     </tr>
                     @endforeach
