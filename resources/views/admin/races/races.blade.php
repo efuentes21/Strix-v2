@@ -37,8 +37,7 @@
                         <th>Time</th>
                         <th>Inscription</th>
                         <th>Active</th>
-                        <th class="invisible">Challenges</th>
-                        <th class="invisible">Edit</th>
+                        <th class="invisible">Settings</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -52,8 +51,18 @@
                         <td>{{ $race->time }}</td>
                         <td>{{ $race->inscription }}€</td>
                         <td>{{ $race->active }}</td>
-                        <td><a href="{{ route('racechallenge.index', ['race' => $race]) }}">Challenges</a></td>
-                        <td><a href="{{ route('race.edit', ['race' => $race]) }}">Edit</a></td>
+                        <td>
+                            <div class="dropdown">
+                                <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" id="dropdownUser1-{{ $race->id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="{{ asset('images/ajustes.svg') }}" alt="Settings" style="max-width: 25px;">
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-white text-small shadow" aria-labelledby="dropdownUser1-{{ $race->id }}">
+                                    <li><a class="dropdown-item" href="{{ route('race.edit', ['race' => $race]) }}">Edit</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('racechallenge.index', ['race' => $race]) }}">Challenges</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('raceinsurance.index', ['race' => $race]) }}">Insurances</a></li>
+                                </ul>
+                            </div>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

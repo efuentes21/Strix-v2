@@ -53,4 +53,8 @@ class Race extends Model
         return $this->belongsToMany(Challenge::class, 'race_challenges', 'race', 'challenge');
 
     }
+    
+    public function insurances(){
+        return $this->belongsToMany(Insurance::class, 'race_insurances', 'race', 'insurance');
+    }
 }
