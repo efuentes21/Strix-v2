@@ -47,6 +47,10 @@ class Kernel extends HttpKernel
         'auth.admin' => [
             \App\Http\Middleware\AdminMiddleware::class,
         ],
+
+        'auth.competitor' => [
+            \App\Http\Middleware\CompetitorMiddleware::class,
+        ],
     ];
 
     /**

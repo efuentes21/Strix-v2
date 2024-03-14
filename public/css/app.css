@@ -34,7 +34,7 @@ aside, main {
 }
 
 #backgound-login {
-    background-image: url("../images/login.png");
+    background-image: url("../resources/login.png");
     background-size: cover;
     background-repeat: no-repeat;
 }

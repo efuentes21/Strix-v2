@@ -43,7 +43,7 @@
                         <td class="align-middle">{{ $sponsor->cif }}</td>
                         <td class="align-middle">{{ $sponsor->name }}</td>
                         <td class="align-middle">{{ $sponsor->address }}</td>
-                        <td class="text-center align-middle"><img src="{{ asset('images/' . $sponsor->logo) }}" alt="Sponsor Logo" style="max-width: 50px;"></td>
+                        <td class="text-center align-middle"><img src="{{ asset('resources/' . $sponsor->logo) }}" alt="Sponsor Logo" style="max-width: 50px;"></td>
                         <td class="align-middle"><a href="{{ route('sponsorship.remove', ['sponsor' => $sponsor, 'race' => $race]) }}">Remove</a></td>
                     </tr>
                     @endforeach

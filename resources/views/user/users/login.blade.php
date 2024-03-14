@@ -3,5 +3,5 @@
 @section('titulo', 'Log in')
 
 @section('form')
-    @include('layouts.login.admin')
+    @include('layouts.login.user')
 @stop

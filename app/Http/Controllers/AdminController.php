@@ -29,7 +29,7 @@ class AdminController extends Controller
 	
 	    // Si el usuario existe lo logamos y lo llevamos a la vista de "logados" con un mensaje
 	    if (Auth::guard('admin')->attempt($credentials)) {
-	        return redirect()->route('race.index')->withSuccess('Loged correctly');
+	        return redirect()->route('race.index')->withSuccess('Logged in successfully');
 	    }
 	
 	    // Si el usuario no existe devolvemos al usuario al formulario de login con un mensaje de error

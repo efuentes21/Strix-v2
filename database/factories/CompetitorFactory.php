@@ -19,6 +19,8 @@ class CompetitorFactory extends Factory
     {
         return [
             'dni' => strtoupper(Str::random(9)),
+            'email' => fake()->unique()->email(),
+            'password' => bcrypt('admin'),
             'name' => fake()->name(),
             'address' => fake()->address(),
             'birthdate' => fake()->date(),

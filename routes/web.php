@@ -23,9 +23,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('user.mainpage.main');
+})->name('/');
 
+Route::get('user/index', [CompetitorController::class, 'index']) ->name('user.index');
+Route::post('user/login', [CompetitorController::class, 'login'])->name('user.login');
 Route::get('admin/index', [AdminController::class, 'index']) ->name('admin.index');
 Route::post('admin/login', [AdminController::class, 'login'])->name('admin.login');
 
@@ -71,6 +73,6 @@ Route::group(['middleware' => 'auth.admin'], function () {
     Route::get('raceinsurance/{race}/add/{insurance}', [RaceInsuranceController::class, 'add'])->name('raceinsurance.add');
     Route::get('raceinsurance/{race}/remove/{insurance}', [RaceInsuranceController::class, 'remove'])->name('raceinsurance.remove');
 
-    Route::get('admin/competitors', [CompetitorController::class, 'index'])->name('competitor.index');
+    Route::get('admin/competitors', [CompetitorController::class, 'adminindex'])->name('competitor.index');
     Route::get('competitor/create', [CompetitorController::class, 'create'])->name('competitor.create');
 });

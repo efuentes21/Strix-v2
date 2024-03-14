@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('company', function (Blueprint $table) {
             $table->id();
-            $table->integer('cif')->unique();
-            $table->string('logo');
+            $table->string('cif')->unique();
             $table->string('name');
-            $table->string('direction');
-            $table->decimal('principal_price');
+            $table->string('address');
+            $table->string('logo');
+            $table->string('account');
+            $table->integer('principal_price');
+            $table->integer('partner_price');
             $table->timestamps();
         });
     }

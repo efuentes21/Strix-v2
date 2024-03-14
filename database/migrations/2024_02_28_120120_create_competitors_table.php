@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('competitors', function (Blueprint $table) {
             $table->string('dni')->primary();
+            $table->string('email');
+            $table->string('password');
             $table->string('name');
             $table->string('address');
             $table->date('birthdate');

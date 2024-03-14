@@ -15,6 +15,7 @@
                 <thead>
                     <tr>
                         <th>DNI</th>
+                        <th>Email</th>
                         <th>Name</th>
                         <th>Address</th>
                         <th>Pro</th>
@@ -26,6 +27,7 @@
                     @foreach ($competitors as $competitor)
                     <tr>
                         <td class="align-middle">{{ $competitor->dni }}</td>
+                        <td class="align-middle">{{ $competitor->email }}</td>
                         <td class="align-middle">{{ $competitor->name }}</td>
                         <td class="align-middle">{{ $competitor->address }}</td>
                         <td class="align-middle">{{ $competitor->pro }}</td>
