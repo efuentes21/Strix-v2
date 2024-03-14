@@ -33,7 +33,6 @@
                         <th>Name</th>
                         <th>Address</th>
                         <th>Logo</th>
-                        <th>Principal</th>
                         <th class="invisible">R</th>
                     </tr>
                 </thead>
