@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('competitors', function (Blueprint $table) {
-            $table->string('dni')->primary();
+            $table->id();
+            $table->string('dni')->unique();
             $table->string('email');
             $table->string('password');
             $table->string('name');
