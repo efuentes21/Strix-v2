@@ -4,5 +4,6 @@
 
 @yield('header')
 @section('content')
+    @include('user.components.banner-image')
     @include('user.components.banner')
 @stop

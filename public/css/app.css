@@ -48,4 +48,14 @@ aside, main {
 
 .full {
   width: 100%;
+}
+
+.text-title-banner {
+  font-weight: 600;
+  font-style: bold;
+  font-size: 4rem;
+}
+
+.text-outline-1 {
+  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000;
 }/*# sourceMappingURL=app.css.map */
