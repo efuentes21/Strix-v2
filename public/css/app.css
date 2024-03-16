@@ -77,11 +77,17 @@ aside, main {
 }
 
 .text-title-banner {
-  font-weight: 600;
-  font-style: bold;
-  font-size: 4rem;
+  font-size: 4em;
 }
 
+@media (max-width: 768px) {
+  .text-title-banner {
+    font-size: 2em;
+  }
+  .text-banner-subtitle {
+    display: none;
+  }
+}
 .text-outline-1 {
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000;
 }/*# sourceMappingURL=app.css.map */
