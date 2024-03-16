@@ -20,7 +20,7 @@
     <main class="container-fuild">
         <div class="row h-100 full">
             @section('login')
-                <div id="backgound-login" class="col-6"></div>
+                <div id="background-login" class="col-6"></div>
                 <div class="col-6 d-flex align-items-center justify-content-center">
                     <div>
                         <div class="row mt-3 mb-3 container">
