@@ -6,4 +6,5 @@
 @section('content')
     @include('user.components.banner-image')
     @include('user.components.banner')
+    @include('user.components.races')
 @stop

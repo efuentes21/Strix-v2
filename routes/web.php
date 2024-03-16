@@ -22,9 +22,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('user.mainpage.main');
-})->name('/');
+Route::get('/', [CompetitorController::class, 'mainpage'])->name('/');
 
 Route::get('user/index', [CompetitorController::class, 'index']) ->name('user.index');
 Route::post('user/login', [CompetitorController::class, 'login'])->name('user.login');

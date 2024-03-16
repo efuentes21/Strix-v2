@@ -5,11 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Competitor;
+use App\Models\Race;
 use App\Http\Requests\StoreCompetitorRequest;
 use App\Http\Requests\UpdateCompetitorRequest;
 
 class CompetitorController extends Controller
 {
+    public function mainpage()
+    {
+        $races = Race::all();
+        return view('user.mainpage.main', compact(('races')));
+    }
+
     /**
      * Display a listing of the resource.
      */
