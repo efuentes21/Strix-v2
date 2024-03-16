@@ -29,7 +29,7 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Id</th>
+                        <th>Name</th>
                         <th>Unevenness</th>
                         <th>Competitors</th>
                         <th>Distance</th>
@@ -43,7 +43,7 @@
                 <tbody>
                     @foreach ($races as $race)
                     <tr>
-                        <td class="align-middle">{{ $race->id }}</td>
+                        <td class="align-middle">{{ $race->name }}</td>
                         <td class="align-middle">{{ $race->unevenness }}</td>
                         <td class="align-middle">{{ $race->max_competitors }}</td>
                         <td class="align-middle">{{ $race->distance }}</td>
@@ -51,7 +51,7 @@
                         <td class="align-middle">{{ $race->time }}</td>
                         <td class="align-middle">{{ $race->inscription }}€</td>
                         <td class="align-middle">{{ $race->active }}</td>
-                        <td>
+                        <td class="align-middle">
                             <div class="dropdown">
                                 <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" id="dropdownUser1-{{ $race->id }}" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src="{{ asset('resources/ajustes.svg') }}" alt="Settings" style="max-width: 25px;">
@@ -62,6 +62,9 @@
                                     <li><a class="dropdown-item" href="{{ route('racechallenge.index', ['race' => $race]) }}">Challenges</a></li>
                                     <li><a class="dropdown-item" href="{{ route('sponsorship.index', ['race' => $race]) }}">Sponsors</a></li>
                                     <li><a class="dropdown-item" href="{{ route('raceinsurance.index', ['race' => $race]) }}">Insurances</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="#">Media</a></li>
+                                    <li><a class="dropdown-item" href="#">Scan QR</a></li>
                                 </ul>
                             </div>
                         </td>

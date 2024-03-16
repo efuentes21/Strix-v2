@@ -59,18 +59,6 @@
                         Competitors
                         </a>
                     </li>
-                    <li>
-                        <a href="/admin/scanqr" class="nav-link text-white @yield('active-scanqr')">
-                        <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-                        Scan QR
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/admin/media" class="nav-link text-white @yield('active-media')">
-                        <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-                        Media
-                        </a>
-                    </li>
                     </ul>
                     <hr>
                     <div class="dropdown">

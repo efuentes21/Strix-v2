@@ -17,6 +17,7 @@ class RaceFactory extends Factory
     public function definition(): array
     {
         return [
+            'name' => fake()->name(),
             'description' => fake()->sentence(),
             'unevenness' => fake()->numberBetween(0, 100),
             'map' => 'map_route.jpg',

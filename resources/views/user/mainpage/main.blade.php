@@ -4,5 +4,5 @@
 
 @yield('header')
 @section('content')
-    {{-- @include('user.mainpage.main') --}}
+    @include('user.components.banner')
 @stop

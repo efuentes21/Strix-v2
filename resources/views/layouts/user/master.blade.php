@@ -18,17 +18,17 @@
 </head>
 <body>
     @section('header')
-    <header class="p-3 mb-3 border-bottom">
+    <header class="p-3 border-bottom bg-dark text-white">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
-                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+                @include('layouts.assets.strix-logo')
                 </a>
 
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="#" class="nav-link px-2 link-dark">Races</a></li>
-                    <li><a href="#" class="nav-link px-2 link-dark">Challenges</a></li>
-                    <li><a href="#" class="nav-link px-2 link-dark">Media</a></li>
+                    <li><a href="#" class="nav-link px-2 link-dark text-white">Races</a></li>
+                    <li><a href="#" class="nav-link px-2 link-dark text-white">Challenges</a></li>
+                    <li><a href="#" class="nav-link px-2 link-dark text-white">Media</a></li>
                 </ul>
 
                 <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
@@ -37,15 +37,15 @@
 
                 @auth('competitor')
                 <div class="dropdown text-end d-none d-sm-block">
-                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle text-white" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
                     </a>
-                    <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
-                        <li><a class="dropdown-item" href="#">New project...</a></li>
-                        <li><a class="dropdown-item" href="#">Settings</a></li>
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="{{ route('user.logout') }}">Sign out</a></li>
+                    <ul class="dropdown-menu text-small bg-dark" aria-labelledby="dropdownUser1" style="">
+                        <li><a class="dropdown-item text-white" href="#">New project...</a></li>
+                        <li><a class="dropdown-item text-white" href="#">Settings</a></li>
+                        <li><a class="dropdown-item text-white" href="#">Profile</a></li>
+                        <li><hr class="dropdown-divider text-white"></li>
+                        <li><a class="dropdown-item text-white" href="{{ route('user.logout') }}">Sign out</a></li>
                     </ul>
                 </div>
                 @else
@@ -62,7 +62,7 @@
         </div>
     </header>
     @show
-    <div class="col-10 container">
+    <div class="col-12">
         @yield('content')
     </div>
 </body>
