@@ -13,7 +13,7 @@ class CompetitorController extends Controller
 {
     public function mainpage()
     {
-        $races = Race::all();
+        $races = Race::paginate(8);
         return view('user.mainpage.main', compact(('races')));
     }
 

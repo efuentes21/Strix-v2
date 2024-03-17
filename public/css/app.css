@@ -106,4 +106,36 @@ aside, main {
 }
 .text-outline-1 {
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000;
+}
+
+.race-banner {
+  position: relative;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transition: all 0.5s ease-in-out;
+}
+
+.card-body-banner {
+  position: relative;
+}
+
+.card-body-banner h4 {
+  position: absolute;
+  top: 85%;
+  transform: translateY(-50%);
+  transition: all ease-in-out 0.5s;
+}
+
+.race-banner:hover {
+  transform: scale(1.05);
+  filter: blur(2px);
+}
+
+.race-banner:hover .card-body-banner {
+  filter: blur(0) !important;
+}
+
+.race-banner:hover .card-body-banner h4 {
+  top: 50%;
 }/*# sourceMappingURL=app.css.map */
