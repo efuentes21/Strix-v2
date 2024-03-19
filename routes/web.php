@@ -27,6 +27,7 @@ Route::get('/', [CompetitorController::class, 'mainpage'])->name('/');
 Route::get('user/index', [CompetitorController::class, 'index']) ->name('user.index');
 Route::post('user/login', [CompetitorController::class, 'login'])->name('user.login');
 Route::get('races/inspection/{race}', [RaceController::class, 'inspection'])->name('race.inspection');
+Route::get('races', [RaceController::class, 'racespage'])->name('races');
 
 Route::get('admin/index', [AdminController::class, 'index']) ->name('admin.index');
 Route::post('admin/login', [AdminController::class, 'login'])->name('admin.login');

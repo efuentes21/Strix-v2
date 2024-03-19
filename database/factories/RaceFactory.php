@@ -23,7 +23,7 @@ class RaceFactory extends Factory
             'map' => 'map_route.jpg',
             'max_competitors' => fake()->numberBetween(10, 100),
             'distance' => fake()->numberBetween(1, 25),
-            'date' => fake()->date(),
+            'date' => fake()->dateTimeBetween('2024-01-01', '2030-12-31')->format('Y-m-d'),
             'time' => fake()->time(),
             'start' => fake()->address(),
             'promotion' => 'promotion.jpg',

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Models\Race;
 
 class RaceController extends Controller
@@ -147,5 +148,16 @@ class RaceController extends Controller
     {
         $race = Race::findOrFail($raceId);
         return view('user.races.index', compact('race'));
+    }
+
+    /**
+     * Shows every proximate race
+     */
+    public function racespage(){
+        $races = Race::where('date', '>=', Carbon::today())
+                        ->where('active', true)
+                        ->orderBy('date')
+                        ->get();
+        return view('user.mainpage.races', compact(('races')));
     }
 }

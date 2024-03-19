@@ -1,5 +1,5 @@
 <div class="full bg-white">
-    <div class="px-4 py-5 my-5 text-center d-flex flex-column justify-content-center">
+    <div class="px-4 py-5 @yield('margin') text-center d-flex flex-column justify-content-center">
         <h1 class="display-5 fw-bold">RACES</h1>
         <hr class="border border-2 border-dark rounded w-25 mx-auto m-0 mb-3">
         <div class="col-lg-10 mx-auto">
@@ -19,7 +19,7 @@
                 @endif
             @endforeach
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                <button type="button" class="btn btn-black btn-lg px-4 gap-3">See more...</button>
+                <a href="{{ route('races') }}" class="btn btn-black btn-lg px-4 gap-3">See more...</button>
             </div>
         </div>
     </div>

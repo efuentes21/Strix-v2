@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Models\Competitor;
 use App\Models\Race;
+use App\Models\Sponsor;
 use App\Http\Requests\StoreCompetitorRequest;
 use App\Http\Requests\UpdateCompetitorRequest;
 
@@ -15,10 +16,12 @@ class CompetitorController extends Controller
     public function mainpage()
     {
         $races = Race::where('date', '>=', Carbon::today())
+                        ->where('active', true)
                         ->orderBy('date')
                         ->take(4)
                         ->get();
-        return view('user.mainpage.main', compact(('races')));
+        $sponsors = Sponsor::where('principal', true)->where('active', true)->get();
+        return view('user.mainpage.main', compact((['races', 'sponsors'])));
     }
 
     /**
