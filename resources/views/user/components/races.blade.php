@@ -7,11 +7,13 @@
                 @if($loop->iteration % 4 == 1)
                 <div class="d-grid gap-3 d-sm-flex justify-content-sm-center my-3">
                 @endif
-                    <div class="card race-banner" style="width: 14rem; height: 18em; background-image: url({{ asset('images/'.$race->promotion ) }});">
-                        <div class="card-body card-body-banner d-flex flex-col justify-content-center">
-                            <h4 class="card-title text-white text-center">{{ $race->name }}</h4>
+                    <a href="{{ route('race.inspection', ['race' => $race->id]) }}">
+                        <div class="card race-banner" style="width: 14rem; height: 18em; background-image: url({{ asset('images/'.$race->promotion ) }});">
+                            <div class="card-body card-body-banner d-flex flex-col justify-content-center">
+                                <h4 class="card-title text-white text-center">{{ $race->name }}</h4>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 @if($loop->iteration % 4 == 0 || $loop->last)
                 </div>
                 @endif

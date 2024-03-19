@@ -137,4 +137,13 @@ class RaceController extends Controller
     {
         //
     }
+
+    /**
+     * Show the data of a race to the user.
+     */
+    public function inspection($raceId)
+    {
+        $race = Race::findOrFail($raceId);
+        return view('user.races.index', compact('race'));
+    }
 }
