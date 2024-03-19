@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Models\Competitor;
 use App\Models\Race;
 use App\Http\Requests\StoreCompetitorRequest;
@@ -13,7 +14,10 @@ class CompetitorController extends Controller
 {
     public function mainpage()
     {
-        $races = Race::paginate(8);
+        $races = Race::where('date', '>=', Carbon::today())
+                        ->orderBy('date')
+                        ->take(4)
+                        ->get();
         return view('user.mainpage.main', compact(('races')));
     }
 

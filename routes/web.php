@@ -29,7 +29,9 @@ Route::post('user/login', [CompetitorController::class, 'login'])->name('user.lo
 Route::get('admin/index', [AdminController::class, 'index']) ->name('admin.index');
 Route::post('admin/login', [AdminController::class, 'login'])->name('admin.login');
 
-Route::get('user/logout', [CompetitorController::class, 'logout'])->name('user.logout');
+Route::group(['middleware' => 'auth.competitor'], function () {
+    Route::get('user/logout', [CompetitorController::class, 'logout'])->name('user.logout');
+});
 
 Route::group(['middleware' => 'auth.admin'], function () {
     Route::get('admin/logout', [AdminController::class, 'logout'])->name('admin.logout');

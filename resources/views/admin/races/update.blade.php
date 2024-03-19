@@ -16,7 +16,7 @@
       </ul>
     </div>
   @endif
-  <form action="{{ route('race.update', [$race]) }}" method="PUT" enctype="multipart/form-data" class="mb-3">
+  <form action="{{ route('race.update', [$race]) }}" method="POST" enctype="multipart/form-data" class="mb-3">
     @csrf
     @method('PUT')
     <div class="mb-3">
