@@ -19,6 +19,11 @@
   <form action="{{ route('race.store') }}" method="POST" enctype="multipart/form-data" class="mb-3">
     @csrf
     <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" class="form-control" id="name" name="name" aria-describedby="name-help" required>
+      <div id="name-help" class="form-text">Introduce a name for the race.</div>
+    </div>
+    <div class="mb-3">
       <label for="description" class="form-label">Description</label>
       <input type="text" class="form-control" id="description" name="description" aria-describedby="description-help" required>
       <div id="description-help" class="form-text">Introduce a description for the race.</div>

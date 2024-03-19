@@ -31,6 +31,7 @@ class RaceController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
             'description' => 'required|string|max:255',
             'unevenness' => 'required|numeric',
             'map' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -85,6 +86,7 @@ class RaceController extends Controller
     {
         $race = Race::findOrFail($id);
         $request->validate([
+            'name' => 'required|string|max:255',
             'description' => 'required|string|max:255',
             'unevenness' => 'required|numeric',
             'map' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240',
@@ -99,6 +101,7 @@ class RaceController extends Controller
         ]);
 
         try {
+            $race->name = $request->name;
             $race->description = $request->description;
             $race->unevenness = $request->unevenness;
             $race->max_competitors = $request->max_competitors;
@@ -122,7 +125,6 @@ class RaceController extends Controller
                 $race->promotion = $imageName;
             }
             $race->update();
-            // dd($race);
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }

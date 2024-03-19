@@ -17,6 +17,7 @@ class Race extends Model
      * @var array
      */
     protected $fillable = [
+        'name',
         'description',
         'unevenness',
         'map',
