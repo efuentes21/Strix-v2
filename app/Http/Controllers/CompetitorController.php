@@ -20,7 +20,7 @@ class CompetitorController extends Controller
                         ->orderBy('date')
                         ->take(4)
                         ->get();
-        $sponsors = Sponsor::where('principal', true)->where('active', true)->get();
+        $sponsors = Sponsor::where('principal', true)->where('active', true)->take(8)->get();
         return view('user.mainpage.main', compact((['races', 'sponsors'])));
     }
 
@@ -50,7 +50,13 @@ class CompetitorController extends Controller
 	
 	    // Si el usuario existe lo logamos y lo llevamos a la vista de "logados" con un mensaje
 	    if (Auth::guard('competitor')->attempt($credentials)) {
-	        return redirect()->route('/')->withSuccess('Logged in successfully');
+            $user = Auth::guard('competitor')->user();
+	        if ($user->partner && $user->active) {
+                return redirect()->route('/')->withSuccess('Logged in successfully');
+            } else {
+                Auth::guard('competitor')->logout();
+                return redirect()->back()->with('error', 'Your account is not active or you are not registered. If this is an error, please contact with an administrator');
+            }
 	    }
 	
 	    // Si el usuario no existe devolvemos al usuario al formulario de login con un mensaje de error

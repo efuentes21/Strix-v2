@@ -111,6 +111,7 @@ aside, main {
 }
 
 .race-banner {
+    width: 14rem; height: 18em;
     position: relative;
     background-position: center;
     background-repeat: no-repeat;
@@ -118,26 +119,70 @@ aside, main {
     transition: all 0.5s ease-in-out;
 }
 
-.card-body-banner {
-    position: relative;
+.race-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 10;
 }
 
-.card-body-banner h4 {
+.sponsor-banner {
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: 0;
+}
+
+.card-body-banner {
+    position: relative;
+    width: 14rem; height: 18em;
+    top: -18em;
+    pointer-events: none;
+}
+
+.race-link {
+    display: block;
+    height: 18em;
+    max-height: 18em;
+}
+
+.card-body-banner h1 {
     position: absolute;
     top: 85%;
     transform: translateY(-50%);
     transition: all ease-in-out 0.5s;
+    z-index: 50;
+    font-size: 1.5em;
+}
+.card-body-banner h2 {
+    position: absolute;
+    top: 85%;
+    transform: translateY(-50%);
+    transition: all ease-in-out 0.5s;
+    z-index: 50;
+    font-size: 1.2em;
+    opacity: 0;
 }
 
 .race-banner:hover {
     transform: scale(1.05);
     filter: blur(2px);
 }
-
-.race-banner:hover .card-body-banner {
-    filter: blur(0) !important;   
+.race-banner:hover::before {
+    opacity: 1;
 }
 
-.race-banner:hover .card-body-banner h4 {
+.race-banner:hover + .card-body-banner h1 {
     top: 50%;
+}
+.race-banner:hover + .card-body-banner h2 {
+    opacity: 1;
 }

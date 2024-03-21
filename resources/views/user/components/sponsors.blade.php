@@ -5,9 +5,9 @@
         <div class="col-lg-10 mx-auto">
             @foreach($sponsors as $sponsor)
                 @if($loop->iteration % 4 == 1)
-                <div class="d-grid gap-3 d-sm-flex justify-content-sm-center my-3">
+                <div class="d-grid gap-5 d-sm-flex justify-content-sm-center my-3">
                 @endif
-                    <div class="card race-banner" style="width: 10rem; height: 10em;">
+                    <div class="card sponsor-banner" style="width: 10rem; height: 10em; background-image: url({{ asset('images/'.$sponsor->logo ) }});">
                         <div class="card-body card-body-banner d-flex flex-col justify-content-center">
                             
                         </div>

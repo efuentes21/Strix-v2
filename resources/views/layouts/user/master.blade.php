@@ -65,5 +65,6 @@
     <div class="col-12">
         @yield('content')
     </div>
+    @include('user.components.footer')
 </body>
 </html>
