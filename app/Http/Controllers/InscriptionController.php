@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Insurance;
+use App\Models\Race;
+use App\Models\Inscription;
 
 class InscriptionController extends Controller
 {
@@ -51,5 +53,13 @@ class InscriptionController extends Controller
         }
 
         return redirect()->route('race.index')->with('success', 'Race successfully created!');
+    }
+
+    /**
+     * Prints a PDF containing all the competitors inscripted in a race
+     */
+    public function print(Race $race){
+        $inscriptions = Inscription::with('competitor')->where('race', $race)->get();
+        return view('admin.inscriptions.pdf', compact('inscriptions'));
     }
 }

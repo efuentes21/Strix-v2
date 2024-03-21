@@ -48,6 +48,8 @@ Route::group(['middleware' => 'auth.admin'], function () {
     Route::put('race/update/{race}', [RaceController::class, 'update'])->name('race.update');
     Route::post('race/store', [RaceController::class, 'store'])->name('race.store');
 
+    Route::get('race/inscriptions/{race}', [InscriptionController::class, 'print'])->name('inscription.print');
+
     Route::get('admin/sponsors', [SponsorController::class, 'index'])->name('sponsor.index');
     Route::get('sponsor/create', [SponsorController::class, 'create'])->name('sponsor.create');
     Route::get('sponsor/edit/{sponsor}', [SponsorController::class, 'edit'])->name('sponsor.edit');

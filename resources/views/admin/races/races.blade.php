@@ -58,6 +58,8 @@
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="#">Media</a></li>
                                     <li><a class="dropdown-item" href="#">Scan QR</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="{{ route('inscription.print', ['race' => $race]) }}">Print competitors</a></li>
                                 </ul>
                             </div>
                         </td>

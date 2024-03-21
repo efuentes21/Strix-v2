@@ -29,6 +29,8 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\Challenge::factory(10)->create();
 
+        \App\Models\Inscription::factory(10)->create();
+
         \App\Models\Admin::factory(3)->create();
 
         \App\Models\Admin::factory()->create([
