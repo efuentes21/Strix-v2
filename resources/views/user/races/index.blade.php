@@ -4,5 +4,8 @@
 
 @yield('header')
 @section('content')
-    @include('user.races.inspection')
+    <div class="container">
+        @include('user.races.inspection')
+        @include('user.components.challenges')
+    </div>
 @stop

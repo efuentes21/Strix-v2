@@ -147,7 +147,9 @@ class RaceController extends Controller
     public function inspection($raceId)
     {
         $race = Race::findOrFail($raceId);
-        return view('user.races.index', compact('race'));
+        $challenges = $race->challenges()->get();
+        $sponsors = $race->sponsors()->get();
+        return view('user.races.index', compact('race', 'challenges', 'sponsors'));
     }
 
     /**

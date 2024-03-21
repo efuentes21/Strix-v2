@@ -1,28 +1,23 @@
-<div>
-    <h1 class="text-center">{{ strtoupper($race->name) }}</h1>
-    <div class="d-flex row mt-4 mb-2 ms-5 me-5">
-        <div class="col-md-9">
-            <p>{{ $race->description }}</p>
-        </div>
-        <div class="col-md-3">
-            {{-- <a href="{{ route('race.inscription') }}" class="btn btn-primary text-white">INSCRIPTION</a> --}}
-            <a href="#" class="btn btn-primary text-white">INSCRIPTION</a>
-        </div>
+<h1 class="text-center">{{ strtoupper($race->name) }}</h1>
+<hr class="border border-2 border-dark rounded w-25 mx-auto m-0 mb-3">
+<div class="d-flex row mt-4 mb-2">
+    <div class="col-md-9">
+        <p>{{ $race->description }}</p>
     </div>
-    <div class="d-flex row mt-4 mb-2 ms-5 me-5">
-        <div class="col-md-6">
-            <p>Date: {{ $race->date }}</p>
-            <p>Start: {{ $race->start }}</p>
-            <p>Distance: {{ $race->distance }}</p>
-            <p>Unevennes: {{ $race->unevennes }}</p>
-            <p>Inscription's price: {{ $race->inscription }}</p>
-        </div>
-        <div class="col-md-6">
-            <img src="{{ asset('images/' . $race->map) }}" alt="Race Map" style="max-width: 500px;">
-        </div>
+    <div class="col-md-3 d-flex justify-content-end px-0">
+        {{-- <a href="{{ route('inscription.index') }}" class="btn btn-primary text-white">INSCRIPTION</a> --}}
+        <a href="#" class="btn btn-primary text-white">INSCRIPTION</a>
     </div>
-    <h1 class="text-center">CHALLENGES</h1>
 </div>
-
-{{-- vale vamos a volver al codigo de antes, en el que se pasaba un objeto race a una vista.
-la web del proyecto gestiona carreras parecidas a las spartan races, por lo tanto las carreras estan compuestas por "challenges" o desafios, por lo tanto en mi base de datos tengo entre otras 3 tablas que nos interesan races(la tabla con las carreras), challenges(la tabla con los desafios de cada carrera) y una tabla que relaciona estas dos anteriores llamadas race_challenges --}}
+<div class="d-flex row mt-4 mb-2 p-4 bg-light">
+    <div class="col-md-6 d-flex flex-column justify-content-between">
+        <p>Date: {{ $race->date }}</p>
+        <p>Start: {{ $race->start }}</p>
+        <p>Distance: {{ $race->distance }}km</p>
+        <p>Unevenness: {{ $race->unevenness }}m</p>
+        <p>Inscription's price: {{ $race->inscription }}€</p>
+    </div>
+    <div class="col-md-6 d-flex justify-content-end">
+        <img src="{{ asset('images/' . $race->map) }}" alt="Race Map" style="max-width: 450px;">
+    </div>
+</div>
