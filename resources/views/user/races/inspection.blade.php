@@ -5,8 +5,8 @@
         <p>{{ $race->description }}</p>
     </div>
     <div class="col-md-3 d-flex justify-content-end px-0">
-        {{-- <a href="{{ route('inscription.index') }}" class="btn btn-primary text-white">INSCRIPTION</a> --}}
-        <a href="#" class="btn btn-primary text-white">INSCRIPTION</a>
+        <a href="{{ route('inscription.index', ['race' => $race]) }}" class="btn btn-primary text-white">INSCRIPTION</a>
+        {{-- <a href="#" class="btn btn-primary text-white">INSCRIPTION</a> --}}
     </div>
 </div>
 <div class="d-flex row mt-4 mb-2 p-4 bg-light">

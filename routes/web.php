@@ -9,6 +9,7 @@ use App\Http\Controllers\RaceInsuranceController;
 use App\Http\Controllers\SponsorshipController;
 use App\Http\Controllers\ChallengeController;
 use App\Http\Controllers\CompetitorController;
+use App\Http\Controllers\InscriptionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +29,8 @@ Route::get('user/index', [CompetitorController::class, 'index']) ->name('user.in
 Route::post('user/login', [CompetitorController::class, 'login'])->name('user.login');
 Route::get('races/inspection/{race}', [RaceController::class, 'inspection'])->name('race.inspection');
 Route::get('races', [RaceController::class, 'racespage'])->name('races');
+Route::get('inscription/create/{race}', [InscriptionController::class, 'create'])->name('inscription.index');
+Route::post('inscription/store', [InscriptionController::class, 'store'])->name('inscription.store');
 
 Route::get('admin/index', [AdminController::class, 'index']) ->name('admin.index');
 Route::post('admin/login', [AdminController::class, 'login'])->name('admin.login');
