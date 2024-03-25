@@ -17,8 +17,10 @@ class InscriptionFactory extends Factory
     public function definition(): array
     {
         return [
-            'race' => fake()->numberBetween(0, 10),
-            'competitor' => fake()->numberBetween(0, 10)
+            'race' => fake()->numberBetween(1, 10),
+            'competitor' => fake()->numberBetween(1, 10),
+            'number' => fake()->numberBetween(0, 20),
+            'insurance' => fake()->numberBetween(1, 10)
         ];
     }
 }

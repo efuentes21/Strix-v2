@@ -42,7 +42,7 @@ class Competitor extends Authenticatable
     ];
 
     public function races(){
-        return $this->hasMany(Race::class);
+        return $this->belongsToMany(Race::class, 'inscriptions', 'competitor', 'race');
     }
 
     public function insurance(){

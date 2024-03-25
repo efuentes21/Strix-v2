@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('inscriptions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('race');
-            $table->string('competitor');
+            $table->unsignedBigInteger('competitor');
             $table->integer('number');
             $table->timestamp('arrival');
             $table->unsignedBigInteger('insurance');
             $table->timestamps();
 
             $table->foreign('race')->references('id')->on('races')->onDelete('cascade');
-            $table->foreign('competitor')->references('dni')->on('competitors')->onDelete('cascade');
+            $table->foreign('competitor')->references('id')->on('competitors')->onDelete('cascade');
             $table->foreign('insurance')->references('id')->on('insurances')->onDelete('cascade');
         });
     }

@@ -160,6 +160,7 @@ class RaceController extends Controller
                         ->where('active', true)
                         ->orderBy('date')
                         ->get();
-        return view('user.mainpage.races', compact(('races')));
+        $seemore = false;
+        return view('user.mainpage.races', compact(['races', 'seemore']));
     }
 }

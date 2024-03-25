@@ -22,9 +22,11 @@
                 </section>
                 @endif
             @endforeach
+            @if($seemore)
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
                 <a href="{{ route('races') }}" class="btn btn-black btn-lg px-4 gap-3">See more...</a>
             </div>
+            @endif
         </div>
     </div>
 </div>

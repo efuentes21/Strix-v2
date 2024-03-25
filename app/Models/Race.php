@@ -47,7 +47,7 @@ class Race extends Model
     }
 
     public function competitors(){
-        return $this->hasMany(Competitor::class);
+        return $this->belongsToMany(Competitor::class, 'inscriptions', 'race', 'competitor');
     }
 
     public function challenges(){

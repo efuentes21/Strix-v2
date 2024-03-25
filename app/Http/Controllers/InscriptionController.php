@@ -59,7 +59,8 @@ class InscriptionController extends Controller
      * Prints a PDF containing all the competitors inscripted in a race
      */
     public function print(Race $race){
-        $inscriptions = Inscription::with('competitor')->where('race', $race)->get();
-        return view('admin.inscriptions.pdf', compact('inscriptions'));
+        //$inscriptions = Inscription::with('competitor')->where('race', $race)->get();
+        $inscriptions = Inscription::where('race', $race->id)->with('competitors')->orderBy('competitor')->get();
+        return view('admin.inscriptions.pdf', compact(['inscriptions', 'race']));
     }
 }

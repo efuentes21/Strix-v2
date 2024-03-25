@@ -21,7 +21,8 @@ class CompetitorController extends Controller
                         ->take(4)
                         ->get();
         $sponsors = Sponsor::where('principal', true)->where('active', true)->take(8)->get();
-        return view('user.mainpage.main', compact((['races', 'sponsors'])));
+        $seemore = true;
+        return view('user.mainpage.main', compact((['races', 'sponsors', 'seemore'])));
     }
 
     /**

@@ -1,18 +1,28 @@
 <?php
 
-// Incluimos el autoload de Composer
+/**
+ * Composer autoload is included
+ */
 require_once base_path('vendor/autoload.php');
 
+/**
+ * Import necessary models to generate the pdf
+ */
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
-// Creamos una nueva instancia de Dompdf
+/**
+ * A new DomPDF instance is created
+ */
 $options = new Options();
 $options->set('isHtml5ParserEnabled', true);
+$options->set('title', $race->name . ' inscriptions');
 $dompdf = new Dompdf($options);
 
-// Creamos el contenido HTML para el PDF con estilos CSS
-$html = '<style>
+/**
+ * Stylesheet for the PDF is added
+ */
+$content = '<style>
             .table {
                 width: 100%;
                 border-collapse: collapse;
@@ -23,45 +33,59 @@ $html = '<style>
                 text-align: center;
             }
             .table th {
-                background-color: #f2f2f2;
+                background-color: #e6e6e6;
+                
                 color: #333;
             }
             .table tr:nth-child(even) td {
-                background-color: #f9f9f9;
+                background-color: #f2f2f2;
             }
             .table tr:nth-child(odd) td {
-                background-color: #e6e6e6;
+                background-color: #f9f9f9;
             }
         </style>';
 
-$html .= '<h1>Lista de Participantes de ' . $inscriptions[0]->race->name .'</h1>';
-$html .= '<table class="table">';
-$html .= '<thead>';
-$html .= '<tr>';
-$html .= '<th>ID</th>';
-$html .= '<th>Name</th>';
-$html .= '<th>Dorsal</th>';
-$html .= '</tr>';
-$html .= '</thead>';
-$html .= '<tbody>';
+/**
+ * The content of the PDF
+ * A table with the inscripted competitors is created
+ */
+$content .= '<h1>Inscriptions in ' . $race->name .'</h1>';
+$content .= '<table class="table">';
+$content .= '<thead>';
+$content .= '<tr>';
+$content .= '<th>ID</th>';
+$content .= '<th>Name</th>';
+$content .= '<th>Dorsal</th>';
+$content .= '<th>Insurance</th>';
+$content .= '</tr>';
+$content .= '</thead>';
+$content .= '<tbody>';
 
 foreach ($inscriptions as $inscription) {
-    $html .= '<tr>';
-    $html .= '<td>' . $inscription->competitor->id . '</td>';
-    $html .= '<td>' . $inscription->competitor->name . '</td>';
-    $html .= '<td>' . $inscription->dorsal . '</td>';
-    $html .= '</tr>';
+    $content .= '<tr>';
+    $content .= '<td>' . $inscription->competitors->id . '</td>';
+    $content .= '<td>' . $inscription->competitors->name . '</td>';
+    $content .= '<td>' . $inscription->number . '</td>';
+    $content .= '<td>' . $inscription->insurances->name . '</td>';
+    $content .= '</tr>';
 }
-$html .= '</tbody>';
-$html .= '</table>';
 
-// Cargamos el contenido HTML en Dompdf
-$dompdf->loadHtml($html);
+$content .= '</tbody>';
+$content .= '</table>';
 
-// Renderizamos el PDF
+/**
+ * The content is loaded into the Dompdf instance
+ */
+$dompdf->loadHtml($content);
+
+/**
+ * The PDF is rendered
+ */
 $dompdf->render();
 
-// Generamos el PDF
-$dompdf->stream('lista_personas.pdf', [
+/**
+ * The PDF is showed to the final user
+ */
+$dompdf->stream('inscriptions.pdf', [
     'Attachment' => false
 ]);
