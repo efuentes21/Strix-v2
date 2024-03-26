@@ -6,6 +6,7 @@ use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\InsuranceController;
 use App\Http\Controllers\RaceChallengeController;
 use App\Http\Controllers\RaceInsuranceController;
+use App\Http\Controllers\RaceImageController;
 use App\Http\Controllers\SponsorshipController;
 use App\Http\Controllers\ChallengeController;
 use App\Http\Controllers\CompetitorController;
@@ -82,6 +83,10 @@ Route::group(['middleware' => 'auth.admin'], function () {
     Route::get('admin/raceinsurances/add/{race}', [RaceInsuranceController::class, 'indexadd'])->name('raceinsurance.indexadd');
     Route::get('raceinsurance/{race}/add/{insurance}', [RaceInsuranceController::class, 'add'])->name('raceinsurance.add');
     Route::get('raceinsurance/{race}/remove/{insurance}', [RaceInsuranceController::class, 'remove'])->name('raceinsurance.remove');
+
+    Route::get('admin/raceimages/{race}', [RaceImageController::class, 'index'])->name('raceimages.index');
+    Route::get('admin/raceimages/add/{race}', [RaceImageController::class, 'create'])->name('raceimages.add');
+    Route::post('admin/raceimages/store/{race}', [RaceImageController::class, 'store'])->name('raceimages.store');
 
     Route::get('admin/competitors', [CompetitorController::class, 'adminindex'])->name('competitor.index');
     Route::get('competitor/create', [CompetitorController::class, 'create'])->name('competitor.create');

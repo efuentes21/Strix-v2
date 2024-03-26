@@ -186,3 +186,10 @@ aside, main {
 .race-banner:hover + .card-body-banner h2 {
     opacity: 1;
 }
+
+#dropzone {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+}

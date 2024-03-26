@@ -56,7 +56,7 @@
                                     <li><a class="dropdown-item" href="{{ route('sponsorship.index', ['race' => $race]) }}">Sponsors</a></li>
                                     <li><a class="dropdown-item" href="{{ route('raceinsurance.index', ['race' => $race]) }}">Insurances</a></li>
                                     <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="#">Media</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('raceimages.index', ['race' => $race]) }}">Media</a></li>
                                     <li><a class="dropdown-item" href="#">Scan QR</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="{{ route('inscription.print', ['race' => $race]) }}">Print competitors</a></li>
