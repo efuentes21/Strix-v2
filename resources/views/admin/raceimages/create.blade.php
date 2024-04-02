@@ -2,7 +2,7 @@
     @csrf
     <div class="dropzone" id="dropzone">
         <p>DROP IMAGES HERE</p>
-        <input type="file" name="images[]" multiple hidden>
+        <input type="file" name="images[]" id="images" multiple hidden>
     </div>
     <button type="submit">Upload images</button>
 </form>

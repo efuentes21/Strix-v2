@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Race;
+use App\Models\RaceImage;
 
 class RaceImageController extends Controller
 {
@@ -12,7 +13,8 @@ class RaceImageController extends Controller
      */
     public function index(Race $race)
     {
-        return view('admin.raceimages.index', compact('race'));
+        $images = RaceImage::where('race', $race->id)->get();
+        return view('admin.raceimages.index', compact('race', 'images'));
     }
 
     /**
@@ -28,12 +30,16 @@ class RaceImageController extends Controller
      */
     public function store(Request $request, Race $race)
     {
-        dd($request->all());
+        // dd($request->all());
         $images = $request->file('images');
 
         foreach ($images as $image) {
-            $imageName = $image->getClientOriginalName();
+            $imageName = time().'_'.$image->getClientOriginalName();
             $image->move(public_path('images/races/uploads'), $imageName);
+            $raceImage = new RaceImage();
+            $raceImage->race = $race->id;
+            $raceImage->image = $imageName;
+            $raceImage->save();
         }
 
         return view('admin.raceimages.index', compact('race'));
