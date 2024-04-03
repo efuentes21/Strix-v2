@@ -26,6 +26,7 @@ class CompetitorFactory extends Factory
             'birthdate' => fake()->date(),
             'sex' => fake()->numberBetween(0, 1),
             'pro' => fake()->numberBetween(0, 1),
+            'federation' => fake()->name(),
             'points' => fake()->numberBetween(0,5000),
             'partner' => fake()->numberBetween(0, 1),
             'active' => fake()->numberBetween(0, 1)
