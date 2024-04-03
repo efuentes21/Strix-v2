@@ -10,7 +10,7 @@
         </div>
         @endif
     </div>
-    @if ($errors->any())
+  @if ($errors->any())
     <div class="alert alert-danger">
       <ul>
         @foreach ($errors->all() as $error)
@@ -18,25 +18,18 @@
         @endforeach
       </ul>
     </div>
-    @endif
-    @if(strtotime($race->date) < strtotime(now()))
-      @if(count($images) > 0)
-      <div class="row">
-        <div class="col-md-12">
-          @include('admin.raceimages.carrousel')
-      </div>
-    @else
-      <div class="row">
-        <div class="col-md-12">
-          <p>No media uploaded yet!</p>
-        </div>
-      </div>
-    @endif
+  @endif
+  @if(count($images) > 0)
+    <div class="row">
+      <div class="col-md-12">
+        @include('admin.raceimages.carrousel')
+    </div>
   @else
     <div class="row">
       <div class="col-md-12">
-        <p>This race didn't celebrate yet!</p>
+        <p>No media uploaded yet!</p>
       </div>
     </div>
   @endif
+</div>
 @show

@@ -194,8 +194,11 @@ aside, main {
     cursor: pointer;
 }
 
+.carousel {
+    max-height: 69vh;
+}
+
 .carousel-item {
-    max-height: 70vh;
     background-position: center;
     background-size: auto;
     justify-content: center;

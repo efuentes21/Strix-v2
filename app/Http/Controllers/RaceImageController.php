@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Models\Race;
 use App\Models\RaceImage;
 
@@ -76,5 +77,21 @@ class RaceImageController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    /**
+     * Shows every proximate race
+     */
+    public function media(){
+        $races = Race::where('date', '<', Carbon::today())
+                        ->where('active', true)
+                        ->orderBy('date')
+                        ->get();
+        return view('user.mainpage.media', compact(['races']));
+    }
+
+    public function mediashow(Race $race){
+        $images = RaceImage::where('race', $race->id)->get();
+        return view('user.races.media', compact('race', 'images'));
     }
 }

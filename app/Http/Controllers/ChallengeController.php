@@ -92,4 +92,13 @@ class ChallengeController extends Controller
     {
         //
     }
+
+    /**
+     * Shows the challenges client page
+     */
+    public function challengespage()
+    {
+        $challenges = Challenge::where('active', true)->get();
+        return view('user.mainpage.challenges', compact('challenges'));
+    }
 }

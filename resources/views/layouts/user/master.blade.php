@@ -16,7 +16,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body class="@yield('body-class')">
     @section('header')
     <header class="p-3 border-bottom bg-dark text-white">
         <div class="container">
@@ -27,8 +27,8 @@
 
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li><a href="{{ route('races') }}" class="nav-link px-2 link-dark text-white">Races</a></li>
-                    <li><a href="#" class="nav-link px-2 link-dark text-white">Challenges</a></li>
-                    <li><a href="#" class="nav-link px-2 link-dark text-white">Media</a></li>
+                    <li><a href="{{ route('challenges') }}" class="nav-link px-2 link-dark text-white">Challenges</a></li>
+                    <li><a href="{{ route('media') }}" class="nav-link px-2 link-dark text-white">Media</a></li>
                 </ul>
 
                 <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">

@@ -33,6 +33,9 @@ Route::get('races/inspection/{race}', [RaceController::class, 'inspection'])->na
 Route::get('races', [RaceController::class, 'racespage'])->name('races');
 Route::get('inscription/create/{race}', [InscriptionController::class, 'create'])->name('inscription.index');
 Route::post('inscription/store/{race}', [InscriptionController::class, 'store'])->name('inscription.store');
+Route::get('media', [RaceImageController::class, 'media'])->name('media');
+Route::get('media/race/{race}', [RaceImageController::class, 'mediashow'])->name('race.mediashow');
+Route::get('challenges', [ChallengeController::class, 'challengespage'])->name('challenges');
 
 Route::get('admin/index', [AdminController::class, 'index']) ->name('admin.index');
 Route::post('admin/login', [AdminController::class, 'login'])->name('admin.login');
