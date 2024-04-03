@@ -14,6 +14,6 @@
     <button type="submit" class="btn btn-primary text-white">LOGIN</button>
 </form>
 <div class="mb-3">
-    <div id="route-signup"><a href="#">Not registered yet?</a></div>
+    <div id="route-signup"><a href="{{ route('user.register') }}">Not registered yet?</a></div>
 </div>
 @show

@@ -80,7 +80,7 @@ class CompetitorController extends Controller
      */
     public function create()
     {
-        return view('admin.competitors.new');
+        return view('user.users.new');
     }
 
     /**

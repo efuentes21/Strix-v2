@@ -39,6 +39,8 @@ Route::get('challenges', [ChallengeController::class, 'challengespage'])->name('
 
 Route::get('admin/index', [AdminController::class, 'index']) ->name('admin.index');
 Route::post('admin/login', [AdminController::class, 'login'])->name('admin.login');
+Route::get('user/register', [CompetitorController::class, 'create'])->name('user.register');
+Route::post('user/new', [CompetitorController::class, 'store'])->name('user.new');
 
 Route::group(['middleware' => 'auth.competitor'], function () {
     Route::get('user/logout', [CompetitorController::class, 'logout'])->name('user.logout');
