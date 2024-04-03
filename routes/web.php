@@ -44,6 +44,7 @@ Route::post('user/new', [CompetitorController::class, 'store'])->name('user.new'
 
 Route::group(['middleware' => 'auth.competitor'], function () {
     Route::get('user/logout', [CompetitorController::class, 'logout'])->name('user.logout');
+    Route::get('inscription/storelogged/{race}', [InscriptionController::class, 'storelogged'])->name('inscription.logged');
 });
 
 Route::group(['middleware' => 'auth.admin'], function () {

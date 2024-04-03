@@ -24,6 +24,21 @@ class DatabaseSeeder extends Seeder
         \App\Models\Sponsor::factory(10)->create();
 
         \App\Models\Competitor::factory(10)->create();
+
+        \App\Models\Competitor::factory()->create([
+            'dni' => '27119473N',
+            'email' => 'competitor@gmail.com',
+            'password' => bcrypt('competitor'),
+            'name' => 'Alex Alcala',
+            'address' => 'c/ la Pineda',
+            'birthdate' =>  \DateTime::createFromFormat('d/m/Y', '13/12/2004')->format('Y-m-d'),
+            'sex' => 0,
+            'pro' => 1,
+            'federation' => 'Amer',
+            'points' => 3333,
+            'partner' => 1,
+            'active' => 1
+        ]);
         
         \App\Models\Insurance::factory(10)->create();
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Race;
 use App\Models\Competitor;
@@ -88,5 +89,27 @@ class InscriptionController extends Controller
         //$inscriptions = Inscription::with('competitor')->where('race', $race)->get();
         $inscriptions = Inscription::where('race', $race->id)->with('competitors')->orderBy('competitor')->get();
         return view('admin.inscriptions.pdf', compact(['inscriptions', 'race']));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function storelogged($raceId)
+    {
+        try {
+            $inscription = [
+                'race' => $raceId,
+                'competitor' => Auth::guard('competitor')->user()->id,
+                'number' => 1,
+                'arrival' => null,
+                'insurance' => 1,
+            ];
+
+            Inscription::create($inscription);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+
+        return redirect()->route('/')->with('success', 'Inscription successfully created!');
     }
 }
