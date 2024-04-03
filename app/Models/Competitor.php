@@ -25,6 +25,7 @@ class Competitor extends Authenticatable
         'name',
         'address',
         'birthdate',
+        'sex',
         'points',
         'pro',
         'insurance',

@@ -1,10 +1,9 @@
 <div class="container">
     <div class="row mt-4 mb-2">
       <div class="col-md-10">
-          <h1>NEW RACE</h1>
+          <h1>INSCRIPTION FOR {{ strtoupper($race->name) }}</h1>
       </div>
       <div class="col-md-2 d-flex align-items-center justify-content-end">
-          {{-- <a href="{{ route('inscription.index') }}" class="btn btn-danger">Cancel</a> --}}
           <a href="{{ route('race.inspection', ['race' => $race]) }}" class="btn btn-danger">Cancel</a>
       </div>
     </div>
@@ -24,25 +23,36 @@
         <input type="text" class="form-control" id="dni" name="dni" aria-describedby="dni-help" required>
         <div id="dni-help" class="form-text">Introduce your dni.</div>
       </div>
-      {{-- <div class="mb-3">
+      <div class="mb-3">
         <label for="email" class="form-label">Email</label>
         <input type="text" class="form-control" id="email" name="email" aria-describedby="email-help" required>
         <div id="email-help" class="form-text">Introduce your email.</div>
-      </div> --}}
+      </div>
       <div class="mb-3">
         <label for="name" class="form-label">Name</label>
         <input type="text" class="form-control" id="name" name="name" aria-describedby="name-help" required>
         <div id="name-help" class="form-text">Introduce your name and surname.</div>
       </div>
       <div class="mb-3">
-        <label for="address" class="form-label">Address</label>
-        <input type="text" class="form-control" id="address" name="address" aria-describedby="address-help" required>
-        <div id="address-help" class="form-text">Introduce your address.</div>
-      </div>
-      <div class="mb-3">
         <label for="birthdate" class="form-label">Birth date</label>
         <input type="date" class="form-control" id="birthdate" name="birthdate" aria-describedby="birthdate-help" required>
         <div id="birthdate-help" class="form-text">Introduce your birthdate.</div>
+      </div>
+      <div class="mb-3">
+        <label for="sex" class="form-label">Sex</label>
+        <select class="form-select" id="sex" name="sex" aria-describedby="sex-help" required>
+          <option value="1" selected>Woman</option>
+          <option value="0">Man</option>
+        </select>
+        <div id="sex-help" class="form-text">Select your sex?</div>
+      </div>
+      <div class="mb-3">
+        <label for="pro" class="form-label">Pro</label>
+        <select class="form-select" id="pro" name="pro" aria-describedby="pro-help" required>
+          <option value="1" selected>Yes</option>
+          <option value="0">No</option>
+        </select>
+        <div id="pro-help" class="form-text">If you are federated, select "yes", if not, select "no"</div>
       </div>
       <div class="mb-3">
         <label for="insurance" class="form-label">Insurance</label>
