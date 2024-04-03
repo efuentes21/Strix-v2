@@ -42,7 +42,8 @@ class RaceImageController extends Controller
             $raceImage->save();
         }
 
-        return view('admin.raceimages.index', compact('race'));
+        $images = RaceImage::where('race', $race->id)->get();
+        return view('admin.raceimages.index', compact('race', 'images'));
     }
 
     /**
