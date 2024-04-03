@@ -85,6 +85,8 @@ Route::group(['middleware' => 'auth.admin'], function () {
     Route::get('sponsorship/{race}/add/{sponsor}', [SponsorshipController::class, 'add'])->name('sponsorship.add');
     Route::get('sponsorship/{race}/remove/{sponsor}', [SponsorshipController::class, 'remove'])->name('sponsorship.remove');
 
+    Route::get('race/sponsorships/{race}', [SponsorshipController::class, 'print'])->name('sponsorship.print');
+
     Route::get('admin/raceinsurances/remove/{race}', [RaceInsuranceController::class, 'index'])->name('raceinsurance.index');
     Route::get('admin/raceinsurances/add/{race}', [RaceInsuranceController::class, 'indexadd'])->name('raceinsurance.indexadd');
     Route::get('raceinsurance/{race}/add/{insurance}', [RaceInsuranceController::class, 'add'])->name('raceinsurance.add');

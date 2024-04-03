@@ -107,4 +107,12 @@ class SponsorshipController extends Controller
     {
         //
     }
+
+    /**
+     * Prints a PDF containing all the competitors inscripted in a race
+     */
+    public function print(Race $race){
+        $sponsors = $race->sponsors;
+        return view('admin.sponsorships.pdf', compact(['sponsors', 'race']));
+    }
 }

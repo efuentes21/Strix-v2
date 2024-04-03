@@ -1,4 +1,4 @@
-<h1 class="text-center">{{ strtoupper($race->name) }}</h1>
+<h1 class="text-center fw-bold">{{ strtoupper($race->name) }}</h1>
 <hr class="border border-2 border-dark rounded w-25 mx-auto m-0 mb-3">
 <div class="d-flex row mt-4 mb-2">
     <div class="col-md-9">

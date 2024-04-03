@@ -7,5 +7,6 @@
     <div class="container">
         @include('user.races.inspection')
         @include('user.components.challenges')
+        @include('user.components.sponsors')
     </div>
 @stop

@@ -1,4 +1,4 @@
-<h1 class="text-center">CHALLENGES</h1>
+<h1 class="text-center fw-bold">CHALLENGES</h1>
 <hr class="border border-2 border-dark rounded w-25 mx-auto m-0 mb-3">
 @foreach($challenges as $challenge)
     @if($loop->iteration % 4 == 1)
