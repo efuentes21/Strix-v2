@@ -86,63 +86,55 @@ class CompetitorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, Race $race)
+    public function store(Request $request)
     {
         $validatedData = $request->validate([
             'dni' => 'required|string|max:9',
+            'address' => 'required|string|max:255',
             'name' => 'required|string|max:255',
             'birthdate' => 'required|date',
             'email' => 'required|string|max:255',
             'password' => 'required|string|max:255',
-            'sex' => 'required|required|boolean',
+            'sex' => 'required|boolean',
             'federation' => 'nullable|string|max:255',
         ]);
 
-        $competitorExist = Competitor::where('dni', $validatedData['dni'])->first();
-
         try {
+            $competitorExist = Competitor::where('dni', $validatedData['dni'])->first();
+            if($validatedData['federation'] != null){
+                $federation = $validatedData['federation'];
+                $pro = true;
+            } else {
+                $federation = null;
+                $pro = false;
+            }
             if($competitorExist) {
                 $competitorExist->name = $validatedData['name'];
+                $competitorExist->address = $validatedData['address'];
                 $competitorExist->email = $validatedData['email'];
+                $competitorExist->password = bcrypt($validatedData['password']);
                 $competitorExist->birthdate = $validatedData['birthdate'];
                 $competitorExist->sex = $validatedData['sex'];
-                $competitorExist->pro = $validatedData['pro'];
-
+                $competitorExist->federation = $federation;
+                $competitorExist->pro = $pro;
+                $competitorExist->partner = true;
+                $competitorExist->active = true;
                 $competitorExist->update();
-
-                $idCompetitor = $competitorExist->id;
             } else {
-                $competitor = Competitor::create([
-                    'dni' => $validatedData['dni'],
-                    'name' => $validatedData['name'],
-                    'email' => $validatedData['email'],
-                    'birthdate' => $validatedData['birthdate'],
-                    'sex' => $validatedData['sex'],
-                    'pro' => $validatedData['pro'],
-                    'points' => 0,
-                    'partner' => false,
-                    'active' => true,
-                    'address' => '',
-                    'password' => '',
-                ]);
-
-                $idCompetitor = $competitor->id;
+                $validatedData['partner'] = 1;
+                $validatedData['active'] = 1;
+                $validatedData['pro'] = 1;
+                $validatedData['password'] = bcrypt($validatedData['password']);
+                $validatedData['points'] = 0;
+                $validatedData['federation'] = $federation;
+                Competitor::create($validatedData);
             }
 
-            $inscription = [
-                'race' => $race->id,
-                'competitor' => $idCompetitor,
-                'number' => 1,
-                'arrival' => null,
-                'insurance' => $validatedData['insurance'],
-            ];
-
-            Inscription::create($inscription);
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
 
-        return redirect()->route('/')->with('success', 'Inscription successfully created!');
+        return redirect()->route('user.index')->with('success', 'Inscription successfully created!');
     }
 
     /**

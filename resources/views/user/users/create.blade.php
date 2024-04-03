@@ -1,9 +1,18 @@
 @section('user-form')
 <form action="{{ route('user.new') }}" method="POST" enctype="multipart/form-data" class="mb-3">
     @csrf
+    @if ($errors->any())
+        <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+        </div>
+    @endif
     <div class="mb-3">
         <label for="dni" class="form-label">DNI</label>
-        <input type="text" class="form-control" id="address" name="address" aria-describedby="dni-help" pattern=/^\d{8}[a-zA-Z]$/ required>
+        <input type="text" class="form-control" id="dni" name="dni" aria-describedby="dni-help" required>
         <div id="dni-help" class="form-text">Introduce your DNI.</div>
     </div>
     <div class="mb-3">
@@ -34,7 +43,8 @@
     <div class="mb-3">
         <label for="sex" class="form-label">Sex</label>
         <select id="sex" name="sex" aria-describedby="sex-help" class="form-select" aria-label="Specify your sex" required>
-            <option value="1" selected>Men</option>
+            <option value="false" disabled selected>Select your sex</option>
+            <option value="1">Men</option>
             <option value="0">Woman</option>
         </select>
         <div id="sex-help" class="form-text">Introduce your sex.</div>
