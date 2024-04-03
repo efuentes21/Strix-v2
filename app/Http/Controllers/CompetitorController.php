@@ -8,6 +8,7 @@ use Illuminate\Support\Carbon;
 use App\Models\Competitor;
 use App\Models\Race;
 use App\Models\Sponsor;
+use App\Models\Inscription;
 use App\Http\Requests\StoreCompetitorRequest;
 use App\Http\Requests\UpdateCompetitorRequest;
 
@@ -85,7 +86,7 @@ class CompetitorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCompetitorRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -120,5 +121,13 @@ class CompetitorController extends Controller
     public function destroy(Competitor $competitor)
     {
         //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function inscription()
+    {
+        return view('user.inscriptions.index');
     }
 }

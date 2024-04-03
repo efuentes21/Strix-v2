@@ -20,6 +20,8 @@ class Competitor extends Authenticatable
      */
     protected $fillable = [
         'dni',
+        'email',
+        'password',
         'name',
         'address',
         'birthdate',

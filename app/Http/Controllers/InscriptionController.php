@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Insurance;
 use App\Models\Race;
+use App\Models\Competitor;
 use App\Models\Inscription;
 
 class InscriptionController extends Controller
@@ -12,47 +13,57 @@ class InscriptionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($raceId)
     {
-        return view('user.inscriptions.index');
+        $race = Race::findOrFail($raceId);
+        $insurances = Insurance::all();
+        return view('user.inscriptions.index', compact('race', 'insurances'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $raceId)
     {
         $validatedData = $request->validate([
+            'dni' => 'required|string|max:255',
             'name' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
-            'unevenness' => 'required|numeric',
-            'map' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'max_competitors' => 'required|integer',
-            'distance' => 'required|numeric',
-            'date' => 'required|date',
-            'time' => 'required|date_format:H:i',
-            'start' => 'nullable|string',
-            'promotion' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'sponsorship' => 'nullable|numeric',
-            'inscription' => 'nullable|numeric',
-            'active' => 'required|boolean'
+            'address' => 'required|string|max:255',
+            'birthdate' => 'required|date',
+            // 'email' => 'required|string|max:255',
+            'sex' => 'required',
+            'insurance' => 'required',
         ]);
 
         try {
-            $image = $request->file('map');
-            $imageName = time().'_'.$image->getClientOriginalName();
-            $image->move(public_path('images'), $imageName);
-            $validatedData['map'] = $imageName;
-            $image = $request->file('promotion');
-            $imageName = time().'_'.$image->getClientOriginalName();
-            $image->move(public_path('images'), $imageName);
-            $validatedData['promotion'] = $imageName;
-            Insurance::create($validatedData);
+            $competitor = Competitor::create([
+                'dni' => $validatedData['dni'],
+                'name' => $validatedData['name'],
+                'address' => $validatedData['address'],
+                'birthdate' => $validatedData['birthdate'],
+                'sex' => $validatedData['sex'],
+                'pro' => false,
+                'points' => 0,
+                'partner' => false,
+                'active' => true,
+                'email' => '',
+                'password' => '',
+            ]);
+
+            $inscription = [
+                'race' => $raceId,
+                'competitor' => $competitor->id,
+                'number' => 1,
+                'arrival' => null,
+                'insurance' => $validatedData['insurance'],
+            ];
+
+            Inscription::create($inscription);
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
 
-        return redirect()->route('race.index')->with('success', 'Race successfully created!');
+        return redirect()->route('/')->with('success', 'Race successfully created!');
     }
 
     /**
