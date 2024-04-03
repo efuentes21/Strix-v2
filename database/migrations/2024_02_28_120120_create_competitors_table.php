@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('address');
             $table->date('birthdate');
+            $table->boolean('sex');
             $table->integer('points');
             $table->boolean('pro');
             $table->string('insurance');
