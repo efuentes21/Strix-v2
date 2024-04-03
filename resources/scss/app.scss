@@ -83,6 +83,10 @@ aside, main {
     background-image: url("../resources/login.png");
     background-size: cover;
     background-repeat: no-repeat;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    left: 0;
 }
 
 .full {
@@ -204,4 +208,9 @@ aside, main {
     justify-content: center;
     align-items: center;
     display: block;
+}
+
+.loggin-main {
+    max-height: 100vh;
+    overflow-y: scroll;
 }

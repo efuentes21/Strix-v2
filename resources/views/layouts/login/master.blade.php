@@ -18,7 +18,7 @@
 </head>
 <body>
     <main class="container-fuild">
-        <div class="row h-100 full">
+        <div class="row h-100 full loggin-main">
             @section('login')
                 <div id="background-login" class="col-6"></div>
                 <div class="col-6 d-flex align-items-center justify-content-center">

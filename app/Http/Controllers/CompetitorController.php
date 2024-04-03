@@ -86,9 +86,63 @@ class CompetitorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Race $race)
     {
-        //
+        $validatedData = $request->validate([
+            'dni' => 'required|string|max:9',
+            'name' => 'required|string|max:255',
+            'birthdate' => 'required|date',
+            'email' => 'required|string|max:255',
+            'password' => 'required|string|max:255',
+            'sex' => 'required|required|boolean',
+            'federation' => 'nullable|string|max:255',
+        ]);
+
+        $competitorExist = Competitor::where('dni', $validatedData['dni'])->first();
+
+        try {
+            if($competitorExist) {
+                $competitorExist->name = $validatedData['name'];
+                $competitorExist->email = $validatedData['email'];
+                $competitorExist->birthdate = $validatedData['birthdate'];
+                $competitorExist->sex = $validatedData['sex'];
+                $competitorExist->pro = $validatedData['pro'];
+
+                $competitorExist->update();
+
+                $idCompetitor = $competitorExist->id;
+            } else {
+                $competitor = Competitor::create([
+                    'dni' => $validatedData['dni'],
+                    'name' => $validatedData['name'],
+                    'email' => $validatedData['email'],
+                    'birthdate' => $validatedData['birthdate'],
+                    'sex' => $validatedData['sex'],
+                    'pro' => $validatedData['pro'],
+                    'points' => 0,
+                    'partner' => false,
+                    'active' => true,
+                    'address' => '',
+                    'password' => '',
+                ]);
+
+                $idCompetitor = $competitor->id;
+            }
+
+            $inscription = [
+                'race' => $race->id,
+                'competitor' => $idCompetitor,
+                'number' => 1,
+                'arrival' => null,
+                'insurance' => $validatedData['insurance'],
+            ];
+
+            Inscription::create($inscription);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+
+        return redirect()->route('/')->with('success', 'Inscription successfully created!');
     }
 
     /**
