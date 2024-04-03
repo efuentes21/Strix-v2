@@ -29,7 +29,6 @@ class Competitor extends Authenticatable
         'points',
         'pro',
         'federation',
-        'insurance',
         'partner',
         'active',
     ];
