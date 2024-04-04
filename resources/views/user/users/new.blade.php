@@ -1,7 +1,7 @@
 @extends('layouts.login.master')
 
-@section('titulo', 'Log in')
-
+@section('titulo', 'Register')
+@section('page-title', "REGISTER")
 @section('form')
     @include('user.users.create')
 @stop

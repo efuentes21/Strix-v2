@@ -24,7 +24,7 @@
                 <div class="col-6 d-flex align-items-center justify-content-center">
                     <div>
                         <div class="row mt-3 mb-3 container">
-                            <h1>LOG IN</h1>
+                            <h1>@yield('page-title')</h1>
                         </div>
                         <div class="row mt-3 mb-3 container">
                             @if ($errors->any())

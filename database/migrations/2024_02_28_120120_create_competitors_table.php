@@ -22,7 +22,7 @@ return new class extends Migration
             $table->boolean('sex');
             $table->integer('points');
             $table->boolean('pro');
-            $table->string('federation');
+            $table->string('federation')->nullable();
             $table->boolean('partner');
             $table->boolean('active');
             $table->timestamps();

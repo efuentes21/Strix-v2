@@ -17,6 +17,7 @@
                         <th>Id</th>
                         <th>Name</th>
                         <th>Description</th>
+                        <th>Difficutly</th>
                         <th>Active</th>
                         <th class="invisible">Edit</th>
                     </tr>
@@ -27,6 +28,7 @@
                         <td class="align-middle">{{ $challenge->id }}</td>
                         <td class="align-middle">{{ $challenge->name }}</td>
                         <td class="align-middle">{{ $challenge->description }}</td>
+                        <td class="align-middle">{{ $challenge->difficulty }}</td>
                         <td class="align-middle">{{ $challenge->active }}</td>
                         <td class="align-middle"><a href="{{ route('challenge.edit', ['challenge' => $challenge]) }}">Edit</a></td>
                     </tr>

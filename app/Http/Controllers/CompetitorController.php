@@ -123,7 +123,7 @@ class CompetitorController extends Controller
             } else {
                 $validatedData['partner'] = 1;
                 $validatedData['active'] = 1;
-                $validatedData['pro'] = 1;
+                $validatedData['pro'] = $pro;
                 $validatedData['password'] = bcrypt($validatedData['password']);
                 $validatedData['points'] = 0;
                 $validatedData['federation'] = $federation;
