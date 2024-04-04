@@ -55,6 +55,7 @@ class RaceChallengeController extends Controller
             $racechallenge = new RaceChallenge();
             $racechallenge->race = $race->id;
             $racechallenge->challenge = $challenge->id;
+            $racechallenge->position = 1;
             $racechallenge->save();
             return redirect()->back()->with('success', 'Challenge added successfully');
         } else {
