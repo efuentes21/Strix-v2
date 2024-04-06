@@ -48,6 +48,7 @@
                         <td class="align-middle"><a href="{{ route('racechallenge.remove', ['challenge' => $challenge, 'race' => $race]) }}">Remove</a></td>
                     </tr>
                     @endforeach
+                    <tr data-state="static"></tr>
                 </tbody>
             </table>
         </div>
