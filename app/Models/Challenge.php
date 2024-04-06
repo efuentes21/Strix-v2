@@ -19,6 +19,7 @@ class Challenge extends Model
     protected $fillable = [
         'name',         // Nombre del desafío
         'description',  // Descripción del desafío
+        'difficulty',
         'active',
     ];
 

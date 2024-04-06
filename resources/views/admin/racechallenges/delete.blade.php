@@ -24,6 +24,8 @@
         </div>
     @endif 
     -->
+    @csrf
+    <div class="d-none" id="race-id" data-race="{{ $race->id }}" data-url="{{ route('racechallenge.update') }}"></div>
     <div class="row">
         <div class="col-md-12">
             <table class="table table-striped">
@@ -32,15 +34,17 @@
                         <th>Id</th>
                         <th>Name</th>
                         <th>Description</th>
+                        <th>Difficulty</th>
                         <th class="invisible">R</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="draggable-list">
                     @foreach ($racechallenges as $challenge)
-                    <tr>
+                    <tr data-difficulty="{{ $challenge->difficulty }}" data-state="static" data-id="{{ $challenge->id }}" draggable="true">
                         <td class="align-middle">{{ $challenge->id }}</td>
                         <td class="align-middle">{{ $challenge->name }}</td>
                         <td class="align-middle">{{ $challenge->description }}</td>
+                        <td class="align-middle">{{ $challenge->difficulty }}</td>
                         <td class="align-middle"><a href="{{ route('racechallenge.remove', ['challenge' => $challenge, 'race' => $race]) }}">Remove</a></td>
                     </tr>
                     @endforeach

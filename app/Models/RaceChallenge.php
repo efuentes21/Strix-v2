@@ -19,6 +19,7 @@ class RaceChallenge extends Model
     protected $fillable = [
         'race',
         'challenge',
+        'position',
     ];
 
     public function races() {

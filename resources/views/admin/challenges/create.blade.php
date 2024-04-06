@@ -29,6 +29,11 @@
       <div id="description-help" class="form-text">Introduce a description for the challenge.</div>
     </div>
     <div class="mb-3">
+      <label for="difficulty" class="form-label">Difficulty</label>
+      <input type="number" class="form-control" id="difficulty" name="difficulty" aria-describedby="difficulty-help" required>
+      <div id="difficulty-help" class="form-text">Introduce a difficulty for the challenge.</div>
+    </div>
+    <div class="mb-3">
       <label for="active" class="form-label">Active</label>
       <select id="active" name="active" aria-describedby="active-help" class="form-select" aria-label="Select if the race is active or not" required>
         <option value="1" selected>Yes</option>

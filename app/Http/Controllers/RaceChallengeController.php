@@ -17,7 +17,7 @@ class RaceChallengeController extends Controller
      */
     public function index(Race $race)
     {
-        $racechallenges = $race->challenges()->get();
+        $racechallenges = $race->challenges()->orderBy('position')->get();
         if($racechallenges->count() > 0){
             $noRecord = false;
         } else {
@@ -55,8 +55,25 @@ class RaceChallengeController extends Controller
             $racechallenge = new RaceChallenge();
             $racechallenge->race = $race->id;
             $racechallenge->challenge = $challenge->id;
-            $racechallenge->position = 1;
+
+            $newChallengeDifficulty = $challenge->difficulty;
+            $existingChallenges = $race->challenges()->orderBy('position')->get();
+
+            $newChallengePosition = 0;
+            foreach ($existingChallenges as $existingChallenge) {
+                if ($existingChallenge->difficulty >= $newChallengeDifficulty) {
+                    $newChallengePosition++;
+                }
+            }
+            $racechallenge->position = $newChallengePosition;
             $racechallenge->save();
+
+            $existingChallenges = RaceChallenge::where('race', $race->id)->where('position', '>=', $newChallengePosition)->where('id', '!=', $racechallenge->id)->orderBy('position')->get();
+            foreach ($existingChallenges as $existingChallenge) {
+                $existingChallenge->position += 1;
+                $existingChallenge->update();
+            }
+
             return redirect()->back()->with('success', 'Challenge added successfully');
         } else {
             return redirect()->back();
@@ -68,7 +85,15 @@ class RaceChallengeController extends Controller
      */
     public function remove(Race $race, Challenge $challenge)
     {
+        $raceChallenge = RaceChallenge::where('challenge', $challenge->id)->where('race', $race->id)->get()->first();
+        $position = $raceChallenge->position;
         $race->challenges()->detach($challenge->id);
+        $existingChallenges = RaceChallenge::where('race', $race->id)->where('position', '>=', $position)->orderBy('position')->get();
+        foreach($existingChallenges as $existingChallenge){
+            $existingChallenge->position -= 1;
+            $existingChallenge->update();
+        }
+
         return redirect()->back()->with('success', 'Challenge added successfully');
     }
 
@@ -99,9 +124,23 @@ class RaceChallengeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, String $id)
+    public function update(Request $request)
     {
-        //
+        $positions = $request->input('positions');
+        $race = $request->input('raceid');
+        $message = "";
+        foreach ($positions as $position) {
+            $raceChallenge = RaceChallenge::where('challenge', $position['id'])->where('race', $race)->get()->first();
+            if ($raceChallenge) {
+                $raceChallenge->position = $position['position'];
+                $raceChallenge->update();
+                $message .= ":D";
+            } else {
+                $message .= ":C";
+            }
+        }
+
+        return response()->json(['message' => $message]);
     }
 
     /**

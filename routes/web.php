@@ -80,6 +80,7 @@ Route::group(['middleware' => 'auth.admin'], function () {
     Route::get('admin/racechallenges/add/{race}', [RaceChallengeController::class, 'indexadd'])->name('racechallenge.indexadd');
     Route::get('racechallenge/{race}/add/{challenge}', [RaceChallengeController::class, 'add'])->name('racechallenge.add');
     Route::get('racechallenge/{race}/remove/{challenge}', [RaceChallengeController::class, 'remove'])->name('racechallenge.remove');
+    Route::post('racechallenge/update', [RaceChallengeController::class, 'update'])->name('racechallenge.update');
 
     Route::get('admin/sponsorship/remove/{race}', [SponsorshipController::class, 'index'])->name('sponsorship.index');
     Route::get('admin/sponsorship/add/{race}', [SponsorshipController::class, 'indexadd'])->name('sponsorship.indexadd');
