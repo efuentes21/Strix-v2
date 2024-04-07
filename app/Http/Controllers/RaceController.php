@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Inscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Models\Race;
+use Illuminate\Support\Facades\Auth;
 
 class RaceController extends Controller
 {
@@ -149,7 +151,14 @@ class RaceController extends Controller
         $race = Race::findOrFail($raceId);
         $challenges = $race->challenges()->get();
         $sponsors = $race->sponsors()->get();
-        return view('user.races.index', compact('race', 'challenges', 'sponsors'));
+        $competitors = $race->competitors()->count();
+        if(Auth::guard('competitor')->user()) {
+            $inscriptionExist = Inscription::where('competitor', Auth::guard('competitor')->user()->id)->where('race', $raceId)->first();
+            return view('user.races.index', compact('race', 'challenges', 'sponsors', 'competitors', 'inscriptionExist'));
+        } else {
+            return view('user.races.index', compact('race', 'challenges', 'sponsors', 'competitors'));
+        }
+        
     }
 
     /**

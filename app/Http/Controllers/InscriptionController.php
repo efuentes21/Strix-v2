@@ -55,7 +55,8 @@ class InscriptionController extends Controller
             'insurance' => 'required',
         ]);
 
-        $competitorExist = Competitor::where('dni', $validatedData['dni'])->first();
+        $competitorExist = Competitor::where('dni', $validatedData['dni'])->where('partner', false)->first();
+        $competitorIsPartner = Competitor::where('dni', $validatedData['dni'])->where('partner', true)->first();
 
         try {
             if($competitorExist) {
@@ -68,7 +69,9 @@ class InscriptionController extends Controller
                 $competitorExist->update();
 
                 $idCompetitor = $competitorExist->id;
-            } else {
+            } else if($competitorIsPartner) {
+                return redirect()->back()->with('error', 'Already registered as a partner');
+            }else {
                 $competitor = Competitor::create([
                     'dni' => $validatedData['dni'],
                     'name' => $validatedData['name'],
@@ -81,20 +84,27 @@ class InscriptionController extends Controller
                     'active' => true,
                     'address' => '',
                     'password' => '',
+                    'federation' => null,
                 ]);
 
                 $idCompetitor = $competitor->id;
             }
 
-            $inscription = [
-                'race' => $raceId,
-                'competitor' => $idCompetitor,
-                'number' => 1,
-                'arrival' => null,
-                'insurance' => $validatedData['insurance'],
-            ];
+            $inscriptionExists = Inscription::where('competitor', $idCompetitor)->where('race', $raceId)->first();
 
-            Inscription::create($inscription);
+            if(!$inscriptionExists) {
+                $inscription = [
+                    'race' => $raceId,
+                    'competitor' => $idCompetitor,
+                    'number' => 1,
+                    'arrival' => null,
+                    'insurance' => $validatedData['insurance'],
+                ];
+
+                Inscription::create($inscription);
+            } else {
+                return redirect()->back()->with('error', 'Already inscripted in the race');
+            }
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
