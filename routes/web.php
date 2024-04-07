@@ -42,6 +42,10 @@ Route::post('admin/login', [AdminController::class, 'login'])->name('admin.login
 Route::get('user/register', [CompetitorController::class, 'create'])->name('user.register');
 Route::post('user/new', [CompetitorController::class, 'store'])->name('user.new');
 
+Route::get('pdf/qr/{race}/{competitor}/{number}', [InscriptionController::class, 'simple_qr'])->name('pdf.qr');
+Route::get('qr/save-time/{race}/{competitor}', [InscriptionController::class, 'save_time'])->name('qr.savetime');
+Route::get('pdf/qr/all/{race}', [InscriptionController::class, 'all_qr'])->name('qr.all');
+
 Route::group(['middleware' => 'auth.competitor'], function () {
     Route::get('user/logout', [CompetitorController::class, 'logout'])->name('user.logout');
     Route::get('inscription/storelogged/{race}', [InscriptionController::class, 'storelogged'])->name('inscription.logged');
@@ -57,6 +61,7 @@ Route::group(['middleware' => 'auth.admin'], function () {
     Route::post('race/store', [RaceController::class, 'store'])->name('race.store');
 
     Route::get('race/inscriptions/{race}', [InscriptionController::class, 'print'])->name('inscription.print');
+    Route::get('inscriptions/{race}', [InscriptionController::class, 'index'])->name('inscriptions');
 
     Route::get('admin/sponsors', [SponsorController::class, 'index'])->name('sponsor.index');
     Route::get('sponsor/create', [SponsorController::class, 'create'])->name('sponsor.create');

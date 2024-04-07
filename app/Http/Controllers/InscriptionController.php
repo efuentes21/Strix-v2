@@ -7,9 +7,29 @@ use Illuminate\Http\Request;
 use App\Models\Race;
 use App\Models\Competitor;
 use App\Models\Inscription;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class InscriptionController extends Controller
 {
+    /**
+     * Shows every competitor in a race
+     */
+    public function index(Race $race)
+    {
+        $inscriptions = Inscription::where('race', $race->id)->get();
+        $datas = [];
+        foreach($inscriptions as $inscription){
+            $datas[] =  [
+                'dni' => Competitor::where('id', $inscription->competitor)->get()->first()->dni,
+                'id' => $inscription->competitor, 
+                'name' => Competitor::where('id', $inscription->competitor)->get()->first()->name,
+                'number' => $inscription->number
+            ];
+        }
+        return view('admin.inscriptions.index', compact('datas', 'race'));
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -111,5 +131,96 @@ class InscriptionController extends Controller
         }
 
         return redirect()->route('/')->with('success', 'Inscription successfully created!');
+    }
+
+    public function simple_qr($race, $competitor, $number)
+    {
+        // Obtener la información necesaria para generar el QR
+        $competitor = Competitor::findOrFail($competitor);
+        $race = Race::findOrFail($race);
+    
+            // Crear los datos para el código QR
+            // $qrData = "Nombre: " . $competitor . ", Race: " . $race;
+        $url = route('qr.savetime', ['race' => $race, 'competitor' => $competitor]);
+        $qrData = "URL: " . $url;
+
+    
+        // Generar el código QR como un objeto QrCode
+        $qrCode = QrCode::size(300)->generate($qrData);
+    
+        // Generar el contenido HTML para el PDF con el QR en el medio
+        $html = '<h1 style="text-align: center;">' . $race->name . '</h1>';
+        $html .= '<h1 style="text-align: center;">' . $number . '</h1>';
+
+        $html .= '<div style="text-align: center;">';
+        $html .= '<img src="data:image/png;base64,' . base64_encode($qrCode) . '" alt="QR Code">';
+        $html .= '</div>';
+
+
+        $html .= '<h1 style="text-align: center;">'.$competitor->name.'</h1>';
+        
+
+
+        // Configurar Dompdf
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $dompdf = new Dompdf($options);
+    
+        // Cargar el contenido HTML en Dompdf
+        $dompdf->loadHtml($html);
+    
+        // Renderizar el PDF
+        $dompdf->render();
+    
+        // Devolver el PDF generado
+        return $dompdf->stream('competitor_dorsal.pdf');
+    }
+
+
+    public function all_qr(Race $race)
+    {
+        // Obtener todos los Inscriptions para la Race
+        $inscriptions = Inscription::where('race', $race->id)->get();
+
+        // Configurar Dompdf
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $dompdf = new Dompdf($options);
+
+        // Inicializar el contenido HTML del PDF
+        $html = '';
+
+        // Iterar sobre cada Inscription
+        foreach ($inscriptions as $inscription) {
+            // Obtener información del Competitor y la Race
+            $competitor = Competitor::findOrFail($inscription->competitor);
+            $race = Race::findOrFail($race->id);
+
+            // Crear la URL para el Inscription
+            $url = route('qr.savetime', ['race' => $race->id, 'competitor' => $inscription->competitor]);
+            
+            // Crear el código QR para la URL
+            $qrCode = QrCode::size(300)->generate($url);
+
+            // Agregar la información del Inscription al HTML
+            $html .= '<h1 style="text-align: center;">' . $race->name . '</h1>';
+            $html .= '<h1 style="text-align: center;">' . $inscription->number . '</h1>';
+            $html .= '<div style="text-align: center;">';
+            $html .= '<img src="data:image/png;base64,' . base64_encode($qrCode) . '" alt="QR Code">';
+            $html .= '</div>';
+            $html .= '<h1 style="text-align: center;">'.$competitor->name.'</h1>';
+
+            // Agregar un salto de página HTML después de cada Inscription
+            $html .= '<div style="page-break-after: always;"></div>';
+        }
+
+        // Cargar el contenido HTML en Dompdf
+        $dompdf->loadHtml($html);
+
+        // Renderizar el PDF
+        $dompdf->render();
+
+        // Devolver el PDF generado
+        return $dompdf->stream('qr_Competitores.pdf');
     }
 }

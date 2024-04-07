@@ -8,7 +8,7 @@ function setup(){
     
     const initSortableList = (e) => {
         e.preventDefault();
-        const draggingItem = sortableList.querySelector('tr[data-state="dragging"]')
+        const draggingItem = sortableList.querySelector('tr[data-state="dragging"]');
         const siblings = [...sortableList.querySelectorAll('tr[data-state="static"]')];
         
         let nextSibling = siblings.find(sibling => {

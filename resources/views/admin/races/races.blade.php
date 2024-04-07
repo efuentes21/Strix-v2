@@ -55,9 +55,10 @@
                                     <li><a class="dropdown-item" href="{{ route('racechallenge.index', ['race' => $race]) }}">Challenges</a></li>
                                     <li><a class="dropdown-item" href="{{ route('sponsorship.index', ['race' => $race]) }}">Sponsors</a></li>
                                     <li><a class="dropdown-item" href="{{ route('raceinsurance.index', ['race' => $race]) }}">Insurances</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('inscriptions', ['race' => $race]) }}">Inscriptions</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="{{ route('raceimages.index', ['race' => $race]) }}">Media</a></li>
-                                    <li><a class="dropdown-item" href="#">Scan QR</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('qr.all', ['race' => $race]) }}">Scan QR</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="{{ route('inscription.print', ['race' => $race]) }}">Print competitors</a></li>
                                     <li><a class="dropdown-item" href="{{ route('sponsorship.print', ['race' => $race]) }}">Print sponsors</a></li>
