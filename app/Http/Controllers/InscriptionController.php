@@ -240,14 +240,32 @@ class InscriptionController extends Controller
 
         $now = new \DateTime();
 
+        $arrives = Inscription::where('race', $race)->where('arrival', '!=', null)->get();
+
+        $competitor_age = $now->diff($competitor->birthdate)->y;
+        $competitors_arrived = [];
         if($competitor->sex){
-            $arrives = Inscription::where('race', $race)->where('arrival', '!=', null)->get();
-
-            $competitor_age = $now->diff($competitor->birthdate)->y;
-
-            $competitors_arrived = [];
             foreach($arrives as $arrive){
                 if($arrive->sex){
+                    $arrive_age = $now->diff($arrive->competitor->birthdate)->y;
+                    if($competitor_age <= 20 && $arrive_age <= 20){
+                        $competitors_arrived[] = $arrive->competitor;
+                    } elseif($competitor_age >= 21 && $competitor_age <= 30 && $arrive_age >= 21 && $arrive_age <= 30){
+                        $competitors_arrived[] = $arrive->competitor;
+                    } elseif($competitor_age >= 31 && $competitor_age <= 40 && $arrive_age >= 31 && $arrive_age <= 40){
+                        $competitors_arrived[] = $arrive->competitor;
+                    } elseif($competitor_age >= 41 && $competitor_age <= 50 && $arrive_age >= 41 && $arrive_age <= 50){
+                        $competitors_arrived[] = $arrive->competitor;
+                    } elseif($competitor_age >= 51 && $competitor_age <= 60 && $arrive_age >= 51 && $arrive_age <= 60){
+                        $competitors_arrived[] = $arrive->competitor;
+                    } elseif($competitor_age >= 61 && $arrive_age >= 61){
+                        $competitors_arrived[] = $arrive->competitor;
+                    }
+                }
+            }
+        } else {
+            foreach($arrives as $arrive){
+                if(!$arrive->sex){
                     $arrive_age = $now->diff($arrive->competitor->birthdate)->y;
                     if($competitor_age <= 20 && $arrive_age <= 20){
                         $competitors_arrived[] = $arrive->competitor;
