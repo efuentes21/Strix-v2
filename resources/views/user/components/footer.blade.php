@@ -2,7 +2,7 @@
     <div class="container">
         <div class="px-4 py-5 text-center d-flex flex-row align-items-center justify-content-between text-white">
             <div class="d-flex flex-row">
-                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none" title="Main menu">
                     @include('layouts.assets.strix-logo')
                 </a>
                 <div class="nav col-12 col-lg-auto me-lg-auto mb-2 align-items-center justify-content-center mb-md-0">

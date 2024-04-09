@@ -9,7 +9,7 @@
                 {{-- Cambiar foto cuando este implementado --}}
                 {{-- <img src="{{ asset('images/' . $challenge->image) }}" class="card-img-top" alt={{ $challenge->name }}> --}}
                 <div class="card-body">
-                    <h5 class="card-title">{{ $challenge->name }}</h5>
+                    <h1 class="card-title">{{ $challenge->name }}</h5>
                     <p class="card-text">{{ $challenge->description }}</p>
                 </div>
             </div>
