@@ -49,7 +49,7 @@ $content = '<style>
  * The content of the PDF
  * A table with the inscripted competitors is created
  */
-$content .= '<h1>Inscriptions in ' . $race->name .'</h1>';
+$content .= '<h1>Sponsorships in ' . $race->name .'</h1>';
 $content .= '<table class="table">';
 $content .= '<thead>';
 $content .= '<tr>';
