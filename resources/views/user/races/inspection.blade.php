@@ -12,7 +12,14 @@
                 @if($inscriptionExist)
                     <button type="button" class="btn btn-outline-primary" disabled>INSCRIPTED</button>
                 @else
-                    <a href="{{ route('inscription.logged', ['race' => $race]) }}" class="btn btn-primary text-white">INSCRIPTION</a>
+                    {{-- <a href="{{ route('inscription.logged', ['race' => $race]) }}" class="btn btn-primary text-white">INSCRIPTION</a> --}}
+                    {{-- falta estilo en el boton, esta chiquito --}}
+                    <div id="paypal-button-container"></div>
+                    <script src="{{ asset('js/paypal.js')}}"></script>
+                    <script>
+                        let price = parseFloat({{ $race->inscription }});
+                        const route = "{{ route('inscription.logged', ['race' => $race]) }}";
+                    </script>
                 @endif
             @else
                 <a href="{{ route('inscription.index', ['race' => $race]) }}" class="btn btn-primary text-white">INSCRIPTION</a>
@@ -26,7 +33,11 @@
         <p>Start: {{ $race->start }}</p>
         <p>Distance: {{ $race->distance }}km</p>
         <p>Unevenness: {{ $race->unevenness }}m</p>
-        <p>Inscription's price: {{ $race->inscription }}€</p>
+        @auth('competitor')
+            <p>Inscription's price: {{ $race->inscription }}€ (20% off)</p>
+        @else
+            <p>Inscription's price: {{ $race->inscription }}€</p>
+        @endauth
     </div>
     <div class="col-md-6 d-flex justify-content-end">
         <img src="{{ asset('images/' . $race->map) }}" alt="Race Map" style="max-width: 450px;">

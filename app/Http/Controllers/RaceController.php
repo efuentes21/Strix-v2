@@ -153,6 +153,7 @@ class RaceController extends Controller
         $sponsors = $race->sponsors()->get();
         $competitors = $race->competitors()->count();
         if(Auth::guard('competitor')->user()) {
+            $race->inscription = $race->inscription * 0.8;
             $inscriptionExist = Inscription::where('competitor', Auth::guard('competitor')->user()->id)->where('race', $raceId)->first();
             return view('user.races.index', compact('race', 'challenges', 'sponsors', 'competitors', 'inscriptionExist'));
         } else {

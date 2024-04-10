@@ -55,5 +55,7 @@ class DatabaseSeeder extends Seeder
             'signature' => 'signature.png',
             'password' => bcrypt('admin'),
         ]);
+
+        \App\Models\Admin::factory(1)->create();
     }
 }

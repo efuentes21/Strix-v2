@@ -1,5 +1,5 @@
 @section('user-form')
-<form action="{{ route('user.new') }}" method="POST" enctype="multipart/form-data" class="mb-3">
+<form id="paypal-form" action="{{ route('user.new') }}" method="POST" enctype="multipart/form-data" class="mb-3">
     @csrf
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -54,9 +54,14 @@
         <input type="text" class="form-control" id="federation" name="federation" aria-describedby="federation-help">
         <div id="federation-help" class="form-text">Are you federated? Introduce your federation number.</div>
     </div>
-    <button type="submit" class="btn btn-primary text-white">REGISTER</button>
+    {{-- <button type="submit" class="btn btn-primary text-white">REGISTER</button> --}}
 </form>
+<div id="paypal-button-container"></div>
+<script src="{{ asset('js/paypal.js')}}"></script>
+<script>
+    let price = parseFloat({{ $company->principal_price }})
+</script>
 <div class="mb-3">
-    <div id="route-login"><a href="{{ route('user.index') }}">Already a memeber?</a></div>
+    <div id="route-login"><a href="{{ route('user.index') }}">Already a member?</a></div>
 </div>
 @show
