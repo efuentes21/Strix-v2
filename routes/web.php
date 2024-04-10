@@ -43,7 +43,7 @@ Route::get('user/register', [CompetitorController::class, 'create'])->name('user
 Route::post('user/new', [CompetitorController::class, 'store'])->name('user.new');
 
 Route::get('pdf/qr/{race}/{competitor}/{number}', [InscriptionController::class, 'simple_qr'])->name('pdf.qr');
-Route::get('qr/save-time/{race}/{competitor}', [InscriptionController::class, 'save_time'])->name('qr.savetime');
+Route::get('/qr/save_time/{race}/{competitor}', [InscriptionController::class, 'save_time'])->name('qr.savetime');
 Route::get('pdf/qr/all/{race}', [InscriptionController::class, 'all_qr'])->name('qr.all');
 
 Route::group(['middleware' => 'auth.competitor'], function () {

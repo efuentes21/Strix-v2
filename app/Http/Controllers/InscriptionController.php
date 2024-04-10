@@ -235,31 +235,32 @@ class InscriptionController extends Controller
     }
 
     public function save_time(Race $race, Competitor $competitor){
-        $competitor = Competitor::findOrFail($competitor);
-        $race = Race::findOrFail($race);
+        $competitor = Competitor::findOrFail($competitor->id);
+        $race = Race::findOrFail($race->id);
 
         $now = new \DateTime();
 
-        $arrives = Inscription::where('race', $race)->where('arrival', '!=', null)->get();
+        $arrives = Inscription::where('race', $race->id)->where('arrival', '!=', null)->get();
 
         $competitor_age = $now->diff($competitor->birthdate)->y;
-        $competitors_arrived = [];
+        $competitors_arrived = 0;
         if($competitor->sex){
             foreach($arrives as $arrive){
                 if($arrive->sex){
                     $arrive_age = $now->diff($arrive->competitor->birthdate)->y;
+                    dd($arrive_age);
                     if($competitor_age <= 20 && $arrive_age <= 20){
-                        $competitors_arrived[] = $arrive->competitor;
+                        $competitors_arrived += 1;
                     } elseif($competitor_age >= 21 && $competitor_age <= 30 && $arrive_age >= 21 && $arrive_age <= 30){
-                        $competitors_arrived[] = $arrive->competitor;
+                        $competitors_arrived += 1;
                     } elseif($competitor_age >= 31 && $competitor_age <= 40 && $arrive_age >= 31 && $arrive_age <= 40){
-                        $competitors_arrived[] = $arrive->competitor;
+                        $competitors_arrived += 1;
                     } elseif($competitor_age >= 41 && $competitor_age <= 50 && $arrive_age >= 41 && $arrive_age <= 50){
-                        $competitors_arrived[] = $arrive->competitor;
+                        $competitors_arrived += 1;
                     } elseif($competitor_age >= 51 && $competitor_age <= 60 && $arrive_age >= 51 && $arrive_age <= 60){
-                        $competitors_arrived[] = $arrive->competitor;
+                        $competitors_arrived += 1;
                     } elseif($competitor_age >= 61 && $arrive_age >= 61){
-                        $competitors_arrived[] = $arrive->competitor;
+                        $competitors_arrived += 1;
                     }
                 }
             }
@@ -267,30 +268,33 @@ class InscriptionController extends Controller
             foreach($arrives as $arrive){
                 if(!$arrive->sex){
                     $arrive_age = $now->diff($arrive->competitor->birthdate)->y;
+                    dd($arrive_age);
                     if($competitor_age <= 20 && $arrive_age <= 20){
-                        $competitors_arrived[] = $arrive->competitor;
+                        $competitors_arrived += 1;
                     } elseif($competitor_age >= 21 && $competitor_age <= 30 && $arrive_age >= 21 && $arrive_age <= 30){
-                        $competitors_arrived[] = $arrive->competitor;
+                        $competitors_arrived += 1;
                     } elseif($competitor_age >= 31 && $competitor_age <= 40 && $arrive_age >= 31 && $arrive_age <= 40){
-                        $competitors_arrived[] = $arrive->competitor;
+                        $competitors_arrived += 1;
                     } elseif($competitor_age >= 41 && $competitor_age <= 50 && $arrive_age >= 41 && $arrive_age <= 50){
-                        $competitors_arrived[] = $arrive->competitor;
+                        $competitors_arrived += 1;
                     } elseif($competitor_age >= 51 && $competitor_age <= 60 && $arrive_age >= 51 && $arrive_age <= 60){
-                        $competitors_arrived[] = $arrive->competitor;
+                        $competitors_arrived += 1;
                     } elseif($competitor_age >= 61 && $arrive_age >= 61){
-                        $competitors_arrived[] = $arrive->competitor;
+                        $competitors_arrived += 1;
                     }
                 }
             }
         }
+        dd($competitors_arrived, $competitor);
+        
         $points = 1000;
-        $competitor->points += max(0, $points - (count($competitors_arrived) * 100));
+        $competitor->points += max(0, $points - ($competitors_arrived * 100));
         $competitor->update();
-
-        $inscription = Inscription::where('race', $race)->where('competitor', $competitor)->get()->first();
+        
+        $inscription = Inscription::where('race', $race->id)->where('competitor', $competitor->id)->get()->first();
         $inscription->arrival = $now;
         $inscription->update();
-
+        
         return redirect()->route('/')->with('success', 'Time successfully registered');
     }
 }

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('race');
             $table->unsignedBigInteger('competitor');
             $table->integer('number');
-            $table->timestamp('arrival');
+            $table->timestamp('arrival')->nullable();
             $table->unsignedBigInteger('insurance');
             $table->timestamps();
 
