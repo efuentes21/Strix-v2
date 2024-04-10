@@ -9,6 +9,7 @@ use App\Models\Competitor;
 use App\Models\Race;
 use App\Models\Sponsor;
 use App\Models\Inscription;
+use App\Models\Company;
 use App\Http\Requests\StoreCompetitorRequest;
 use App\Http\Requests\UpdateCompetitorRequest;
 
@@ -80,7 +81,8 @@ class CompetitorController extends Controller
      */
     public function create()
     {
-        return view('user.users.new');
+        $company = Company::findOrFail('1');
+        return view('user.users.new', compact('company'));
     }
 
     /**

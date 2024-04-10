@@ -16,7 +16,7 @@
         </ul>
       </div>
     @endif
-    <form id="inscription-form" action="{{ route('inscription.store', ['race' => $race]) }}" method="POST" enctype="multipart/form-data" class="mb-3">
+    <form id="paypal-form" action="{{ route('inscription.store', ['race' => $race]) }}" method="POST" enctype="multipart/form-data" class="mb-3">
       @csrf
       <div class="mb-3">
         <label for="dni" class="form-label">DNI</label>
@@ -67,4 +67,7 @@
 
     <div id="paypal-button-container"></div>
     <script src="{{ asset('js/paypal.js')}}"></script>
+    <script>
+      let price = parseFloat({{ $race->inscription }})
+    </script>
 </div>
