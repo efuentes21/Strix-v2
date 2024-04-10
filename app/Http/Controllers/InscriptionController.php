@@ -10,6 +10,7 @@ use App\Models\Inscription;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Carbon\Carbon;
 
 class InscriptionController extends Controller
 {
@@ -145,92 +146,65 @@ class InscriptionController extends Controller
 
     public function simple_qr($race, $competitor, $number)
     {
-        // Obtener la información necesaria para generar el QR
         $competitor = Competitor::findOrFail($competitor);
         $race = Race::findOrFail($race);
-    
-            // Crear los datos para el código QR
-            // $qrData = "Nombre: " . $competitor . ", Race: " . $race;
+
         $url = route('qr.savetime', ['race' => $race, 'competitor' => $competitor]);
         $qrData = "URL: " . $url;
 
-    
-        // Generar el código QR como un objeto QrCode
         $qrCode = QrCode::size(300)->generate($qrData);
     
-        // Generar el contenido HTML para el PDF con el QR en el medio
-        $html = '<h1 style="text-align: center;">' . $race->name . '</h1>';
-        $html .= '<h1 style="text-align: center;">' . $number . '</h1>';
-
+        $html = '<h1 style="text-align: center; font-size: 64px;">'.$competitor->name.'</h1>';
+        $html .= '<h1 style="text-align: center; font-size: 64px;">' . $number . '</h1>';
+        $html .= '<div style="width: 100%; height: 50px;"></div>';
         $html .= '<div style="text-align: center;">';
         $html .= '<img src="data:image/png;base64,' . base64_encode($qrCode) . '" alt="QR Code">';
         $html .= '</div>';
 
-
-        $html .= '<h1 style="text-align: center;">'.$competitor->name.'</h1>';
-        
-
-
-        // Configurar Dompdf
         $options = new Options();
         $options->set('isHtml5ParserEnabled', true);
         $dompdf = new Dompdf($options);
     
-        // Cargar el contenido HTML en Dompdf
         $dompdf->loadHtml($html);
-    
-        // Renderizar el PDF
+
         $dompdf->render();
     
-        // Devolver el PDF generado
         return $dompdf->stream('competitor_dorsal.pdf');
     }
 
 
     public function all_qr(Race $race)
     {
-        // Obtener todos los Inscriptions para la Race
         $inscriptions = Inscription::where('race', $race->id)->get();
 
-        // Configurar Dompdf
         $options = new Options();
         $options->set('isHtml5ParserEnabled', true);
         $dompdf = new Dompdf($options);
 
-        // Inicializar el contenido HTML del PDF
         $html = '';
 
-        // Iterar sobre cada Inscription
         foreach ($inscriptions as $inscription) {
-            // Obtener información del Competitor y la Race
             $competitor = Competitor::findOrFail($inscription->competitor);
             $race = Race::findOrFail($race->id);
 
-            // Crear la URL para el Inscription
             $url = route('qr.savetime', ['race' => $race->id, 'competitor' => $inscription->competitor]);
             
-            // Crear el código QR para la URL
             $qrCode = QrCode::size(300)->generate($url);
 
-            // Agregar la información del Inscription al HTML
-            $html .= '<h1 style="text-align: center;">' . $race->name . '</h1>';
-            $html .= '<h1 style="text-align: center;">' . $inscription->number . '</h1>';
+            $html .= '<h1 style="text-align: center; font-size: 64px;">' . $competitor->name.'</h1>';
+            $html .= '<h1 style="text-align: center; font-size: 64px;">' . $inscription->number . '</h1>';
+            $html .= '<div style="width: 100%; height: 50px;"></div>';
             $html .= '<div style="text-align: center;">';
             $html .= '<img src="data:image/png;base64,' . base64_encode($qrCode) . '" alt="QR Code">';
             $html .= '</div>';
-            $html .= '<h1 style="text-align: center;">'.$competitor->name.'</h1>';
 
-            // Agregar un salto de página HTML después de cada Inscription
             $html .= '<div style="page-break-after: always;"></div>';
         }
 
-        // Cargar el contenido HTML en Dompdf
         $dompdf->loadHtml($html);
 
-        // Renderizar el PDF
         $dompdf->render();
 
-        // Devolver el PDF generado
         return $dompdf->stream('qr_Competitores.pdf');
     }
 
@@ -242,13 +216,12 @@ class InscriptionController extends Controller
 
         $arrives = Inscription::where('race', $race->id)->where('arrival', '!=', null)->get();
 
-        $competitor_age = $now->diff($competitor->birthdate)->y;
+        $competitor_age = Carbon::parse($competitor->birthdate)->age;
         $competitors_arrived = 0;
         if($competitor->sex){
             foreach($arrives as $arrive){
                 if($arrive->sex){
-                    $arrive_age = $now->diff($arrive->competitor->birthdate)->y;
-                    dd($arrive_age);
+                    $arrive_age = Carbon::parse($arrive->competitors->birthdate)->age;
                     if($competitor_age <= 20 && $arrive_age <= 20){
                         $competitors_arrived += 1;
                     } elseif($competitor_age >= 21 && $competitor_age <= 30 && $arrive_age >= 21 && $arrive_age <= 30){
@@ -267,8 +240,7 @@ class InscriptionController extends Controller
         } else {
             foreach($arrives as $arrive){
                 if(!$arrive->sex){
-                    $arrive_age = $now->diff($arrive->competitor->birthdate)->y;
-                    dd($arrive_age);
+                    $arrive_age = Carbon::parse($arrive->competitors->birthdate)->age;
                     if($competitor_age <= 20 && $arrive_age <= 20){
                         $competitors_arrived += 1;
                     } elseif($competitor_age >= 21 && $competitor_age <= 30 && $arrive_age >= 21 && $arrive_age <= 30){
@@ -285,7 +257,6 @@ class InscriptionController extends Controller
                 }
             }
         }
-        dd($competitors_arrived, $competitor);
         
         $points = 1000;
         $competitor->points += max(0, $points - ($competitors_arrived * 100));
@@ -296,5 +267,208 @@ class InscriptionController extends Controller
         $inscription->update();
         
         return redirect()->route('/')->with('success', 'Time successfully registered');
+    }
+
+    public function print_rankings(Race $race){
+        $race = Race::findOrFail($race->id);
+
+        $arrives = Inscription::where('race', $race->id)->where('arrival', '!=', null)->orderBy('arrival')->get();
+        $ages = [20, 30, 40, 50, 60, 70];
+        $html = '<style>
+                table {
+                    width: 100%;
+                }
+                th {
+                    border: solid black 1px;
+                    border-collapse: collapse;
+                    border-spacing: 0;
+                }
+                * {
+                    box-sizing: border-box;
+                }
+                </style>';
+        foreach($ages as $age){
+            if($age <= 20){
+                $html .= '<h1>Master 20 men ranking</h1>';
+                $points = 1000;
+                $html .= '<table>';
+                $html .= '<tr><th>DNI</th><th>Competitor</th><th>Points</th></tr>';
+                foreach($arrives as $arrive){
+                    $arrive_age = Carbon::parse($arrive->competitors->birthdate)->age;
+                    if($arrive->competitors->sex == true && $arrive_age <= 20){
+                        $html .= '<tr><td>'.$arrive->competitors->dni.'</td><td>'.$arrive->competitors->name.'</td><td>'.max(0, $points).'</td></tr>';
+                        $points -= 100;
+                    }
+                }
+                $html .= '</table>';
+                $html .= '<div style="page-break-after: always;"></div>';
+            } elseif($age >= 21 && $age <= 30){
+                $html .= '<h1>Master 30 men ranking</h1>';
+                $points = 1000;
+                $html .= '<table>';
+                $html .= '<tr><th>DNI</th><th>Competitor</th><th>Points</th></tr>';
+                foreach($arrives as $arrive){
+                    $arrive_age = Carbon::parse($arrive->competitors->birthdate)->age;
+                    if($arrive->competitors->sex == true && $arrive_age >= 21 && $arrive_age <= 30){
+                        $html .= '<tr><td>'.$arrive->competitors->dni.'</td><td>'.$arrive->competitors->name.'</td><td>'.max(0, $points).'</td></tr>';
+                        $points -= 100;
+                    }
+                }
+                $html .= '</table>';
+                $html .= '<div style="page-break-after: always;"></div>';
+            } elseif($age >= 31 && $age <= 40){
+                $html .= '<h1>Master 40 men ranking</h1>';
+                $points = 1000;
+                $html .= '<table>';
+                $html .= '<tr><th>DNI</th><th>Competitor</th><th>Points</th></tr>';
+                foreach($arrives as $arrive){
+                    $arrive_age = Carbon::parse($arrive->competitors->birthdate)->age;
+                    if($arrive->competitors->sex == true && $arrive_age >= 31 && $arrive_age <= 40){
+                        $html .= '<tr><td>'.$arrive->competitors->dni.'</td><td>'.$arrive->competitors->name.'</td><td>'.max(0, $points).'</td></tr>';
+                        $points -= 100;
+                    }
+                }
+                $html .= '</table>';
+                $html .= '<div style="page-break-after: always;"></div>';
+            } elseif($age >= 41 && $age <= 50){
+                $html .= '<h1>Master 50 men ranking</h1>';
+                $points = 1000;
+                $html .= '<table>';
+                $html .= '<tr><th>DNI</th><th>Competitor</th><th>Points</th></tr>';
+                foreach($arrives as $arrive){
+                    $arrive_age = Carbon::parse($arrive->competitors->birthdate)->age;
+                    if($arrive->competitors->sex == true && $arrive_age >= 41 && $arrive_age <= 50){
+                        $html .= '<tr><td>'.$arrive->competitors->dni.'</td><td>'.$arrive->competitors->name.'</td><td>'.max(0, $points).'</td></tr>';
+                        $points -= 100;
+                    }
+                }
+                $html .= '</table>';
+                $html .= '<div style="page-break-after: always;"></div>';
+            } elseif($age >= 51 && $age <= 60){
+                $html .= '<h1>Master 60 men ranking</h1>';
+                $points = 1000;
+                $html .= '<table>';
+                $html .= '<tr><th>DNI</th><th>Competitor</th><th>Points</th></tr>';
+                foreach($arrives as $arrive){
+                    $arrive_age = Carbon::parse($arrive->competitors->birthdate)->age;
+                    if($arrive->competitors->sex == true && $arrive_age >= 51 && $arrive_age <= 60){
+                        $html .= '<tr><td>'.$arrive->competitors->dni.'</td><td>'.$arrive->competitors->name.'</td><td>'.max(0, $points).'</td></tr>';
+                        $points -= 100;
+                    }
+                }
+                $html .= '</table>';
+                $html .= '<div style="page-break-after: always;"></div>';
+            } elseif($age >= 61){
+                $html .= '<h1>Master 70 men ranking</h1>';
+                $points = 1000;
+                $html .= '<table>';
+                $html .= '<tr><th>DNI</th><th>Competitor</th><th>Points</th></tr>';
+                foreach($arrives as $arrive){
+                    $arrive_age = Carbon::parse($arrive->competitors->birthdate)->age;
+                    if($arrive->competitors->sex == true && $arrive_age > 61){
+                        $html .= '<tr><td>'.$arrive->competitors->dni.'</td><td>'.$arrive->competitors->name.'</td><td>'.max(0, $points).'</td></tr>';
+                        $points -= 100;
+                    }
+                }
+                $html .= '</table>';
+                $html .= '<div style="page-break-after: always;"></div>';
+            }
+            // Woman
+            if($age <= 20){
+                $html .= '<h1>Master 20 woman ranking</h1>';
+                $points = 1000;
+                $html .= '<table>';
+                $html .= '<tr><th>DNI</th><th>Competitor</th><th>Points</th></tr>';
+                foreach($arrives as $arrive){
+                    $arrive_age = Carbon::parse($arrive->competitors->birthdate)->age;
+                    if($arrive->competitors->sex == false && $arrive_age <= 20){
+                        $html .= '<tr><td>'.$arrive->competitors->dni.'</td><td>'.$arrive->competitors->name.'</td><td>'.max(0, $points).'</td></tr>';
+                        $points -= 100;
+                    }
+                }
+                $html .= '</table>';
+                $html .= '<div style="page-break-after: always;"></div>';
+            } elseif($age >= 21 && $age <= 30){
+                $html .= '<h1>Master 30 woman ranking</h1>';
+                $points = 1000;
+                $html .= '<table>';
+                $html .= '<tr><th>DNI</th><th>Competitor</th><th>Points</th></tr>';
+                foreach($arrives as $arrive){
+                    $arrive_age = Carbon::parse($arrive->competitors->birthdate)->age;
+                    if($arrive->competitors->sex == false && $arrive_age >= 21 && $arrive_age <= 30){
+                        $html .= '<tr><td>'.$arrive->competitors->dni.'</td><td>'.$arrive->competitors->name.'</td><td>'.max(0, $points).'</td></tr>';
+                        $points -= 100;
+                    }
+                }
+                $html .= '</table>';
+                $html .= '<div style="page-break-after: always;"></div>';
+            } elseif($age >= 31 && $age <= 40){
+                $html .= '<h1>Master 40 woman ranking</h1>';
+                $points = 1000;
+                $html .= '<table>';
+                $html .= '<tr><th>DNI</th><th>Competitor</th><th>Points</th></tr>';
+                foreach($arrives as $arrive){
+                    $arrive_age = Carbon::parse($arrive->competitors->birthdate)->age;
+                    if($arrive->competitors->sex == false && $arrive_age >= 31 && $arrive_age <= 40){
+                        $html .= '<tr><td>'.$arrive->competitors->dni.'</td><td>'.$arrive->competitors->name.'</td><td>'.max(0, $points).'</td></tr>';
+                        $points -= 100;
+                    }
+                }
+                $html .= '</table>';
+                $html .= '<div style="page-break-after: always;"></div>';
+            } elseif($age >= 41 && $age <= 50){
+                $html .= '<h1>Master 50 woman ranking</h1>';
+                $points = 1000;
+                $html .= '<table>';
+                $html .= '<tr><th>DNI</th><th>Competitor</th><th>Points</th></tr>';
+                foreach($arrives as $arrive){
+                    $arrive_age = Carbon::parse($arrive->competitors->birthdate)->age;
+                    if($arrive->competitors->sex == false && $arrive_age >= 41 && $arrive_age <= 50){
+                        $html .= '<tr><td>'.$arrive->competitors->dni.'</td><td>'.$arrive->competitors->name.'</td><td>'.max(0, $points).'</td></tr>';
+                        $points -= 100;
+                    }
+                }
+                $html .= '</table>';
+                $html .= '<div style="page-break-after: always;"></div>';
+            } elseif($age >= 51 && $age <= 60){
+                $html .= '<h1>Master 60 woman ranking</h1>';
+                $points = 1000;
+                $html .= '<table>';
+                $html .= '<tr><th>DNI</th><th>Competitor</th><th>Points</th></tr>';
+                foreach($arrives as $arrive){
+                    $arrive_age = Carbon::parse($arrive->competitors->birthdate)->age;
+                    if($arrive->competitors->sex == false && $arrive_age >= 51 && $arrive_age <= 60){
+                        $html .= '<tr><td>'.$arrive->competitors->dni.'</td><td>'.$arrive->competitors->name.'</td><td>'.max(0, $points).'</td></tr>';
+                        $points -= 100;
+                    }
+                }
+                $html .= '</table>';
+                $html .= '<div style="page-break-after: always;"></div>';
+            } elseif($age >= 61){
+                $html .= '<h1>Master 70 woman ranking</h1>';
+                $points = 1000;
+                $html .= '<table>';
+                $html .= '<tr><th>DNI</th><th>Competitor</th><th>Points</th></tr>';
+                foreach($arrives as $arrive){
+                    $arrive_age = Carbon::parse($arrive->competitors->birthdate)->age;
+                    if($arrive->competitors->sex == false && $arrive_age > 61){
+                        $html .= '<tr><td>'.$arrive->competitors->dni.'</td><td>'.$arrive->competitors->name.'</td><td>'.max(0, $points).'</td></tr>';
+                        $points -= 100;
+                    }
+                }
+                $html .= '</table>';
+                $html .= '<div style="page-break-after: always;"></div>';
+            }
+        
+        }
+
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $dompdf = new Dompdf($options);
+    
+        $dompdf->loadHtml($html);
+        $dompdf->render();
+    
+        return $dompdf->stream('ranking.pdf');
     }
 }

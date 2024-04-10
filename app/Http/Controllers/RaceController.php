@@ -173,4 +173,12 @@ class RaceController extends Controller
         $seemore = false;
         return view('user.mainpage.races', compact(['races', 'seemore']));
     }
+
+    public function rankings(){
+        $races = Race::where('date', '<=', Carbon::today())
+                        ->where('active', true)
+                        ->orderBy('date')
+                        ->get();
+        return view('user.mainpage.ranking', compact('races'));
+    }
 }

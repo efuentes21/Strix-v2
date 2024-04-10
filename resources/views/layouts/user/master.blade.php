@@ -30,6 +30,7 @@
                     <li><a href="{{ route('races') }}" class="nav-link px-2 link-dark text-white">Races</a></li>
                     <li><a href="{{ route('challenges') }}" class="nav-link px-2 link-dark text-white">Challenges</a></li>
                     <li><a href="{{ route('media') }}" class="nav-link px-2 link-dark text-white">Media</a></li>
+                    <li><a href="{{ route('rankings') }}" class="nav-link px-2 link-dark text-white">Rankings</a></li>
                 </ul>
 
                 <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">

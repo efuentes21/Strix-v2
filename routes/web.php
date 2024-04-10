@@ -46,6 +46,9 @@ Route::get('pdf/qr/{race}/{competitor}/{number}', [InscriptionController::class,
 Route::get('/qr/save_time/{race}/{competitor}', [InscriptionController::class, 'save_time'])->name('qr.savetime');
 Route::get('pdf/qr/all/{race}', [InscriptionController::class, 'all_qr'])->name('qr.all');
 
+Route::get('rankings/{race}', [InscriptionController::class, 'print_rankings'])->name('print.ranking');
+Route::get('rankings', [RaceController::class, 'rankings'])->name('rankings');
+
 Route::group(['middleware' => 'auth.competitor'], function () {
     Route::get('user/logout', [CompetitorController::class, 'logout'])->name('user.logout');
     Route::get('inscription/storelogged/{race}', [InscriptionController::class, 'storelogged'])->name('inscription.logged');
