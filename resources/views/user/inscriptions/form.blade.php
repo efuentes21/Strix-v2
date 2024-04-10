@@ -16,7 +16,7 @@
         </ul>
       </div>
     @endif
-    <form action="{{ route('inscription.store', ['race' => $race]) }}" method="POST" enctype="multipart/form-data" class="mb-3">
+    <form id="inscription-form" action="{{ route('inscription.store', ['race' => $race]) }}" method="POST" enctype="multipart/form-data" class="mb-3">
       @csrf
       <div class="mb-3">
         <label for="dni" class="form-label">DNI</label>
@@ -62,8 +62,9 @@
           @endforeach
         </select>
         <div id="active-help" class="form-text">Select your insurance for the race</div>
-      </div>
-  
-      <button type="submit" class="btn btn-primary text-white">Submit</button>
+      </div> 
     </form>
-  </div>
+
+    <div id="paypal-button-container"></div>
+    <script src="{{ asset('js/paypal.js')}}"></script>
+</div>
