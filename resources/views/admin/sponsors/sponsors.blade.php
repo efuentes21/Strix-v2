@@ -34,7 +34,19 @@
                         @else
                             <td class="text-center align-middle"><img src="{{ asset('resources/rojo.png') }}" alt="false" style="max-width: 50px;"></td>
                         @endif
-                        <td class="align-middle"><a href="{{ route('sponsor.edit', ['sponsor' => $sponsor]) }}">Edit</a></td>
+                        {{-- <td class="align-middle"><a href="{{ route('sponsor.edit', ['sponsor' => $sponsor]) }}">Edit</a></td> --}}
+                        <td class="align-middle">
+                            <div class="dropdown">
+                                <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" id="dropdownUser1-{{ $sponsor->id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="{{ asset('resources/ajustes.svg') }}" alt="Settings" style="max-width: 25px;">
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-white text-small shadow" aria-labelledby="dropdownUser1-{{ $sponsor->id }}">
+                                    <li><a class="dropdown-item" href="{{ route('sponsor.edit', ['sponsor' => $sponsor]) }}">Edit</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="{{ route('sponsorship.print', ['sponsor' => $sponsor]) }}">Print sponsors</a></li>
+                                </ul>
+                            </div>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

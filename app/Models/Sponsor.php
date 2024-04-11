@@ -36,7 +36,7 @@ class Sponsor extends Model
         'principal' => 'boolean', // El campo 'principal' se casteará a tipo booleano
     ];
 
-    public function sponsors(){
-        return $this->hasMany(Race::class);
+    public function races(){
+        return $this->belongsToMany(Race::class, 'sponsorships', 'sponsor', 'race');
     }
 }

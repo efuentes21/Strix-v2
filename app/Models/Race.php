@@ -28,6 +28,7 @@ class Race extends Model
         'start',
         'promotion',
         'inscription',
+        'sponsorship_price',
         'active',
     ];
 

@@ -25,7 +25,7 @@ class CompanyFactory extends Factory
             'logo' => 'logo',
             'account' => 'account',
             'principal_price' => 100,
-            'principal_price' => 50,
+            'partner_price' => 50,
         ];
     }
 }

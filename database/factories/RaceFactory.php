@@ -28,6 +28,7 @@ class RaceFactory extends Factory
             'start' => fake()->address(),
             'promotion' => 'promotion.jpg',
             'inscription' => fake()->numberBetween(10, 100),
+            'sponsorship_price' => fake()->numberBetween(100, 1000),
             'active' => fake()->numberBetween(0, 1)
         ];
     }
