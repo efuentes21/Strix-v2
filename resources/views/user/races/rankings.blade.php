@@ -1,7 +1,8 @@
 <div class="full bg-white">
     <div class="px-4 py-5 text-center d-flex flex-column justify-content-center">
-        <h1 class="display-5 fw-bold">RACES</h1>
+        <h1 class="display-5 fw-bold">RACES RANKINGS</h1>
         <hr class="border border-2 border-dark rounded w-25 mx-auto m-0 mb-3">
+        @if($races != null && count($races) > 0)
         <div class="col-lg-10 mx-auto">
             @foreach($races as $race)
                 @if($loop->iteration % 4 == 1)
@@ -23,5 +24,8 @@
                 @endif
             @endforeach
         </div>
+        @else
+            <h1 class="display-8">NO RACES FOUND</h1>
+        @endif
     </div>
 </div>
