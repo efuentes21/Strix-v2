@@ -4,9 +4,9 @@
         <div class="col-md-10">
             <h1>COMPETITORS</h1>
         </div>
-        <div class="col-md-2 d-flex align-items-center justify-content-end">
+        {{-- <div class="col-md-2 d-flex align-items-center justify-content-end">
             <a href="{{ route('competitor.create') }}" class="btn btn-primary text-white">ADD COMPETITORS</a>
-        </div>
+        </div> --}}
     </div>
 
     <div class="row">

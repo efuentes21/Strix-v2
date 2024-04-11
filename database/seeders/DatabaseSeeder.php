@@ -57,5 +57,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         \App\Models\Admin::factory(1)->create();
+
+        \App\Models\Company::factory(1)->create();
     }
 }

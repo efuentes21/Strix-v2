@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Race;
 use App\Models\Sponsor;
+use App\Models\Company;
 use App\Models\Sponsorship;
 use Illuminate\Http\Request;
 
@@ -111,8 +112,9 @@ class SponsorshipController extends Controller
     /**
      * Prints a PDF containing all the competitors inscripted in a race
      */
-    public function print(Race $race){
-        $sponsors = $race->sponsors;
-        return view('admin.sponsorships.pdf', compact(['sponsors', 'race']));
+    public function print(Sponsor $sponsor){
+        $company = Company::findOrFail('1');
+        $races = $sponsor->races;
+        return view('admin.sponsorships.pdf', compact(['sponsor', 'races', 'company']));
     }
 }
