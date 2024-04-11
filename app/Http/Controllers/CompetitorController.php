@@ -178,4 +178,10 @@ class CompetitorController extends Controller
     {
         return view('user.inscriptions.index');
     }
+
+    public function print(Competitor $competitor){
+        $company = Company::findOrFail('1');
+        $races = $competitor->races;
+        return view('admin.competitors.pdf', compact(['competitor', 'races', 'company']));
+    }
 }

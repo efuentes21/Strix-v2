@@ -16,7 +16,7 @@ use Dompdf\Options;
  */
 $options = new Options();
 $options->set('isHtml5ParserEnabled', true);
-$options->set('title', $sponsor->name . ' ticket');
+$options->set('title', $competitor->name . ' ticket');
 $dompdf = new Dompdf($options);
 
 /**
@@ -49,6 +49,9 @@ $content = '<style>
             td {
                 width: 33%;
             }
+            th {
+                width: 33%;
+            }
             .centertd {
                 text-align: center;
             }
@@ -58,31 +61,44 @@ $content = '<style>
  * The content of the PDF
  * A table with the inscripted competitors is created
  */
-$content .= '<h1>Sponsorships of ' . $sponsor->name .'</h1>';
-$content .= '<table class="table">';
-$content .= '<thead>';
-$content .= '<tr>';
-$content .= '<th>ID</th>';
-$content .= '<th>Race</th>';
-$content .= '<th>Price</th>';
-$content .= '</tr>';
-$content .= '</thead>';
-$content .= '<tbody>';
-
-foreach ($races as $race) {
+$content .= '<h1>' . $competitor->name .'\'s ticket</h1>';
+if(count($races) > 0) {
+    $content .= '<table class="table">';
+    $content .= '<thead>';
     $content .= '<tr>';
-    $content .= '<td>' . $race->id . '</td>';
-    $content .= '<td>' . $race->name . '</td>';
-    $content .= '<td>' . $race->sponsorship_price . '€</td>';
+    $content .= '<th>ID</th>';
+    $content .= '<th>Race</th>';
+    $content .= '<th>Price</th>';
     $content .= '</tr>';
-    $total += $race->sponsorship_price;
+    $content .= '</thead>';
+    $content .= '<tbody>';
+
+    if($competitor->partner) {
+        foreach ($races as $race) {
+            $content .= '<tr>';
+            $content .= '<td>' . $race->id . '</td>';
+            $content .= '<td>' . $race->name . '</td>';
+            $content .= '<td>' . $race->inscription*0.8 . '€</td>';
+            $content .= '</tr>';
+            $total += $race->inscription;
+        }
+    } else {
+        foreach ($races as $race) {
+            $content .= '<tr>';
+            $content .= '<td>' . $race->id . '</td>';
+            $content .= '<td>' . $race->name . '</td>';
+            $content .= '<td>' . $race->inscription . '€</td>';
+            $content .= '</tr>';
+            $total += $race->inscription;
+        }
+    }
+
+    $content .= '</tbody>';
+    $content .= '</table>';
+    $content .= '<br>';
 }
 
-$content .= '</tbody>';
-$content .= '</table>';
-$content .= '<br>';
-
-if($sponsor->principal) {
+if($competitor->partner) {
     $content .= '<table class="table">';
     $content .= '<thead>';
     $content .= '<tr>';
@@ -95,11 +111,11 @@ if($sponsor->principal) {
     $content .= '<tr>';
     $content .= '<td>' . $company->id . '</td>';
     $content .= '<td>' . $company->name . '</td>';
-    $content .= '<td>' . $company->principal_price . '€</td>';
+    $content .= '<td>' . $company->partner_price . '€</td>';
     $content .= '</tr>';
     $content .= '</tbody>';
     $content .= '</table>';
-    $total += $company->principal_price;
+    $total += $company->partner_price;
 }
 
 $content .= '<table>';

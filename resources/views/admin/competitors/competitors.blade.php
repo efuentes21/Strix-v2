@@ -21,6 +21,7 @@
                         <th>Pro</th>
                         <th>Partner</th>
                         <th>Active</th>
+                        <th>Ticket</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,6 +34,7 @@
                         <td class="align-middle">{{ $competitor->pro }}</td>
                         <td class="align-middle">{{ $competitor->partner }}</td>
                         <td class="align-middle">{{ $competitor->active }}</td>
+                        <td><a href="{{ route('competitor.print', ['competitor' => $competitor]) }}">Ticket</a></td>
                     </tr>
                     @endforeach
                 </tbody>

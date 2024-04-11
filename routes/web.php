@@ -41,6 +41,7 @@ Route::get('admin/index', [AdminController::class, 'index']) ->name('admin.index
 Route::post('admin/login', [AdminController::class, 'login'])->name('admin.login');
 Route::get('user/register', [CompetitorController::class, 'create'])->name('user.register');
 Route::post('user/new', [CompetitorController::class, 'store'])->name('user.new');
+Route::get('competitor/ticket/{competitor}', [CompetitorController::class, 'print'])->name('competitor.print');
 
 Route::get('pdf/qr/{race}/{competitor}/{number}', [InscriptionController::class, 'simple_qr'])->name('pdf.qr');
 Route::get('/qr/save_time/{race}/{competitor}', [InscriptionController::class, 'save_time'])->name('qr.savetime');
