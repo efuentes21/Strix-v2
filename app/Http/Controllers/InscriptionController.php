@@ -287,85 +287,18 @@ class InscriptionController extends Controller
                     box-sizing: border-box;
                 }
                 </style>';
+        $age_ranges = [[1, 20], [21, 30], [31, 40], [41, 50], [51, 60], [61, 150]];
+        $index = 0;
         foreach($ages as $age){
-            if($age <= 20){
-                $html .= '<h1>Master 20 men ranking</h1>';
+            // Men
+            if($age >= $age_ranges[$index][0] && $age <= $age_ranges[$index][1]){
+                $html .= '<h1>Master '.$age.' men ranking</h1>';
                 $points = 1000;
                 $html .= '<table>';
                 $html .= '<tr><th>DNI</th><th>Competitor</th><th>Points</th></tr>';
                 foreach($arrives as $arrive){
                     $arrive_age = Carbon::parse($arrive->competitors->birthdate)->age;
-                    if($arrive->competitors->sex == true && $arrive_age <= 20){
-                        $html .= '<tr><td>'.$arrive->competitors->dni.'</td><td>'.$arrive->competitors->name.'</td><td>'.max(0, $points).'</td></tr>';
-                        $points -= 100;
-                    }
-                }
-                $html .= '</table>';
-                $html .= '<div style="page-break-after: always;"></div>';
-            } elseif($age >= 21 && $age <= 30){
-                $html .= '<h1>Master 30 men ranking</h1>';
-                $points = 1000;
-                $html .= '<table>';
-                $html .= '<tr><th>DNI</th><th>Competitor</th><th>Points</th></tr>';
-                foreach($arrives as $arrive){
-                    $arrive_age = Carbon::parse($arrive->competitors->birthdate)->age;
-                    if($arrive->competitors->sex == true && $arrive_age >= 21 && $arrive_age <= 30){
-                        $html .= '<tr><td>'.$arrive->competitors->dni.'</td><td>'.$arrive->competitors->name.'</td><td>'.max(0, $points).'</td></tr>';
-                        $points -= 100;
-                    }
-                }
-                $html .= '</table>';
-                $html .= '<div style="page-break-after: always;"></div>';
-            } elseif($age >= 31 && $age <= 40){
-                $html .= '<h1>Master 40 men ranking</h1>';
-                $points = 1000;
-                $html .= '<table>';
-                $html .= '<tr><th>DNI</th><th>Competitor</th><th>Points</th></tr>';
-                foreach($arrives as $arrive){
-                    $arrive_age = Carbon::parse($arrive->competitors->birthdate)->age;
-                    if($arrive->competitors->sex == true && $arrive_age >= 31 && $arrive_age <= 40){
-                        $html .= '<tr><td>'.$arrive->competitors->dni.'</td><td>'.$arrive->competitors->name.'</td><td>'.max(0, $points).'</td></tr>';
-                        $points -= 100;
-                    }
-                }
-                $html .= '</table>';
-                $html .= '<div style="page-break-after: always;"></div>';
-            } elseif($age >= 41 && $age <= 50){
-                $html .= '<h1>Master 50 men ranking</h1>';
-                $points = 1000;
-                $html .= '<table>';
-                $html .= '<tr><th>DNI</th><th>Competitor</th><th>Points</th></tr>';
-                foreach($arrives as $arrive){
-                    $arrive_age = Carbon::parse($arrive->competitors->birthdate)->age;
-                    if($arrive->competitors->sex == true && $arrive_age >= 41 && $arrive_age <= 50){
-                        $html .= '<tr><td>'.$arrive->competitors->dni.'</td><td>'.$arrive->competitors->name.'</td><td>'.max(0, $points).'</td></tr>';
-                        $points -= 100;
-                    }
-                }
-                $html .= '</table>';
-                $html .= '<div style="page-break-after: always;"></div>';
-            } elseif($age >= 51 && $age <= 60){
-                $html .= '<h1>Master 60 men ranking</h1>';
-                $points = 1000;
-                $html .= '<table>';
-                $html .= '<tr><th>DNI</th><th>Competitor</th><th>Points</th></tr>';
-                foreach($arrives as $arrive){
-                    $arrive_age = Carbon::parse($arrive->competitors->birthdate)->age;
-                    if($arrive->competitors->sex == true && $arrive_age >= 51 && $arrive_age <= 60){
-                        $html .= '<tr><td>'.$arrive->competitors->dni.'</td><td>'.$arrive->competitors->name.'</td><td>'.max(0, $points).'</td></tr>';
-                        $points -= 100;
-                    }
-                }
-                $html .= '</table>';
-                $html .= '<div style="page-break-after: always;"></div>';
-            } elseif($age >= 61){
-                $html .= '<h1>Master 70 men ranking</h1>';
-                $points = 1000;
-                $html .= '<table>';
-                $html .= '<tr><th>DNI</th><th>Competitor</th><th>Points</th></tr>';
-                foreach($arrives as $arrive){
-                    $arrive_age = Carbon::parse($arrive->competitors->birthdate)->age;
-                    if($arrive->competitors->sex == true && $arrive_age > 61){
+                    if($arrive->competitors->sex == true && $arrive_age >= $age_ranges[$index][0] && $arrive_age <= $age_ranges[$index][1]){
                         $html .= '<tr><td>'.$arrive->competitors->dni.'</td><td>'.$arrive->competitors->name.'</td><td>'.max(0, $points).'</td></tr>';
                         $points -= 100;
                     }
@@ -374,92 +307,22 @@ class InscriptionController extends Controller
                 $html .= '<div style="page-break-after: always;"></div>';
             }
             // Woman
-            if($age <= 20){
-                $html .= '<h1>Master 20 woman ranking</h1>';
+            if($age >= $age_ranges[$index][0] && $age <= $age_ranges[$index][1]){
+                $html .= '<h1>Master '.$age.' woman ranking</h1>';
                 $points = 1000;
                 $html .= '<table>';
                 $html .= '<tr><th>DNI</th><th>Competitor</th><th>Points</th></tr>';
                 foreach($arrives as $arrive){
                     $arrive_age = Carbon::parse($arrive->competitors->birthdate)->age;
-                    if($arrive->competitors->sex == false && $arrive_age <= 20){
+                    if($arrive->competitors->sex == false && $arrive_age >= $age_ranges[$index][0] && $arrive_age <= $age_ranges[$index][1]){
                         $html .= '<tr><td>'.$arrive->competitors->dni.'</td><td>'.$arrive->competitors->name.'</td><td>'.max(0, $points).'</td></tr>';
                         $points -= 100;
                     }
                 }
                 $html .= '</table>';
                 $html .= '<div style="page-break-after: always;"></div>';
-            } elseif($age >= 21 && $age <= 30){
-                $html .= '<h1>Master 30 woman ranking</h1>';
-                $points = 1000;
-                $html .= '<table>';
-                $html .= '<tr><th>DNI</th><th>Competitor</th><th>Points</th></tr>';
-                foreach($arrives as $arrive){
-                    $arrive_age = Carbon::parse($arrive->competitors->birthdate)->age;
-                    if($arrive->competitors->sex == false && $arrive_age >= 21 && $arrive_age <= 30){
-                        $html .= '<tr><td>'.$arrive->competitors->dni.'</td><td>'.$arrive->competitors->name.'</td><td>'.max(0, $points).'</td></tr>';
-                        $points -= 100;
-                    }
-                }
-                $html .= '</table>';
-                $html .= '<div style="page-break-after: always;"></div>';
-            } elseif($age >= 31 && $age <= 40){
-                $html .= '<h1>Master 40 woman ranking</h1>';
-                $points = 1000;
-                $html .= '<table>';
-                $html .= '<tr><th>DNI</th><th>Competitor</th><th>Points</th></tr>';
-                foreach($arrives as $arrive){
-                    $arrive_age = Carbon::parse($arrive->competitors->birthdate)->age;
-                    if($arrive->competitors->sex == false && $arrive_age >= 31 && $arrive_age <= 40){
-                        $html .= '<tr><td>'.$arrive->competitors->dni.'</td><td>'.$arrive->competitors->name.'</td><td>'.max(0, $points).'</td></tr>';
-                        $points -= 100;
-                    }
-                }
-                $html .= '</table>';
-                $html .= '<div style="page-break-after: always;"></div>';
-            } elseif($age >= 41 && $age <= 50){
-                $html .= '<h1>Master 50 woman ranking</h1>';
-                $points = 1000;
-                $html .= '<table>';
-                $html .= '<tr><th>DNI</th><th>Competitor</th><th>Points</th></tr>';
-                foreach($arrives as $arrive){
-                    $arrive_age = Carbon::parse($arrive->competitors->birthdate)->age;
-                    if($arrive->competitors->sex == false && $arrive_age >= 41 && $arrive_age <= 50){
-                        $html .= '<tr><td>'.$arrive->competitors->dni.'</td><td>'.$arrive->competitors->name.'</td><td>'.max(0, $points).'</td></tr>';
-                        $points -= 100;
-                    }
-                }
-                $html .= '</table>';
-                $html .= '<div style="page-break-after: always;"></div>';
-            } elseif($age >= 51 && $age <= 60){
-                $html .= '<h1>Master 60 woman ranking</h1>';
-                $points = 1000;
-                $html .= '<table>';
-                $html .= '<tr><th>DNI</th><th>Competitor</th><th>Points</th></tr>';
-                foreach($arrives as $arrive){
-                    $arrive_age = Carbon::parse($arrive->competitors->birthdate)->age;
-                    if($arrive->competitors->sex == false && $arrive_age >= 51 && $arrive_age <= 60){
-                        $html .= '<tr><td>'.$arrive->competitors->dni.'</td><td>'.$arrive->competitors->name.'</td><td>'.max(0, $points).'</td></tr>';
-                        $points -= 100;
-                    }
-                }
-                $html .= '</table>';
-                $html .= '<div style="page-break-after: always;"></div>';
-            } elseif($age >= 61){
-                $html .= '<h1>Master 70 woman ranking</h1>';
-                $points = 1000;
-                $html .= '<table>';
-                $html .= '<tr><th>DNI</th><th>Competitor</th><th>Points</th></tr>';
-                foreach($arrives as $arrive){
-                    $arrive_age = Carbon::parse($arrive->competitors->birthdate)->age;
-                    if($arrive->competitors->sex == false && $arrive_age > 61){
-                        $html .= '<tr><td>'.$arrive->competitors->dni.'</td><td>'.$arrive->competitors->name.'</td><td>'.max(0, $points).'</td></tr>';
-                        $points -= 100;
-                    }
-                }
-                $html .= '</table>';
-                $html .= '<div style="page-break-after: always;"></div>';
-            }
-        
+            } 
+            $index += 1;
         }
 
         $options = new Options();

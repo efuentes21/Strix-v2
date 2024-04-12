@@ -46,7 +46,7 @@ class SponsorController extends Controller
             $imageName = time().'_'.$image->getClientOriginalName();
             $image->move(public_path('images'), $imageName);
             $validatedData['logo'] = $imageName;
-            $sponsor = Sponsor::create($validatedData);
+            Sponsor::create($validatedData);
         } catch (Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
