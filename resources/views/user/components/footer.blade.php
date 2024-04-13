@@ -10,7 +10,7 @@
                 </div>
             </div>
             <div class="d-flex flex-row justify-content-between col-lg-5">
-                <div class="d-flex flex-col">
+                <div class="d-flex flex-column">
                     <span>Find us</span>
                     <div class="d-flex">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
@@ -24,7 +24,7 @@
                         </svg>
                     </div>
                 </div>
-                <div class="d-flex flex-col">
+                <div class="d-flex flex-column">
                     <span>Secure payments</span>
                     <div class="d-flex">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-paypal" viewBox="0 0 16 16">
