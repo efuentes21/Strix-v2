@@ -1,4 +1,4 @@
-<div class="full bg-white">
+<div class="full bg-white" id="race-container">
     <div class="px-4 py-5 text-center d-flex flex-column justify-content-center">
         <h1 class="display-5 fw-bold">RACES</h1>
         <hr class="border border-2 border-dark rounded w-25 mx-auto m-0 mb-3">

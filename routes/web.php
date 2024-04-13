@@ -55,6 +55,8 @@ Route::group(['middleware' => 'auth.competitor'], function () {
     Route::get('inscription/storelogged/{race}', [InscriptionController::class, 'storelogged'])->name('inscription.logged');
 });
 
+Route::get('races/search', [RaceController::class, 'search_race'])->name('races.search');
+
 Route::group(['middleware' => 'auth.admin'], function () {
     Route::get('admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
     

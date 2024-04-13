@@ -181,4 +181,17 @@ class RaceController extends Controller
                         ->get();
         return view('user.mainpage.ranking', compact('races'));
     }
+
+    public function search_race(Request $request){
+        $query = $request->input('query');
+
+        // Gather all races from the query
+        $races = Race::where('name', 'like', "%$query%")->where('active', true)->get();
+
+        $seemore = false;
+
+        $tbodyHtml = view('user.components.races', ['races' => $races, 'seemore' => $seemore])->render();
+
+        return $tbodyHtml;
+    }
 }
