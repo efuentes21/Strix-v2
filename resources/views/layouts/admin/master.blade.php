@@ -23,8 +23,10 @@
     <main class="container-fuild h-100">
         <div class="row h-100 full">
             @section('dashboard')
-            <div class="col-2 sidebar bg-dark"></div>
-            <aside class="col-2 bg-dark sidebar position-fixed">
+
+            <!-- Desktop and tablet -->
+            <div class="col-2 sidebar bg-dark d-xl-block d-none"></div>
+            <aside class="col-2 bg-dark sidebar d-xl-block d-none position-fixed">
                 <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 290px;">
                     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                     <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
@@ -32,36 +34,36 @@
                     </a>
                     <hr>
                     <ul class="nav nav-pills flex-column mb-auto">
-                    <li class="nav-item">
-                        <a href="/admin/races" class="nav-link text-white @yield('active-races')" aria-current="page">
-                        <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
-                        Races
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/admin/sponsors" class="nav-link text-white @yield('active-sponsors')">
-                        <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-                        Sponsors
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/admin/insurances" class="nav-link text-white @yield('active-insurances')">
-                        <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-                        Insurances
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/admin/challenges" class="nav-link text-white @yield('active-challenges')">
-                        <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-                        Challenges
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/admin/competitors" class="nav-link text-white @yield('active-competitors')">
-                        <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-                        Competitors
-                        </a>
-                    </li>
+                        <li class="nav-item">
+                            <a href="/admin/races" class="nav-link text-white @yield('active-races')" aria-current="page">
+                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
+                            Races
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admin/sponsors" class="nav-link text-white @yield('active-sponsors')">
+                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+                            Sponsors
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admin/insurances" class="nav-link text-white @yield('active-insurances')">
+                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
+                            Insurances
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admin/challenges" class="nav-link text-white @yield('active-challenges')">
+                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
+                            Challenges
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admin/competitors" class="nav-link text-white @yield('active-competitors')">
+                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
+                            Competitors
+                            </a>
+                        </li>
                     </ul>
                     <hr>
                     <div class="dropdown">
@@ -78,9 +80,57 @@
                     </div>
                 </div>
             </aside>
+
+            <!-- Mobile -->
+            <div class="col-sm-1 col-2 sidebar bg-dark d-xl-none d-block"></div>
+            <aside class="col-sm-1 col-2 bg-dark sidebar d-xl-none d-block position-fixed">
+                <div class="d-flex flex-column flex-shrink-0 bg-body-tertiary" style="width: 4.5rem;">
+                    <a href="#" class="d-block p-2 link-body-emphasis text-decoration-none" title="Icon-only" data-bs-toggle="tooltip" data-bs-placement="right">
+                        @include('layouts.assets.strix-logo')
+                    </a>
+                    <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
+                      <li class="nav-item">
+                        <a href="/admin/races" class="nav-link py-3 border-bottom rounded-0 @yield('active-races')" aria-current="page" title="Races" data-bs-toggle="tooltip" data-bs-placement="right">
+                          <img src="{{ asset('images/bandera-a-cuadros.png') }}">
+                        </a>
+                      </li>
+                      <li>
+                        <a href="/admin/sponsors" class="nav-link py-3 border-bottom rounded-0 @yield('active-sponsors')" title="Sponsors" data-bs-toggle="tooltip" data-bs-placement="right">
+                            <img src="{{ asset('images/dolar-de-saco.png') }}">
+                        </a>
+                      </li>
+                      <li>
+                        <a href="/admin/insurances" class="nav-link py-3 border-bottom rounded-0 @yield('active-insurances')" title="Insurances" data-bs-toggle="tooltip" data-bs-placement="right">
+                            <img src="{{ asset('images/medico.png') }}">
+                        </a>
+                      </li>
+                      <li>
+                        <a href="/admin/challenges" class="nav-link py-3 border-bottom rounded-0 @yield('active-challenges')" title="Challenges" data-bs-toggle="tooltip" data-bs-placement="right">
+                            <img src="{{ asset('images/correr.png') }}">
+                        </a>
+                      </li>
+                      <li>
+                        <a href="/admin/competitors" class="nav-link py-3 border-bottom rounded-0 @yield('active-competitors')" title="Competitors" data-bs-toggle="tooltip" data-bs-placement="right">
+                            <img src="{{ asset('images/usuarios.png') }}">
+                        </a>
+                      </li>
+                    </ul>
+                    <div class="dropdown border-top">
+                      <a href="#" class="d-flex align-items-center justify-content-center p-3 link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-circle me-1" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                            <path style="fill: white;" fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                        </svg>
+                      </a>
+                      <ul class="dropdown-menu text-small shadow">
+                        <li><a class="dropdown-item" href="{{ route('admin.logout') }}">Sign out</a></li>
+                      </ul>
+                    </div>
+                  </div>
+            </aside>
             @show
 
-            <div class="col-10 container">
+            <div class="col-10 col-sm-11 col-lg-10 container">
                 @yield('content')
             </div>
         </div>

@@ -24,7 +24,9 @@
         </div>
     @endif 
     -->
-    <div class="row">
+
+    <!-- Desktop and tablet -->
+    <div class="row d-lg-block d-none">
         <div class="col-md-12">
             <table class="table table-striped">
                 <thead>
@@ -50,6 +52,31 @@
             </table>
         </div>
     </div>
+
+    <!-- Mobile -->
+    <div class="row d-lg-none d-block">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>CIF</th>
+                        <th>Name</th>
+                        <th class="invisible">R</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($sponsors as $sponsor)
+                    <tr>
+                        <td class="align-middle">{{ $sponsor->cif }}</td>
+                        <td class="align-middle">{{ $sponsor->name }}</td>
+                        <td class="align-middle"><a href="{{ route('sponsorship.remove', ['sponsor' => $sponsor, 'race' => $race]) }}">Remove</a></td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     @if($noRecord)
         <div class="row">
             <p>No sponsors found!</p>

@@ -9,7 +9,8 @@
         </div> --}}
     </div>
 
-    <div class="row">
+    <!-- Desktop and tablet -->
+    <div class="row d-lg-block d-none">
         <div class="col-md-12">
             <table class="table table-striped">
                 <thead>
@@ -17,7 +18,7 @@
                         <th>DNI</th>
                         <th>Email</th>
                         <th>Name</th>
-                        <th>Address</th>
+                        {{-- <th>Address</th> --}}
                         <th>Pro</th>
                         <th>Partner</th>
                         <th>Active</th>
@@ -30,10 +31,34 @@
                         <td class="align-middle">{{ $competitor->dni }}</td>
                         <td class="align-middle">{{ $competitor->email }}</td>
                         <td class="align-middle">{{ $competitor->name }}</td>
-                        <td class="align-middle">{{ $competitor->address }}</td>
+                        {{-- <td class="align-middle">{{ $competitor->address }}</td> --}}
                         <td class="align-middle">{{ $competitor->pro }}</td>
                         <td class="align-middle">{{ $competitor->partner }}</td>
                         <td class="align-middle">{{ $competitor->active }}</td>
+                        <td><a href="{{ route('competitor.print', ['competitor' => $competitor]) }}">Ticket</a></td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Mobile -->
+    <div class="row d-lg-none d-block">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>DNI</th>
+                        <th>Name</th>
+                        <th>Ticket</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($competitors as $competitor)
+                    <tr>
+                        <td class="align-middle">{{ $competitor->dni }}</td>
+                        <td class="align-middle">{{ $competitor->name }}</td>
                         <td><a href="{{ route('competitor.print', ['competitor' => $competitor]) }}">Ticket</a></td>
                     </tr>
                     @endforeach

@@ -16,8 +16,9 @@
         @endforeach
       </ul>
     </div>
-  @endif
-    <div class="row">
+    @endif
+    <!-- Desktop and tablet -->
+    <div class="row d-lg-block d-none">
         <div class="col-md-12">
             <table class="table table-striped">
                 <thead>
@@ -58,7 +59,7 @@
                                     <li><a class="dropdown-item" href="{{ route('inscriptions', ['race' => $race]) }}">Inscriptions</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="{{ route('raceimages.index', ['race' => $race]) }}">Media</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('qr.all', ['race' => $race]) }}">Scan QR</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('qr.all', ['race' => $race]) }}">Print numbers</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="{{ route('inscription.print', ['race' => $race]) }}">Print competitors</a></li>
                                 </ul>
@@ -70,5 +71,49 @@
             </table>
         </div>
     </div>
+
+    <!-- Mobile -->
+    <div class="row d-lg-none d-block">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Active</th>
+                        <th class="invisible">Settings</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($races as $race)
+                    <tr>
+                        <td class="align-middle">{{ $race->name }}</td>
+                        <td class="align-middle">{{ $race->active }}</td>
+                        <td class="align-middle">
+                            <div class="dropdown">
+                                <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" id="dropdownUser1-{{ $race->id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="{{ asset('resources/ajustes.svg') }}" alt="Settings" style="max-width: 25px;">
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-white text-small shadow" aria-labelledby="dropdownUser1-{{ $race->id }}">
+                                    <li><a class="dropdown-item" href="{{ route('race.edit', ['race' => $race]) }}">Edit</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="{{ route('racechallenge.index', ['race' => $race]) }}">Challenges</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('sponsorship.index', ['race' => $race]) }}">Sponsors</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('raceinsurance.index', ['race' => $race]) }}">Insurances</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('inscriptions', ['race' => $race]) }}">Inscriptions</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="{{ route('raceimages.index', ['race' => $race]) }}">Media</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('qr.all', ['race' => $race]) }}">Print numbers</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="{{ route('inscription.print', ['race' => $race]) }}">Print competitors</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 </div>
 @show

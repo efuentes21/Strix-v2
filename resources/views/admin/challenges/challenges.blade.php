@@ -9,12 +9,12 @@
         </div>
     </div>
 
-    <div class="row">
+    <!-- Desktop and tablet -->
+    <div class="row d-lg-block d-none">
         <div class="col-md-12">
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Name</th>
                         <th>Description</th>
                         <th>Difficutly</th>
@@ -25,7 +25,6 @@
                 <tbody>
                     @foreach ($challenges as $challenge)
                     <tr>
-                        <td class="align-middle">{{ $challenge->id }}</td>
                         <td class="align-middle">{{ $challenge->name }}</td>
                         <td class="align-middle">{{ $challenge->description }}</td>
                         <td class="align-middle">{{ $challenge->difficulty }}</td>
@@ -37,5 +36,30 @@
             </table>
         </div>
     </div>
+
+    <!-- Mobile -->
+    <div class="row d-lg-none d-block">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Active</th>
+                        <th class="invisible">Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($challenges as $challenge)
+                    <tr>
+                        <td class="align-middle">{{ $challenge->name }}</td>
+                        <td class="align-middle">{{ $challenge->active }}</td>
+                        <td class="align-middle"><a href="{{ route('challenge.edit', ['challenge' => $challenge]) }}">Edit</a></td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 </div>
 @show

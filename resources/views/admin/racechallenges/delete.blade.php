@@ -26,7 +26,9 @@
     -->
     @csrf
     <div class="d-none" id="race-id" data-race="{{ $race->id }}" data-url="{{ route('racechallenge.update') }}"></div>
-    <div class="row">
+
+    <!-- Desktop and tablet -->
+    <div class="row d-lg-block d-none">
         <div class="col-md-12">
             <table class="table table-striped">
                 <thead>
@@ -53,6 +55,32 @@
             </table>
         </div>
     </div>
+
+    <!-- Mobile -->
+    <div class="row d-lg-none d-block">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Difficulty</th>
+                        <th class="invisible">R</th>
+                    </tr>
+                </thead>
+                <tbody id="draggable-list">
+                    @foreach ($racechallenges as $challenge)
+                    <tr data-difficulty="{{ $challenge->difficulty }}" data-state="static" data-id="{{ $challenge->id }}" draggable="true">
+                        <td class="align-middle">{{ $challenge->name }}</td>
+                        <td class="align-middle">{{ $challenge->difficulty }}</td>
+                        <td class="align-middle"><a href="{{ route('racechallenge.remove', ['challenge' => $challenge, 'race' => $race]) }}">Remove</a></td>
+                    </tr>
+                    @endforeach
+                    <tr data-state="static"></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     @if($noRecord)
         <div class="row">
             <p>No challenges found!</p>

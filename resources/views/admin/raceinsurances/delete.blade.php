@@ -24,8 +24,10 @@
         </div>
     @endif 
     -->
-    <div class="row">
-        <div class="col-md-12">
+
+    <!-- Desktop and tablet -->
+    <div class="row d-lg-block d-none">
+       <div class="col-md-12">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -47,7 +49,32 @@
                 </tbody>
             </table>
         </div>
+    </div> 
+
+    <!-- Mobile -->
+    <div class="row d-lg-none d-block">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>CIF</th>
+                        <th>Name</th>
+                        <th class="invisible">R</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($raceinsurances as $insurance)
+                    <tr>
+                        <td>{{ $insurance->cif }}</td>
+                        <td>{{ $insurance->name }}</td>
+                        <td><a href="{{ route('raceinsurance.remove', ['insurance' => $insurance, 'race' => $race]) }}">Remove</a></td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
+
     @if($noRecord)
         <div class="row">
             <p>No insurances found!</p>

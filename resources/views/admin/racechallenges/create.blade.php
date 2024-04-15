@@ -24,7 +24,9 @@
         </div>
     @endif 
     -->
-    <div class="row">
+    
+    <!-- Desktop and tablet -->
+    <div class="row d-lg-block d-none">
         <div class="col-md-12">
             <table class="table table-striped">
                 <thead>
@@ -50,6 +52,31 @@
             </table>
         </div>
     </div>
+
+    <!-- Mobile -->
+    <div class="row d-lg-none d-block">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Difficulty</th>
+                        <th class="invisible">A</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($racechallenges as $challenge)
+                    <tr>
+                        <td class="align-middle">{{ $challenge->name }}</td>
+                        <td class="align-middle">{{ $challenge->difficulty }}</td>
+                        <td class="align-middle"><a href="{{ route('racechallenge.add', ['challenge' => $challenge, 'race' => $race]) }}">Add</a></td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     @if($noRecord)
     <div class="row">
         <p>No challenges found!</p>
