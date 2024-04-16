@@ -138,39 +138,6 @@ class CompetitorController extends Controller
 
         return redirect()->route('user.index')->with('success', 'Inscription successfully created!');
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Competitor $competitor)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Competitor $competitor)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateCompetitorRequest $request, Competitor $competitor)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Competitor $competitor)
-    {
-        //
-    }
-
     /**
      * Show the form for creating a new resource.
      */

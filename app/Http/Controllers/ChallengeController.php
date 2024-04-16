@@ -46,14 +46,6 @@ class ChallengeController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Challenge $challenge)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Challenge $challenge)
@@ -83,14 +75,6 @@ class ChallengeController extends Controller
         }
 
         return redirect()->route('challenge.index');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Challenge $challenge)
-    {
-        //
     }
 
     /**

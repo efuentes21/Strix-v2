@@ -55,14 +55,6 @@ class SponsorController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Sponsor $sponsor)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Sponsor $sponsor)
@@ -94,10 +86,7 @@ class SponsorController extends Controller
             $sponsor->active = $request->input('active');
             
             if ($request->hasFile('logo')) {
-                $image = $request->file('logo');
-                $imageName = time().'_'.$image->getClientOriginalName();
-                $image->move(public_path('images'), $imageName);
-                $sponsor->logo = $imageName;
+                $sponsor->logo = $this->saveImage($request->file('logo'));
             }
             
             $sponsor->update();
@@ -108,11 +97,9 @@ class SponsorController extends Controller
         return redirect()->route('sponsor.index')->with('success', 'Sponsor updated successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Sponsor $sponsor)
-    {
-        //
+    public function saveImage($image) {
+        $imageName = time().'_'.$image->getClientOriginalName();
+        $image->move(public_path('images'), $imageName);
+        return $imageName;
     }
 }

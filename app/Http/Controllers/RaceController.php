@@ -67,14 +67,6 @@ class RaceController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Race $race)
@@ -133,14 +125,6 @@ class RaceController extends Controller
         }
 
         return redirect()->route('race.index');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 
     /**

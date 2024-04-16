@@ -50,14 +50,6 @@ class InsuranceController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Insurance $insurance)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Insurance $insurance)
@@ -93,13 +85,5 @@ class InsuranceController extends Controller
         }
 
         return redirect()->route('insurance.index')->with('success', 'Insurance updated successfully');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Insurance $insurance)
-    {
-        //
     }
 }
