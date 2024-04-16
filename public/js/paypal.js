@@ -18,7 +18,6 @@ paypal.Buttons({
     },
     onApprove: function(data, actions) {
       actions.order.capture().then(function (details) {
-        console.log(route);
         if(route) {
           window.location.href = route;
         } else {
