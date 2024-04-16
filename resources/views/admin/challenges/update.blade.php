@@ -16,7 +16,7 @@
       </ul>
     </div>
   @endif
-  <form action="{{ route('challenge.update', [$challenge]) }}" method="POST" class="mb-3">
+  <form action="{{ route('challenge.update', [$challenge]) }}" method="POST" enctype="multipart/form-data" class="mb-3">
     @csrf
     @method('PUT')
     <div class="mb-3">
@@ -35,6 +35,14 @@
       <div id="difficulty-help" class="form-text">Introduce a difficulty for the challenge.</div>
     </div>
     <div class="mb-3">
+      <div class="mb-3">
+        <label for="image" class="form-label">Image</label>
+        <input type="file" class="form-control" id="image" name="image" aria-describedby="image-help">
+        <div id="image-help" class="form-text">Upload the challenge's image.</div>
+        @if($challenge->image)
+            <img src="{{ asset('images/' . $challenge->image) }}" alt="Challenge Logo" style="max-width: 200px;">
+        @endif
+    </div>
       <label for="active" class="form-label">Active</label>
       <select id="active" name="active" aria-describedby="active-help" class="form-select" aria-label="Select if the race is active or not" required>
         @if( old('active', $challenge->active) )

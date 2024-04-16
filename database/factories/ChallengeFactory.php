@@ -23,6 +23,7 @@ class ChallengeFactory extends Factory
             'name' => fake()->name(),
             'description' => fake()->sentence(),
             'difficulty' => fake()->numberBetween(1,3),
+            'image' => 'image.png',
             'active' => fake()->numberBetween(0, 1)
         ];
     }

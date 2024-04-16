@@ -33,10 +33,16 @@ class ChallengeController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:255',
+            'difficulty' => 'required|numeric',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'active' => 'required|boolean'
         ]);
 
         try {
+            $image = $request->file('image');
+            $imageName = time().'_'.$image->getClientOriginalName();
+            $image->move(public_path('images'), $imageName);
+            $validatedData['image'] = $imageName;
             Challenge::create($validatedData);
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
@@ -62,13 +68,22 @@ class ChallengeController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:255',
+            'difficulty' => 'required|numeric',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'active' => 'required|boolean'
         ]);
 
         try {
             $challenge->name = $request->name;
             $challenge->description = $request->description;
+            $challenge->difficulty = $request->difficulty;
             $challenge->active = $request->active;
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $imageName = time().'_'.$image->getClientOriginalName();
+                $image->move(public_path('images'), $imageName);
+                $challenge->image = $imageName;
+            }
             $challenge->update();
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());

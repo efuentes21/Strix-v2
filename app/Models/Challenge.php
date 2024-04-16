@@ -20,6 +20,7 @@ class Challenge extends Model
         'name',         // Nombre del desafío
         'description',  // Descripción del desafío
         'difficulty',
+        'image',
         'active',
     ];
 

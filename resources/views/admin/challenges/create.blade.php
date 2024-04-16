@@ -16,7 +16,7 @@
       </ul>
     </div>
   @endif
-  <form action="{{ route('challenge.store') }}" method="POST" class="mb-3">
+  <form action="{{ route('challenge.store') }}" method="POST" enctype="multipart/form-data" class="mb-3">
     @csrf
     <div class="mb-3">
       <label for="name" class="form-label">Name</label>
@@ -32,6 +32,11 @@
       <label for="difficulty" class="form-label">Difficulty</label>
       <input type="number" class="form-control" id="difficulty" name="difficulty" aria-describedby="difficulty-help" required>
       <div id="difficulty-help" class="form-text">Introduce a difficulty for the challenge.</div>
+    </div>
+    <div class="mb-3">
+      <label for="image" class="form-label">Image</label>
+      <input type="file" class="form-control" id="image" name="image" aria-describedby="image-help">
+      <div id="image-help" class="form-text">Upload a challenge's image.</div>
     </div>
     <div class="mb-3">
       <label for="active" class="form-label">Active</label>
