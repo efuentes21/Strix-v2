@@ -272,8 +272,8 @@ class InscriptionController extends Controller
     public function print_rankings(Race $race){
         $race = Race::findOrFail($race->id);
         $date = $race->date->toDateString();
-        $time = $race->time->toTimeString();
-        $race_datetime = Carbon::createFromFormat('Y-m-d H:i:s', "$date $time");
+        //$time = $race->time->toTimeString();
+        $race_datetime = Carbon::createFromFormat('Y-m-d H:i:s', "$date $race->time");
 
         $arrives = Inscription::where('race', $race->id)->where('arrival', '!=', null)->orderBy('arrival')->get();
         $ages = [20, 30, 40, 50, 60, 70];
@@ -319,10 +319,10 @@ class InscriptionController extends Controller
                 $html .= '<tr><th>DNI</th><th>Competitor</th><th>Time</th><th>Points</th></tr>';
                 foreach($arrives as $arrive){
                     $arrive_age = Carbon::parse($arrive->competitors->birthdate)->age;
-                    $arrival_datetime = new DateTime($arrive->arrival);
+                    $arrival_datetime = Carbon::createFromFormat('Y-m-d H:i:s', $arrive->arrival);
                     $time_difference = $arrival_datetime->diff($race_datetime);
                     if($arrive->competitors->sex == false && $arrive_age >= $age_ranges[$index][0] && $arrive_age <= $age_ranges[$index][1]){
-                        $html .= '<tr><td>'.$arrive->competitors->dni.'</td><td>'.$arrive->competitors->name.'</td><td>'.$time_difference.'</td><td>'.max(0, $points).'</td></tr>';
+                        $html .= '<tr><td>'.$arrive->competitors->dni.'</td><td>'.$arrive->competitors->name.'</td><td>'.$time_difference->format('%H:%I:%S').'</td><td>'.max(0, $points).'</td></tr>';
                         $points -= 100;
                     }
                 }
