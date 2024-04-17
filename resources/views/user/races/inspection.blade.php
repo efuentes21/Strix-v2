@@ -28,7 +28,7 @@
 </div>
 <div class="d-flex row mt-4 mb-2 p-4 bg-light">
     <div class="col-md-6 col-sm-12 d-flex flex-column justify-content-between">
-        <p>Date: {{ $race->date }}</p>
+        <p>Date: {{ $race_datetime }}</p>
         <p>Start: {{ $race->start }}</p>
         <p>Distance: {{ $race->distance }}km</p>
         <p>Unevenness: {{ $race->unevenness }}m</p>
@@ -39,7 +39,6 @@
         @endauth
     </div>
     <div class="col-md-6 col-sm-12 d-flex justify-content-lg-end justify-content-center">
-        {{-- <img src="{{ asset('images/' . $race->map) }}" alt="Race Map" style="width: 450px;"> --}}
         <img src="{{ asset('images/' . $race->map) }}" alt="Race Map" style="width: 70%;">
     </div>
 </div>

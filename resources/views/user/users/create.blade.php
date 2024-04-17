@@ -60,6 +60,7 @@
 <script src="{{ asset('js/paypal.js')}}"></script>
 <script>
     let price = parseFloat({{ $company->principal_price }})
+    const route = false
 </script>
 <div class="mb-3">
     <div id="route-login"><a href="{{ route('user.index') }}">Already a member?</a></div>

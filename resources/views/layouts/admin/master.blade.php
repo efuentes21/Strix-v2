@@ -130,7 +130,7 @@
             </aside>
             @show
 
-            <div class="col-10 col-sm-11 col-lg-10 container">
+            <div class="col-10 col-sm-11 col-lg-10 container" style="min-height: 100vh;">
                 @yield('content')
             </div>
         </div>

@@ -136,12 +136,14 @@ class RaceController extends Controller
         $challenges = $race->challenges()->get();
         $sponsors = $race->sponsors()->get();
         $competitors = $race->competitors()->count();
+        $date = $race->date->toDateString();
+        $race_datetime = Carbon::createFromFormat('Y-m-d H:i:s', "$date $race->time")->format('d-m-Y H:i:s');
         if(Auth::guard('competitor')->user()) {
             $race->inscription = $race->inscription * 0.8;
             $inscriptionExist = Inscription::where('competitor', Auth::guard('competitor')->user()->id)->where('race', $raceId)->first();
-            return view('user.races.index', compact('race', 'challenges', 'sponsors', 'competitors', 'inscriptionExist'));
+            return view('user.races.index', compact('race', 'challenges', 'sponsors', 'competitors', 'inscriptionExist', 'race_datetime'));
         } else {
-            return view('user.races.index', compact('race', 'challenges', 'sponsors', 'competitors'));
+            return view('user.races.index', compact('race', 'challenges', 'sponsors', 'competitors', 'race_datetime'));
         }
         
     }

@@ -8,9 +8,9 @@
                     <div class="d-grid gap-3 d-sm-flex justify-content-center my-3">
                 @endif
                         <div class="card" style="width: 14rem; height: 18rem;">
-                            <img src="{{ asset('resources/ring_traverse.png') }}" class="card-img-top" alt={{ $challenge->name }}>
+                            {{-- <img src="{{ asset('resources/ring_traverse.png') }}" class="card-img-top" alt={{ $challenge->name }}> --}}
                             {{-- Cambiar foto cuando este implementado --}}
-                            {{-- <img src="{{ asset('images/' . $challenge->image) }}" class="card-img-top" alt={{ $challenge->name }}> --}}
+                            <img src="{{ asset('images/' . $challenge->image) }}" class="card-img-top" alt={{ $challenge->name }}>
                             <div class="card-body">
                                 <h1 class="card-title">{{ $challenge->name }}</h5>
                                 <p class="card-text">{{ $challenge->description }}</p>

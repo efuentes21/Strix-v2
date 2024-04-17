@@ -68,6 +68,10 @@
     <div id="paypal-button-container"></div>
     <script src="{{ asset('js/paypal.js')}}"></script>
     <script>
-      let price = parseFloat({{ $race->inscription }})
+      let raceInscription = parseFloat({{ $race->inscription }});
+      let insurancePrice = parseFloat({{ $insurance->price }});
+      let price = raceInscription + insurancePrice;
+      
+      const route = false
     </script>
 </div>
